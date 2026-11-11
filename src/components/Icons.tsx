@@ -1,4 +1,4 @@
-import type { SVGProps } from "react";
+import type { ReactNode, SVGProps } from "react";
 
 type P = SVGProps<SVGSVGElement>;
 const base = (p: P) => ({
@@ -127,19 +127,66 @@ export const FeatureIcon = ({ name, ...p }: P & { name: string }) => {
   }
 };
 
+export const PlusIcon = (p: P) => (
+  <svg {...base(p)}>
+    <path d="M12 5v14M5 12h14" />
+  </svg>
+);
+
+export const InfoIcon = (p: P) => (
+  <svg {...base(p)}>
+    <circle cx="12" cy="12" r="10" />
+    <path d="M12 16v-4M12 8h.01" />
+  </svg>
+);
+
+export const GoogleG = (p: P) => (
+  <svg width={22} height={22} viewBox="0 0 48 48" aria-hidden="true" focusable="false" {...p}>
+    <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.5z" />
+    <path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z" />
+    <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z" />
+    <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.5z" />
+  </svg>
+);
+
+export const SocialIcon = ({ name, ...p }: P & { name: string }) => {
+  const d: Record<string, ReactNode> = {
+    facebook: <path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H8v4h2v6h4v-6h3l1-4h-4V8z" />,
+    instagram: (
+      <>
+        <rect x="3" y="3" width="18" height="18" rx="5" />
+        <circle cx="12" cy="12" r="4" />
+        <path d="M17.5 6.5h.01" />
+      </>
+    ),
+    x: <path d="M4 4l16 16M20 4 4 20" />,
+    youtube: (
+      <>
+        <rect x="2.5" y="5" width="19" height="14" rx="4" />
+        <path d="m10 9 5 3-5 3z" />
+      </>
+    ),
+    linkedin: (
+      <>
+        <rect x="3" y="3" width="18" height="18" rx="3" />
+        <path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7" />
+      </>
+    ),
+    tiktok: <path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5M14 3c.5 2.5 2.5 4 5 4" />,
+  };
+  return <svg {...base(p)}>{d[name]}</svg>;
+};
+
 export function Logo({ light = false }: { light?: boolean }) {
   return (
     <span className={`logo${light ? " logo--light" : ""}`}>
-      <svg width="38" height="38" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
-        <circle cx="20" cy="20" r="20" fill="var(--brand)" />
-        <path
-          d="M28.5 10.5c-9.6.2-15.8 4.6-16.6 12.2-.2 1.9.2 3.6 1 5 4.4-6.4 8.4-9.2 12.2-10.8-3.6 2.4-7.4 6-10.6 12 1.4.8 3 1.1 4.8.9 7.2-.9 9.6-8.1 9.2-19.3z"
-          fill="#fff"
-        />
-      </svg>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/images/logo.png" width={42} height={42} alt="" className="logo__mark" />
       <span className="logo__text">
-        <span className="logo__name">Ecoverde</span>
-        <span className="logo__sub">Valeting &amp; Detailing</span>
+        <span className="logo__name">
+          eco<span>verde</span>
+        </span>
+        <span className="logo__sub">Valeting · West London</span>
       </span>
     </span>
   );

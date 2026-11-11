@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { PRIMARY_AREAS, SITE, quoteHref, whatsappLink } from "@/data/site";
-import { ClockIcon, Logo, MailIcon, PhoneIcon, WhatsAppIcon } from "./Icons";
+import { PRIMARY_AREAS, SITE, SOCIAL, quoteHref } from "@/data/site";
+import { ClockIcon, Logo, MailIcon, PhoneIcon, SocialIcon } from "./Icons";
 
 const SERVICES_LINKS = [
   { label: "Valeting Service", href: quoteHref("mini-full-valet") },
@@ -38,9 +38,17 @@ export default function Footer() {
             West London&apos;s most trusted eco-friendly mobile car valeting &amp; detailing service. Biodegradable
             products, electric van, meticulous results.
           </p>
-          <a className="btn btn--whatsapp btn--sm" href={whatsappLink()} target="_blank" rel="noopener noreferrer">
-            <WhatsAppIcon width={18} height={18} /> WhatsApp Us
-          </a>
+          {SOCIAL.some((x) => x.href) && (
+            <ul className="footer__social">
+              {SOCIAL.filter((x) => x.href).map((x) => (
+                <li key={x.icon}>
+                  <a href={x.href} target="_blank" rel="noopener noreferrer" aria-label={x.label}>
+                    <SocialIcon name={x.icon} width={15} height={15} />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <div>
@@ -63,9 +71,12 @@ export default function Footer() {
               </li>
             ))}
           </ul>
-          <h2 className="footer__title footer__title--spaced">Service Areas</h2>
+        </div>
+
+        <div>
+          <h2 className="footer__title">Service Areas</h2>
           <ul className="footer__links">
-            {PRIMARY_AREAS.map((a) => (
+            {[...PRIMARY_AREAS].reverse().map((a) => (
               <li key={a.postcode}>
                 <Link href="/#areas">
                   {a.name} ({a.postcode})

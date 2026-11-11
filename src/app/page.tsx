@@ -1,7 +1,5 @@
-import { Suspense } from "react";
 import Faq from "@/components/Faq";
 import Gallery from "@/components/Gallery";
-import QuoteForm from "@/components/QuoteForm";
 import {
   BrandStrip,
   FinalCta,
@@ -9,7 +7,7 @@ import {
   GiftVouchers,
   Hero,
   HowItWorks,
-  ReviewSummary,
+  Reviews,
   ServiceAreas,
   Services,
   Stats,
@@ -21,7 +19,7 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <ReviewSummary />
+      <Reviews />
       <BrandStrip />
       <Services />
       <WhyChoose />
@@ -34,9 +32,6 @@ export default function Home() {
       <UsedCar />
       <FinalCta />
       <Faq />
-      <Suspense fallback={null}>
-        <QuoteForm />
-      </Suspense>
     </>
   );
 }

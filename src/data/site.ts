@@ -7,6 +7,7 @@ export const SITE = {
   tagline: "Eco-friendly mobile car valeting & detailing · West London",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://ecoverdevaleting.co.uk",
   reviewsUrl: process.env.NEXT_PUBLIC_REVIEWS_URL || "",
+  trustindexId: process.env.NEXT_PUBLIC_TRUSTINDEX_ID || "",
   email: "info@ecoverdevaleting.co.uk",
   hours: "Mon–Sun 7am–8pm",
   phones: [
@@ -112,8 +113,8 @@ export const SERVICES: ServiceCard[] = [
     category: "Valeting",
     description:
       "Inside-and-out valets — from a tidy mini valet to our deluxe full valet. Vacuum, steam, deep clean, protect and finish.",
-    image: "/images/svc-full-valet.webp",
-    alt: "Car being rinsed with a pressure washer during a full valet",
+    image: "/images/service-1.webp",
+    alt: "Valeter hand-washing a black car with a wash mitt and snow foam",
     formValue: "mini-full-valet",
   },
   {
@@ -122,8 +123,8 @@ export const SERVICES: ServiceCard[] = [
     category: "Detailing",
     description:
       "Meticulous, multi-stage detailing for classics, supercars and high-end vehicles — the perfectionist's choice.",
-    image: "/images/svc-supercar.webp",
-    alt: "Black Porsche 911 GT3 with a deep gloss finish",
+    image: "/images/service-2.webp",
+    alt: "Black saloon covered in snow foam during a premium detail",
     formValue: "supercar-detailing",
   },
   {
@@ -132,8 +133,8 @@ export const SERVICES: ServiceCard[] = [
     category: "Paintwork",
     description:
       "Machine polishing, swirl & scratch removal, paint enhancement and long-lasting ceramic coating protection.",
-    image: "/images/svc-paint-ceramic.webp",
-    alt: "Close-up of glossy corrected red paintwork",
+    image: "/images/service-3.webp",
+    alt: "Water beading on freshly protected red paintwork",
     formValue: "paint-correction",
   },
   {
@@ -142,8 +143,8 @@ export const SERVICES: ServiceCard[] = [
     category: "Interior",
     description:
       "Steam sanitisation, stain & odour removal, mould treatment and ozone — a fresh, hygienic, allergy-friendly cabin.",
-    image: "/images/svc-interior.webp",
-    alt: "Clean black leather seats and steering wheel after an interior deep clean",
+    image: "/images/service-4.webp",
+    alt: "Valeter cleaning a steering wheel and dashboard during an interior deep clean",
     formValue: "interior-deep-clean",
   },
   {
@@ -152,8 +153,8 @@ export const SERVICES: ServiceCard[] = [
     category: "Specialist",
     description:
       "Convertible roof deep clean, re-colour and re-proofing to keep fabric tops protected from the British weather.",
-    image: "/images/svc-soft-top.webp",
-    alt: "Red sports car parked on a London street",
+    image: "/images/service-5.webp",
+    alt: "Convertible fabric roof being deep cleaned and reproofed",
     formValue: "soft-top-cleaning",
   },
   {
@@ -162,8 +163,8 @@ export const SERVICES: ServiceCard[] = [
     category: "Restoration",
     description:
       "Alloy wheel refurbishment, dent & scuff repair and bodywork respraying — restore resale value before you sell.",
-    image: "/images/svc-restoration.webp",
-    alt: "Technician working on a car during restoration",
+    image: "/images/service-6.webp",
+    alt: "Refurbished Ferrari alloy wheel with red brake caliper",
     formValue: "bodywork-respray",
   },
   {
@@ -172,8 +173,8 @@ export const SERVICES: ServiceCard[] = [
     category: "Valeting",
     description:
       "Handing a lease back? We deep clean the areas inspectors check to help you avoid end-of-lease charges. Just bought used? A full reset removes the previous owner's dirt, stains & odours.",
-    image: "/images/svc-lease-return.webp",
-    alt: "Black Range Rover Sport parked outside a garage",
+    image: "/images/service-7.webp",
+    alt: "Car covered in eco-friendly snow foam from a foam sprayer",
     formValue: "lease-return-valet",
   },
   {
@@ -182,8 +183,8 @@ export const SERVICES: ServiceCard[] = [
     category: "Interior",
     description:
       "Mould thrives in damp cabins — we remove it at the source with eco-friendly steam sanitisation, stain treatment and ozone for stubborn, deeply embedded odours.",
-    image: "/images/svc-mould-odour.webp",
-    alt: "Clean car dashboard and cabin",
+    image: "/images/service-8.webp",
+    alt: "Mouldy car interior before an eco steam clean",
     formValue: "mould-odour-removal",
   },
   {
@@ -192,13 +193,43 @@ export const SERVICES: ServiceCard[] = [
     category: "Paintwork",
     description:
       "Single or multi-stage machine polish to lift swirls and restore gloss — finished with wax, sealant or ceramic to lock in the shine.",
-    image: "/images/svc-machine-polish.webp",
-    alt: "Grey Mercedes-AMG GT with polished paintwork",
+    image: "/images/service-9.webp",
+    alt: "Machine polisher restoring gloss to red paintwork",
     formValue: "paint-correction",
   },
 ];
 
-export const BRANDS = ["IGL Coatings", "Ecover", "Gtechniq", "Bilt Hamber", "Autoglym"];
+export const BRANDS = [
+  { name: "IGL Coatings", logo: "/images/brand-igl.png", w: 150, h: 64 },
+  { name: "Ecover", logo: "/images/brand-ecover.png", w: 109, h: 64 },
+  { name: "Gtechniq", logo: "/images/brand-gtechniq.png", w: 146, h: 64 },
+  { name: "Bilt Hamber", logo: "/images/brand-bilt-hamber.png", w: 160, h: 64 },
+  { name: "Autoglym", logo: "/images/brand-autoglym.png", w: 70, h: 64 },
+];
+
+// Google reviews shown on the homepage (from the live site).
+export const REVIEW_CARDS = [
+  { name: "Elizabeth Dias", date: "7 Jun 2026", text: "My car looks absolutely spotless — like new! Very professional, punctual, and paid great attention to detail. I highly recommend this company." },
+  { name: "Rufus Olins", date: "6 Jun 2026", text: "John did a very good job, was a pleasure to talk to — and went beyond what he had to in order to tackle some light scratches." },
+  { name: "Dorian Needs", date: "1 Jun 2026", text: "Outstanding service! I will definitely be using them again and can highly recommend them." },
+  { name: "Mikio Ikeda", date: "29 May 2026", text: "My car looked like it belonged in a showroom. The transformation was remarkable." },
+  { name: "Paul Rolles", date: "27 May 2026", text: "It looks SPECTACULAR! Superb service, will use again." },
+  { name: "Nat Han", date: "15 May 2026", text: "John did an excellent job. Very convenient having a mobile service come to my home." },
+  { name: "Ibrahim Busharat", date: "14 May 2026", text: "John came quickly and did the service very well. Friendly and reliable." },
+  { name: "Sharon Singh", date: "8 May 2026", text: "He worked tirelessly to extract cigarette smoke odour. Stellar job — highly recommending." },
+  { name: "Eugene Miskelly", date: "6 May 2026", text: "John arrived on time and worked neatly to produce an excellent valet service." },
+  { name: "Ben Harris", date: "30 Apr 2026", text: "He did an amazing job with my filthy car and got it gleaming. Thoroughly nice dude." },
+];
+
+// Social profiles — icons only render for entries with a URL.
+export const SOCIAL: { label: string; icon: "facebook" | "instagram" | "x" | "youtube" | "linkedin" | "tiktok"; href: string }[] = [
+  { label: "Facebook", icon: "facebook", href: "" },
+  { label: "Instagram", icon: "instagram", href: "" },
+  { label: "X", icon: "x", href: "" },
+  { label: "YouTube", icon: "youtube", href: "" },
+  { label: "LinkedIn", icon: "linkedin", href: "" },
+  { label: "TikTok", icon: "tiktok", href: "" },
+];
 
 export const WHY = [
   {
@@ -253,17 +284,18 @@ export const STATS = [
   { value: "100%", label: "Mobile & eco-friendly" },
 ];
 
-// NOTE: stock placeholders — replace with genuine Ecoverde job photos before launch.
+// Real Ecoverde job photos (cropped from the live site — swap for full-resolution originals when available).
 export const GALLERY = [
-  { src: "/images/gal-1.webp", alt: "White Tesla Model Y after an exterior valet", caption: "Exterior car detailing result in West London" },
-  { src: "/images/gal-2.webp", alt: "Black Porsche Panamera on the road after a valet", caption: "Porsche valeted at home by our mobile van" },
-  { src: "/images/gal-3.webp", alt: "Red BMW M4 with freshly polished paint", caption: "Paint enhancement and scratch removal" },
-  { src: "/images/gal-4.webp", alt: "Mercedes G-Class on a cobbled street", caption: "Eco-friendly snow foam car wash" },
-  { src: "/images/gal-5.webp", alt: "Silver BMW M5 after a full valet", caption: "Mobile car valeting in progress" },
-  { src: "/images/gal-6.webp", alt: "Black Audi RS saloon after a deep clean", caption: "Car interior deep clean after an eco valet" },
-  { src: "/images/gal-7.webp", alt: "Orange classic Volkswagen Beetle", caption: "Classic car detailing" },
-  { src: "/images/gal-8.webp", alt: "Orange Lamborghini Huracán in a garage", caption: "Supercar detail and protection" },
+  { src: "/images/gallery-1.webp", alt: "White Fiat 500 after a full eco valet", caption: "Car interior deep clean after an eco valet in West London", span: "tall" },
+  { src: "/images/gallery-2.webp", alt: "Convertible soft-top roof, half cleaned, showing before and after", caption: "Soft-top roof clean before and after in West London", span: "wide" },
+  { src: "/images/gallery-3.webp", alt: "Red Porsche Taycan valeted on a residential street beside the Ecoverde van", caption: "Porsche valeted at home by Ecoverde's mobile van", span: "" },
+  { src: "/images/gallery-4.webp", alt: "BMW i3 covered in snow foam beside the Ecoverde electric van", caption: "Eco-friendly snow foam car wash beside the Ecoverde van", span: "wide" },
+  { src: "/images/gallery-5.webp", alt: "Land Rover Defender being snow-foamed on a driveway", caption: "Exterior car detailing result in West London", span: "" },
+  { src: "/images/gallery-6.webp", alt: "Toyota SUV covered in snow foam during a mobile valet", caption: "Mobile car valeting in progress", span: "" },
+  { src: "/images/gallery-7.webp", alt: "Car interior covered in mould before a deep clean", caption: "Interior mould removal and deep clean", span: "wide" },
+  { src: "/images/gallery-8.webp", alt: "Machine polishing red paintwork to remove scratches", caption: "Paint enhancement and scratch removal", span: "" },
 ];
+
 
 export const PRIMARY_AREAS = [
   { name: "Brentford", postcode: "TW8" },
@@ -272,7 +304,7 @@ export const PRIMARY_AREAS = [
 
 export const AREAS = [
   "Chiswick W4", "Ealing W5", "Hammersmith W6", "Shepherd's Bush W12", "Notting Hill W11",
-  "Kensington SW7", "Maida Vale W9", "Kensal Rise", "Acton", "Westminster", "South Kensington",
+  "Kensington SW7", "Maida Vale W9", "Kensal Rise & Green", "Acton", "Westminster", "South Kensington",
   "Chelsea", "Fulham", "Barnes", "Richmond", "Twickenham", "West Hampstead", "Kingston", "Greater London",
 ];
 

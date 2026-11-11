@@ -1,9 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/hanken-grotesk";
+import "@fontsource-variable/fraunces";
+import "@fontsource-variable/fraunces/wght-italic.css";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { AREAS, PRIMARY_AREAS, SITE } from "@/data/site";
+import QuoteModal from "@/components/QuoteModal";
+import { WhatsAppIcon } from "@/components/Icons";
+import { AREAS, PRIMARY_AREAS, SITE, whatsappLink } from "@/data/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -22,10 +26,10 @@ export const metadata: Metadata = {
     title: "Mobile Car Valeting & Detailing West London | Ecoverde",
     description:
       "Eco-friendly mobile car valeting and detailing across West London. Biodegradable products, electric van, meticulous results.",
-    images: [{ url: "/images/hero-foam-wash.webp", width: 1400, height: 933, alt: "Eco-friendly mobile car valeting" }],
+    images: [{ url: "/images/hero.webp", width: 636, height: 656, alt: "Eco-friendly mobile car valeting" }],
   },
   twitter: { card: "summary_large_image" },
-  icons: { icon: "/icon.svg" },
+  icons: { icon: "/images/logo.png", apple: "/images/logo.png" },
 };
 
 export const viewport: Viewport = {
@@ -43,7 +47,8 @@ const jsonLd = {
   url: SITE.url,
   email: SITE.email,
   telephone: SITE.phones[0].tel,
-  image: `${SITE.url}/images/hero-foam-wash.webp`,
+  image: `${SITE.url}/images/hero.webp`,
+  logo: `${SITE.url}/images/logo.png`,
   description: "Eco-friendly, fully mobile car valeting and detailing service across West London.",
   openingHoursSpecification: [
     {
@@ -63,6 +68,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <QuoteModal />
+        <a className="wa-fab" href={whatsappLink()} target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
+          <WhatsAppIcon width={28} height={28} />
+        </a>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </body>
     </html>

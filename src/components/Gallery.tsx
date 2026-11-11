@@ -34,26 +34,26 @@ export default function Gallery() {
   const item = index !== null ? GALLERY[index] : null;
 
   return (
-    <section id="gallery" className="section" aria-labelledby="gallery-title">
+    <section id="gallery" className="section section--soft" aria-labelledby="gallery-title">
       <div className="container">
-        <div className="section-head">
-          <p className="eyebrow">Recent Work · Before &amp; After</p>
-          <h2 id="gallery-title">Car valeting before &amp; after in West London</h2>
-        </div>
-        <ul className="gallery">
+        <p className="eyebrow eyebrow--center">Recent Work · Before &amp; After</p>
+        <h2 id="gallery-title" className="center">
+          Car valeting before &amp; <em>after</em> in West London
+        </h2>
+        <ul className="bento">
           {GALLERY.map((g, i) => (
-            <li key={g.src}>
+            <li key={g.src} className={g.span ? `bento--${g.span}` : undefined}>
               <button
                 type="button"
-                className="gallery__item"
+                className="bento__item"
                 onClick={(e) => {
                   lastTrigger.current = e.currentTarget;
                   setIndex(i);
                 }}
                 aria-label={`Open image: ${g.caption}`}
               >
-                <Image src={g.src} alt={g.alt} fill sizes="(max-width: 640px) 50vw, 25vw" />
-                <span className="gallery__caption">{g.caption}</span>
+                <Image src={g.src} alt={g.alt} fill sizes="(max-width: 640px) 50vw, 440px" />
+                <span className="bento__caption">{g.caption}</span>
               </button>
             </li>
           ))}

@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useId, useRef, useState, type FormEvent } from "react";
+import { useCallback, useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { PET_OPTIONS, PRIMARY_PHONE, SERVICE_MENU, whatsappLink } from "@/data/site";
 import {
   ACCEPT_ATTR,
@@ -30,8 +29,9 @@ const EMPTY: QuoteFields = {
 
 type Status = "idle" | "sending" | "success" | "error";
 
-export default function QuoteForm() {
-  const params = useSearchParams();
+export default function QuoteModal() {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const lastFocus = useRef<HTMLElement | null>(null);
   const [fields, setFields] = useState<QuoteFields>(EMPTY);
   const [photos, setPhotos] = useState<File[]>([]);
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -43,11 +43,40 @@ export default function QuoteForm() {
   const fileRef = useRef<HTMLInputElement>(null);
   const uid = useId();
 
-  // Preselect a service from ?service=slug (service cards, menus, footer)
+  const open = useCallback((service?: string | null) => {
+    const d = dialogRef.current;
+    if (!d) return;
+    if (service && serviceLabel(service)) setFields((f) => ({ ...f, service }));
+    setStatus((st) => (st === "success" ? "idle" : st));
+    lastFocus.current = document.activeElement as HTMLElement | null;
+    if (!d.open) d.showModal();
+    document.documentElement.classList.add("modal-open");
+  }, []);
+
+  const close = useCallback(() => dialogRef.current?.close(), []);
+
+  // Any link to "#quote" (Book Now, Get a Free Quote, service cards, menus, footer) opens the modal,
+  // preselecting ?service=<slug> when present.
   useEffect(() => {
-    const s = params.get("service");
-    if (s && serviceLabel(s)) setFields((f) => ({ ...f, service: s }));
-  }, [params]);
+    const onClick = (e: MouseEvent) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return;
+      const a = (e.target as Element | null)?.closest?.("a[href]") as HTMLAnchorElement | null;
+      if (!a) return;
+      const url = new URL(a.href, location.href);
+      if (url.origin !== location.origin || url.hash !== "#quote") return;
+      // Capture phase on window runs before Next <Link>'s handler, so we can take over the click.
+      e.preventDefault();
+      e.stopPropagation();
+      open(url.searchParams.get("service"));
+    };
+    window.addEventListener("click", onClick, true);
+    // Deep link: /?service=slug#quote
+    if (location.hash === "#quote") {
+      open(new URLSearchParams(location.search).get("service"));
+      history.replaceState(null, "", location.pathname);
+    }
+    return () => window.removeEventListener("click", onClick, true);
+  }, [open]);
 
   useEffect(() => {
     if (status === "success") successRef.current?.focus();
@@ -117,8 +146,23 @@ export default function QuoteForm() {
   });
 
   return (
-    <section id="quote" className="section quote" aria-label="Request a free quote">
-      <div className="container quote__grid">
+    <dialog
+      ref={dialogRef}
+      id="quote"
+      className="quote-modal"
+      aria-label="Request your free quote"
+      onClose={() => {
+        document.documentElement.classList.remove("modal-open");
+        lastFocus.current?.focus?.();
+      }}
+      onClick={(e) => {
+        if (e.target === dialogRef.current) close();
+      }}
+    >
+      <button type="button" className="quote-modal__close icon-btn" onClick={close} aria-label="Close quote form">
+        <CloseIcon />
+      </button>
+      <div className="quote__grid">
         <div className="quote__aside">
           <p className="eyebrow">Free Quote · No Obligation</p>
           <h2 className="quote__heading">Prefer to talk it through?</h2>
@@ -165,7 +209,7 @@ export default function QuoteForm() {
                 >
                   <WhatsAppIcon width={18} height={18} /> Continue on WhatsApp
                 </a>
-                <button type="button" className="btn btn--outline" onClick={() => setStatus("idle")}>
+                <button type="button" className="btn btn--outline" onClick={() => { setStatus("idle"); close(); }}>
                   Close
                 </button>
               </div>
@@ -340,6 +384,6 @@ export default function QuoteForm() {
           )}
         </div>
       </div>
-    </section>
+    </dialog>
   );
 }
