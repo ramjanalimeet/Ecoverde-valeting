@@ -36,7 +36,7 @@ preselects that service. Deep links like `/?service=ceramic-coating#quote` open 
 - `src/app/globals.css` — design tokens (`:root`) and all styles. Fraunces (serif headings, green italic
   accents) + Hanken Grotesk (body), brand greens/teal gradient sampled from the live site.
 - `src/components/` — `Header` (dropdowns, services mega menu, mobile drawer), `Footer`, `Sections`
-  (homepage sections), `Gallery`, `Faq`, `QuoteForm`, `Icons` (incl. logo).
+  (homepage sections), `Gallery`, `Faq`, `QuoteModal`, `Trustindex`, `Icons` (incl. logo).
 - `src/lib/quote.ts` — validation shared by the browser and the server.
 
 ## Quote form
