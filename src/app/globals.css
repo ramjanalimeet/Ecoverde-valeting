@@ -2955,3 +2955,50 @@ textarea {
     border-radius: 28px 28px 0 0;
   }
 }
+
+/* Journal articles */
+.journal__date {
+  margin: 0 0 4px !important;
+  flex: 0 !important;
+  font-size: 0.66rem !important;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--green) !important;
+}
+.article {
+  padding: 120px 0 64px;
+  background: var(--soft);
+}
+.article .crumbs ol {
+  font-size: 0.72rem;
+}
+.article h1 {
+  font-size: clamp(2rem, 1.5rem + 2vw, 2.9rem);
+}
+.article__cover {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--r-lg);
+  margin: 10px 0 28px;
+}
+.article__body {
+  font-size: 1rem;
+}
+.article__body h2 {
+  font-size: 1.6rem;
+  margin-top: 32px;
+}
+.article__body h3 {
+  font-size: 1.15rem;
+  margin-top: 24px;
+}
+.article__body ul {
+  list-style: disc;
+  padding-left: 1.3em;
+  margin-bottom: 16px;
+}
+.article__body li {
+  margin-bottom: 6px;
+}

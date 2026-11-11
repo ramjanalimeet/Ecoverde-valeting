@@ -3,11 +3,7 @@ import "@fontsource-variable/hanken-grotesk";
 import "@fontsource-variable/fraunces";
 import "@fontsource-variable/fraunces/wght-italic.css";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import QuoteModal from "@/components/QuoteModal";
-import { WhatsAppIcon } from "@/components/Icons";
-import { ALL_AREAS, SITE, whatsappLink } from "@/data/site";
+import { SITE } from "@/data/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -38,42 +34,10 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-// Only facts stated on the site — no review/rating markup.
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "AutoWash",
-  name: SITE.legalName,
-  alternateName: SITE.name,
-  url: SITE.url,
-  email: SITE.email,
-  telephone: SITE.phones[0].tel,
-  image: `${SITE.url}/images/hero.webp`,
-  logo: `${SITE.url}/images/logo.png`,
-  description: "Eco-friendly, fully mobile car valeting and detailing service across West London.",
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      opens: "07:00",
-      closes: "20:00",
-    },
-  ],
-  areaServed: ALL_AREAS.map((a) => a.name),
-};
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-GB">
-      <body>
-        <Header />
-        <main id="main">{children}</main>
-        <Footer />
-        <QuoteModal />
-        <a className="wa-fab" href={whatsappLink()} target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
-          <WhatsAppIcon width={28} height={28} />
-        </a>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

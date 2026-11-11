@@ -3,3 +3,5 @@ NEXTJS_ENV=development
 RESEND_API_KEY=
 QUOTE_TO_EMAIL=info@ecoverdevaleting.co.uk
 QUOTE_FROM_EMAIL="Ecoverde Website <quotes@ecoverdevaleting.co.uk>"
+DASHBOARD_PASSWORD=change-me
+SESSION_SECRET=any-long-random-string
