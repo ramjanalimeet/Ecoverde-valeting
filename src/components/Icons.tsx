@@ -112,6 +112,14 @@ export const FeatureIcon = ({ name, ...p }: P & { name: string }) => {
           <path d="M2 21c0-3 1.9-5.4 5.1-6C9.5 14.5 12 13 13 12" />
         </svg>
       );
+    case "car":
+      return (
+        <svg {...base(p)}>
+          <path d="M5 17h14M3 13l2.2-5.2A2 2 0 0 1 7 6.5h10a2 2 0 0 1 1.8 1.3L21 13v4a1 1 0 0 1-1 1h-1.5M3 13v4a1 1 0 0 0 1 1h1.5M3 13h18" />
+          <circle cx="7.5" cy="16.5" r="1.5" />
+          <circle cx="16.5" cy="16.5" r="1.5" />
+        </svg>
+      );
     case "bolt":
       return (
         <svg {...base(p)}>

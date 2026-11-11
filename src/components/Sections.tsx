@@ -61,7 +61,34 @@ export function Hero() {
           sizes="100vw"
         />
       </div>
+      <div className="hero__shade" aria-hidden="true" />
+      <svg className="hero__waves" viewBox="0 0 600 400" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        {Array.from({ length: 9 }).map((_, i) => (
+          <path
+            key={i}
+            d={`M-40 ${250 + i * 9} C 120 ${170 + i * 12}, 260 ${330 - i * 6}, 640 ${120 + i * 14}`}
+            style={{ animationDelay: `${-i * 1.1}s` }}
+          />
+        ))}
+      </svg>
       <div className="container hero__inner">
+        <ul className="hero__features">
+          {[
+            { icon: "leaf", title: "Eco-Friendly Care", text: "Biodegradable products, kinder to your car and the planet." },
+            { icon: "car", title: "We Come to You", text: "Fully mobile service across West London, 7 days a week." },
+            { icon: "sparkle", title: "Showroom Results", text: "Professional detailing for a lasting, premium finish." },
+          ].map((f) => (
+            <li key={f.title}>
+              <span className="hero__feature-icon">
+                <FeatureIcon name={f.icon} width={24} height={24} />
+              </span>
+              <span>
+                <strong>{f.title}</strong>
+                <small>{f.text}</small>
+              </span>
+            </li>
+          ))}
+        </ul>
         <div className="hero__card">
           <Eyebrow>West London · Fully Mobile · Eco-Friendly</Eyebrow>
           <h1 id="hero-title">
