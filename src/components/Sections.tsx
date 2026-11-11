@@ -2,7 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import {
+  ALL_AREAS,
   AREAS,
+  areaHref,
   BRANDS,
   PRIMARY_AREAS,
   PRIMARY_PHONE,
@@ -50,16 +52,13 @@ function Leaves({ className }: { className: string }) {
 export function Hero() {
   return (
     <section className="hero" aria-labelledby="hero-title">
-      <div className="hero__bg" aria-hidden="true">
-        <Image src="/images/hero.webp" alt="" fill priority sizes="100vw" className="hero__bg-blur" />
-      </div>
       <div className="hero__photo">
         <Image
           src="/images/hero.webp"
-          alt="Freshly valeted dark green BMW on a white stucco West London street"
+          alt="Freshly valeted dark green BMW on a tree-lined white stucco West London street"
           fill
           priority
-          sizes="(max-width: 900px) 100vw, 60vw"
+          sizes="100vw"
         />
       </div>
       <div className="container hero__inner">
@@ -276,7 +275,9 @@ export function Services() {
                 <span className="scard__cat">{s.category}</span>
               </div>
               <div className="scard__body">
-                <h3>{s.title}</h3>
+                <h3>
+                  <Link href={`/services/${s.page}`}>{s.title}</Link>
+                </h3>
                 <p>{s.description}</p>
                 <Link className="link-arrow" href={quoteHref(s.formValue)} aria-label={`Book ${s.title}`}>
                   Book this service <ArrowRight width={14} height={14} />
@@ -453,6 +454,11 @@ export function Founder() {
 /* ----------------------------------------------------------------- Areas */
 export function ServiceAreas() {
   const chips = [...PRIMARY_AREAS.map((a) => `${a.name} ${a.postcode}`), ...AREAS];
+  const hrefFor = (label: string) => {
+    const name = label.replace(/\s+[A-Z]{1,2}\d+[A-Z]?$/, "").replace(/ & Green$/, "");
+    const hit = ALL_AREAS.find((a) => a.name === name);
+    return hit ? areaHref(hit.slug) : "/areas";
+  };
   return (
     <section id="areas" className="section section--soft" aria-labelledby="areas-title">
       <div className="container">
@@ -472,9 +478,11 @@ export function ServiceAreas() {
               .
             </p>
           </div>
-          <ul className="chips" aria-label="Areas we cover">
+          <ul className="chips chips--links" aria-label="Areas we cover">
             {chips.map((a) => (
-              <li key={a}>{a}</li>
+              <li key={a}>
+                <Link href={hrefFor(a)}>{a}</Link>
+              </li>
             ))}
           </ul>
         </div>
@@ -509,7 +517,7 @@ export function GiftVouchers() {
             </li>
           ))}
         </ul>
-        <Link className="btn btn--primary" href={quoteHref("gift-vouchers")}>
+        <Link className="btn btn--primary" href="/services/gift-vouchers">
           Browse gift vouchers <ArrowRight width={16} height={16} />
         </Link>
       </div>

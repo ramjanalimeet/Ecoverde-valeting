@@ -38,60 +38,120 @@ export const REVIEWS = {
 };
 
 export type MenuService = { label: string; slug: string };
-export type MenuGroup = { title: string; slug: string; items: MenuService[] };
 
-export const SERVICE_MENU: MenuGroup[] = [
+export const slugify = (s: string) =>
+  s
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/'/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
+/** The four main service categories (cards at the top of the Services menu). */
+export const SERVICE_CATEGORIES = [
   {
-    title: "Valeting Service",
-    slug: "valeting",
+    slug: "valeting-service",
+    label: "Valeting Service",
+    blurb: "A full deep clean inside & out — vacuum, steam, shampoo & protect.",
+    image: "/images/cat-valeting.webp",
+  },
+  {
+    slug: "car-detailing",
+    label: "Car Detailing",
+    blurb: "Paint correction, machine polish & ceramic coating for a flawless finish.",
+    image: "/images/cat-detailing.webp",
+  },
+  {
+    slug: "mobile-car-wash",
+    label: "Mobile Car Wash",
+    blurb: "A quick, eco-friendly exterior wash & refresh — we come to you.",
+    image: "/images/cat-car-wash.webp",
+  },
+  {
+    slug: "car-restoration",
+    label: "Car Restoration",
+    blurb: "Alloy refurb, dent & scuff repair and bodywork respray.",
+    image: "/images/cat-restoration.webp",
+  },
+];
+
+/** Link columns under the category cards in the Services menu. */
+export const SERVICE_GROUPS: { title: string; category: string; items: MenuService[] }[] = [
+  {
+    title: "Valeting Extras",
+    category: "valeting-service",
     items: [
-      { label: "Mini & Full Valet", slug: "mini-full-valet" },
-      { label: "Interior Deep Clean & Steam", slug: "interior-deep-clean" },
-      { label: "Mould & Odour Removal", slug: "mould-odour-removal" },
       { label: "Lease Return Valet", slug: "lease-return-valet" },
       { label: "Pre-Sale Valet", slug: "pre-sale-valet" },
       { label: "Used Car Valet", slug: "used-car-valet" },
       { label: "Maintenance Packages", slug: "maintenance-packages" },
       { label: "Gift Vouchers", slug: "gift-vouchers" },
-      { label: "Soft-Top Cleaning & Proofing", slug: "soft-top-cleaning" },
-      { label: "Fleet & Commercial Valeting", slug: "fleet-commercial" },
+      { label: "Interior Deep Clean & Steam", slug: "interior-deep-clean" },
+      { label: "Mould & Odour Removal", slug: "mould-odour-removal" },
     ],
   },
   {
-    title: "Car Detailing",
-    slug: "detailing",
+    title: "Detailing & Protection",
+    category: "car-detailing",
     items: [
-      { label: "Paint Correction & Machine Polishing", slug: "paint-correction" },
-      { label: "Ceramic Coating & Paint Protection", slug: "ceramic-coating" },
       { label: "Supercar Detailing", slug: "supercar-detailing" },
       { label: "Classic Car Detailing", slug: "classic-car-detailing" },
-      { label: "Leather & Upholstery Detailing", slug: "leather-upholstery" },
+      { label: "Leather & Upholstery", slug: "leather-upholstery" },
+      { label: "Ceramic Coating", slug: "ceramic-coating" },
+      { label: "Paint Correction", slug: "paint-correction" },
+      { label: "Soft-Top Cleaning", slug: "soft-top-cleaning" },
     ],
   },
   {
-    title: "Mobile Car Wash",
-    slug: "car-wash",
+    title: "Restoration & Repair",
+    category: "car-restoration",
     items: [
-      { label: "Exterior Basic Wash", slug: "exterior-basic-wash" },
-      { label: "Exterior + Interior Wash", slug: "exterior-interior-wash" },
-      { label: "Premium Wash & Shine", slug: "premium-wash-shine" },
-      { label: "Full Wash & Refresh", slug: "full-wash-refresh" },
-    ],
-  },
-  {
-    title: "Car Restoration",
-    slug: "restoration",
-    items: [
-      { label: "Alloy Wheel Refurbishment", slug: "alloy-wheel-refurb" },
+      { label: "Alloy Wheel Refurb", slug: "alloy-wheel-refurb" },
       { label: "Dent Removal & Panel Repair", slug: "dent-removal" },
-      { label: "Bumper Scuff & Scratch Repair", slug: "bumper-scuff-repair" },
+      { label: "Bumper Scuff & Scratch", slug: "bumper-scuff-repair" },
       { label: "Bodywork & Respray", slug: "bodywork-respray" },
-      { label: "Faded Paint & Oxidisation Restore", slug: "faded-paint-restore" },
+      { label: "Fleet & Commercial", slug: "fleet-commercial" },
     ],
   },
 ];
 
-export const ALL_MENU_SERVICES = SERVICE_MENU.flatMap((g) => g.items);
+/** Every bookable service (categories + individual services) — used by the quote form. */
+export const ALL_MENU_SERVICES: MenuService[] = [
+  ...SERVICE_CATEGORIES.map((c) => ({ label: c.label, slug: c.slug })),
+  ...SERVICE_GROUPS.flatMap((g) => g.items),
+];
+
+export const serviceHref = (slug: string) => `/services/${slug}`;
+
+/** Our two bases and the areas each one covers (Service Areas menu + area pages). */
+export const AREA_BASES = [
+  {
+    name: "Ladbroke Grove",
+    postcode: "W10",
+    slug: "ladbroke-grove",
+    areas: [
+      "Chelsea", "Kilburn", "Kensal Rise", "Highbury", "Highgate", "Paddington", "Battersea", "Kensington",
+      "Maida Vale", "Holland Park", "Notting Hill", "South Kensington", "Queen's Park", "Victoria",
+      "St John's Wood", "West Hampstead", "Westminster", "Shepherd's Bush", "Hammersmith", "Fulham",
+    ],
+  },
+  {
+    name: "Brentford",
+    postcode: "TW8",
+    slug: "brentford",
+    areas: [
+      "Richmond", "Kew", "Chiswick", "Ealing", "Acton", "Hounslow", "Hanwell", "Sheen", "Barnes", "Wimbledon",
+      "Teddington", "Wandsworth", "Hampton", "Perivale", "Harrow", "Twickenham", "Uxbridge", "Kingston",
+    ],
+  },
+];
+
+export type Area = { name: string; slug: string; base: (typeof AREA_BASES)[number]; isBase: boolean };
+export const ALL_AREAS: Area[] = AREA_BASES.flatMap((b) => [
+  { name: b.name, slug: b.slug, base: b, isBase: true },
+  ...b.areas.map((n) => ({ name: n, slug: slugify(n), base: b, isBase: false })),
+]);
+export const areaHref = (slug: string) => `/areas/${slug}`;
 
 /** Link that preselects a service in the quote form. */
 export const quoteHref = (slug?: string) => (slug ? `/?service=${slug}#quote` : "/#quote");
@@ -104,6 +164,8 @@ export type ServiceCard = {
   image: string;
   alt: string;
   formValue: string;
+  /** Service page slug the card title links to. */
+  page: string;
 };
 
 export const SERVICES: ServiceCard[] = [
@@ -115,7 +177,8 @@ export const SERVICES: ServiceCard[] = [
       "Inside-and-out valets — from a tidy mini valet to our deluxe full valet. Vacuum, steam, deep clean, protect and finish.",
     image: "/images/service-1.webp",
     alt: "Valeter hand-washing a black car with a wash mitt and snow foam",
-    formValue: "mini-full-valet",
+    formValue: "valeting-service",
+    page: "valeting-service",
   },
   {
     title: "Premium & Supercar Detailing",
@@ -126,6 +189,7 @@ export const SERVICES: ServiceCard[] = [
     image: "/images/service-2.webp",
     alt: "Black saloon covered in snow foam during a premium detail",
     formValue: "supercar-detailing",
+    page: "supercar-detailing",
   },
   {
     title: "Paint Correction & Ceramic",
@@ -136,6 +200,7 @@ export const SERVICES: ServiceCard[] = [
     image: "/images/service-3.webp",
     alt: "Water beading on freshly protected red paintwork",
     formValue: "paint-correction",
+    page: "ceramic-coating",
   },
   {
     title: "Interior Deep Clean & Steam",
@@ -146,6 +211,7 @@ export const SERVICES: ServiceCard[] = [
     image: "/images/service-4.webp",
     alt: "Valeter cleaning a steering wheel and dashboard during an interior deep clean",
     formValue: "interior-deep-clean",
+    page: "interior-deep-clean",
   },
   {
     title: "Soft-Top Cleaning & Proofing",
@@ -156,6 +222,7 @@ export const SERVICES: ServiceCard[] = [
     image: "/images/service-5.webp",
     alt: "Convertible fabric roof being deep cleaned and reproofed",
     formValue: "soft-top-cleaning",
+    page: "soft-top-cleaning",
   },
   {
     title: "Restoration & Refurb",
@@ -166,6 +233,7 @@ export const SERVICES: ServiceCard[] = [
     image: "/images/service-6.webp",
     alt: "Refurbished Ferrari alloy wheel with red brake caliper",
     formValue: "bodywork-respray",
+    page: "car-restoration",
   },
   {
     title: "Lease Return & Post-Purchase Valet",
@@ -176,6 +244,7 @@ export const SERVICES: ServiceCard[] = [
     image: "/images/service-7.webp",
     alt: "Car covered in eco-friendly snow foam from a foam sprayer",
     formValue: "lease-return-valet",
+    page: "lease-return-valet",
   },
   {
     title: "Mould & Odour Removal",
@@ -186,6 +255,7 @@ export const SERVICES: ServiceCard[] = [
     image: "/images/service-8.webp",
     alt: "Mouldy car interior before an eco steam clean",
     formValue: "mould-odour-removal",
+    page: "mould-odour-removal",
   },
   {
     title: "Machine Polishing & Paint Protection",
@@ -196,6 +266,7 @@ export const SERVICES: ServiceCard[] = [
     image: "/images/service-9.webp",
     alt: "Machine polisher restoring gloss to red paintwork",
     formValue: "paint-correction",
+    page: "paint-correction",
   },
 ];
 
@@ -364,19 +435,12 @@ export const NAV = [
   {
     label: "About",
     children: [
-      { label: "About Us", href: "/#about" },
-      { label: "Why Choose Us", href: "/#why" },
+      { label: "About Us", href: "/about" },
+      { label: "Why Choose Us", href: "/why-choose-us" },
     ],
   },
-  { label: "Services", mega: true as const },
-  {
-    label: "Service Areas",
-    children: [
-      { label: "Ladbroke Grove (W10)", href: "/#areas" },
-      { label: "Brentford (TW8)", href: "/#areas" },
-      { label: "All areas we cover", href: "/#areas" },
-    ],
-  },
+  { label: "Services", mega: "services" as const },
+  { label: "Service Areas", mega: "areas" as const },
   { label: "Journal", href: "/journal" },
-  { label: "Contact", href: "/#quote" },
+  { label: "Contact", href: "/contact" },
 ];

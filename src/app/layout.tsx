@@ -7,7 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import QuoteModal from "@/components/QuoteModal";
 import { WhatsAppIcon } from "@/components/Icons";
-import { AREAS, PRIMARY_AREAS, SITE, whatsappLink } from "@/data/site";
+import { ALL_AREAS, SITE, whatsappLink } from "@/data/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -58,7 +58,7 @@ const jsonLd = {
       closes: "20:00",
     },
   ],
-  areaServed: [...PRIMARY_AREAS.map((a) => `${a.name} ${a.postcode}`), ...AREAS],
+  areaServed: ALL_AREAS.map((a) => a.name),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -1,31 +1,31 @@
 import Link from "next/link";
-import { PRIMARY_AREAS, SITE, SOCIAL, quoteHref } from "@/data/site";
+import { AREA_BASES, SITE, SOCIAL, areaHref } from "@/data/site";
 import { ClockIcon, Logo, MailIcon, PhoneIcon, SocialIcon } from "./Icons";
 
 const SERVICES_LINKS = [
-  { label: "Valeting Service", href: quoteHref("mini-full-valet") },
-  { label: "Car Detailing", href: quoteHref("supercar-detailing") },
-  { label: "Mobile Car Wash", href: quoteHref("premium-wash-shine") },
-  { label: "Car Restoration", href: quoteHref("bodywork-respray") },
-  { label: "Ceramic Coating", href: quoteHref("ceramic-coating") },
-  { label: "Paint Correction", href: quoteHref("paint-correction") },
-  { label: "Interior Deep Clean & Steam", href: quoteHref("interior-deep-clean") },
-  { label: "Soft-Top Cleaning", href: quoteHref("soft-top-cleaning") },
-  { label: "Used Car Valet", href: quoteHref("used-car-valet") },
-  { label: "Fleet & Commercial", href: quoteHref("fleet-commercial") },
-  { label: "Maintenance Packages", href: quoteHref("maintenance-packages") },
-  { label: "Gift Vouchers", href: quoteHref("gift-vouchers") },
-  { label: "All Services", href: "/#services" },
+  { label: "Valeting Service", href: "/services/valeting-service" },
+  { label: "Car Detailing", href: "/services/car-detailing" },
+  { label: "Mobile Car Wash", href: "/services/mobile-car-wash" },
+  { label: "Car Restoration", href: "/services/car-restoration" },
+  { label: "Ceramic Coating", href: "/services/ceramic-coating" },
+  { label: "Paint Correction", href: "/services/paint-correction" },
+  { label: "Interior Deep Clean & Steam", href: "/services/interior-deep-clean" },
+  { label: "Soft-Top Cleaning", href: "/services/soft-top-cleaning" },
+  { label: "Used Car Valet", href: "/services/used-car-valet" },
+  { label: "Fleet & Commercial", href: "/services/fleet-commercial" },
+  { label: "Maintenance Packages", href: "/services/maintenance-packages" },
+  { label: "Gift Vouchers", href: "/services/gift-vouchers" },
+  { label: "All Services", href: "/services" },
 ];
 
 const COMPANY_LINKS = [
-  { label: "About John", href: "/#about" },
-  { label: "Why Choose Us", href: "/#why" },
-  { label: "Why Eco-Friendly", href: "/#why" },
+  { label: "About John", href: "/about" },
+  { label: "Why Choose Us", href: "/why-choose-us" },
+  { label: "Why Eco-Friendly", href: "/why-choose-us#why" },
   { label: "How It Works", href: "/#how" },
   { label: "Reviews", href: "/#reviews" },
   { label: "Journal", href: "/journal" },
-  { label: "Contact", href: "/#quote" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Footer() {
@@ -76,13 +76,16 @@ export default function Footer() {
         <div>
           <h2 className="footer__title">Service Areas</h2>
           <ul className="footer__links">
-            {[...PRIMARY_AREAS].reverse().map((a) => (
+            {AREA_BASES.map((a) => (
               <li key={a.postcode}>
-                <Link href="/#areas">
+                <Link href={areaHref(a.slug)}>
                   {a.name} ({a.postcode})
                 </Link>
               </li>
             ))}
+            <li>
+              <Link href="/areas">All areas</Link>
+            </li>
           </ul>
         </div>
 
