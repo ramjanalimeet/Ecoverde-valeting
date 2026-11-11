@@ -143,7 +143,22 @@ export default function Header() {
     };
   }, [drawer]);
 
+  // Hover intent: a short delay before closing so moving the cursor into a menu never drops it.
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const openNow = (label: string) => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setOpen(label);
+  };
+  const closeSoon = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => setOpen(null), 250);
+  };
+  useEffect(() => () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+  }, []);
+
   const close = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
     setOpen(null);
     setDrawer(false);
   };
@@ -188,8 +203,8 @@ export default function Header() {
                 <li
                   key={item.label}
                   className={`nav__item${mega ? " nav__item--mega" : ""}`}
-                  onMouseEnter={() => setOpen(item.label)}
-                  onMouseLeave={() => setOpen(null)}
+                  onMouseEnter={() => openNow(item.label)}
+                  onMouseLeave={closeSoon}
                 >
                   <button
                     type="button"
@@ -203,7 +218,9 @@ export default function Header() {
                   </button>
                   {mega ? (
                     <div id={id} className={`mega mega--${mega}`} hidden={!isOpen}>
-                      {mega === "services" ? <ServicesMenu onNavigate={close} /> : <AreasMenu onNavigate={close} />}
+                      <div className="mega__scroll">
+                        {mega === "services" ? <ServicesMenu onNavigate={close} /> : <AreasMenu onNavigate={close} />}
+                      </div>
                     </div>
                   ) : (
                     <ul id={id} className="dropdown" hidden={!isOpen}>

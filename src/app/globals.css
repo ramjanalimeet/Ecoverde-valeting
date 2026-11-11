@@ -477,11 +477,10 @@ textarea {
   min-height: 58px;
   padding: 8px 10px 8px 16px;
   border-radius: 18px;
-  background: rgba(250, 248, 236, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(250, 248, 238, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.75);
   box-shadow: rgba(0, 0, 0, 0.08) 0 10px 30px -12px;
   backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
   transition: background 300ms var(--ease), box-shadow 300ms var(--ease);
 }
 .site-header.is-scrolled .header__inner {
@@ -547,14 +546,15 @@ textarea {
   padding: 10px;
   animation: drop 250ms var(--ease);
 }
+/* Invisible hover bridge between the nav item and its menu */
 .dropdown::before,
 .mega::before {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
-  top: -16px;
-  height: 16px;
+  top: -28px;
+  height: 28px;
 }
 @keyframes drop {
   from {
@@ -585,14 +585,18 @@ textarea {
   right: 0;
   top: calc(100% + 8px);
   width: auto;
-  padding: 22px 20px 18px;
+  padding: 0;
   border-radius: 22px;
   background: rgba(244, 250, 246, 0.97);
   border: 1px solid rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  max-height: calc(100vh - 110px);
-  overflow: auto;
+}
+.mega__scroll {
+  max-height: calc(100vh - 104px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 22px 20px 18px;
+  border-radius: inherit;
 }
 .mega__title {
   margin: 0;
@@ -867,11 +871,10 @@ textarea {
   width: min(512px, 100%);
   padding: 36px 32px 28px;
   border-radius: 26px;
-  background: linear-gradient(160deg, rgba(240, 236, 205, 0.6), rgba(220, 225, 215, 0.55));
+  background: linear-gradient(160deg, rgba(246, 243, 226, 0.8), rgba(232, 236, 226, 0.76));
   border: 1px solid rgba(255, 255, 255, 0.7);
   box-shadow: rgba(0, 0, 0, 0.18) 0 30px 60px -30px;
-  backdrop-filter: blur(18px) saturate(130%);
-  -webkit-backdrop-filter: blur(18px) saturate(130%);
+  backdrop-filter: blur(22px) saturate(140%);
 }
 .hero__card h1 {
   font-size: clamp(2.1rem, 1.6rem + 1.6vw, 2.6rem);
