@@ -2857,7 +2857,8 @@ textarea {
   .hero {
     min-height: 0;
     display: block;
-    padding: 84px 0 28px;
+    /* header (12px offset + ~58px pill) + a comfortable 28px gap */
+    padding: calc(98px + env(safe-area-inset-top, 0px)) 0 28px;
   }
   .hero__photo img {
     object-position: 30% 50%;
