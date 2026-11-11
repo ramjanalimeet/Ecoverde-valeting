@@ -137,7 +137,7 @@ export default function Header() {
 
   useEffect(() => {
     document.body.style.overflow = drawer ? "hidden" : "";
-    if (drawer) drawerRef.current?.querySelector<HTMLElement>("a,button")?.focus();
+    if (drawer) drawerRef.current?.focus({ preventScroll: true });
     return () => {
       document.body.style.overflow = "";
     };
@@ -166,7 +166,7 @@ export default function Header() {
   const isActive = (href: string) => href !== "/" && pathname.startsWith(href);
 
   return (
-    <header className={`site-header${scrolled ? " is-scrolled" : ""}`}>
+    <header className={`site-header${scrolled ? " is-scrolled" : ""}${drawer ? " is-menu-open" : ""}`}>
       <a className="skip-link" href="#main">
         Skip to content
       </a>
@@ -264,7 +264,7 @@ export default function Header() {
         </div>
       </div>
 
-      <div id="mobile-drawer" ref={drawerRef} className="drawer" hidden={!drawer} role="dialog" aria-modal="true" aria-label="Menu">
+      <div id="mobile-drawer" ref={drawerRef} className="drawer" hidden={!drawer} role="dialog" aria-modal="true" aria-label="Menu" tabIndex={-1}>
         <nav aria-label="Mobile">
           <ul className="drawer__list">
             {NAV.map((item) => {

@@ -1,8 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource-variable/hanken-grotesk";
-import "@fontsource-variable/fraunces";
-import "@fontsource-variable/fraunces/wght-italic.css";
 import "./globals.css";
+import { fraunces, hanken } from "./fonts";
 import { SITE } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -37,7 +35,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-GB">
+    <html lang="en-GB" className={`${hanken.variable} ${fraunces.variable}`}>
       <body>{children}</body>
     </html>
   );

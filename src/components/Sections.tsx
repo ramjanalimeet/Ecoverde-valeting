@@ -99,10 +99,10 @@ export function Hero() {
               </span>
             </li>
             <li className="hero__tile-logo">
-              <Image src="/images/badge-wlcc.png" alt="Member of West London Chambers of Commerce" width={152} height={36} />
+              <Image src="/images/badge-wlcc.png" alt="Member of West London Chambers of Commerce" width={152} height={36} loading="eager" />
             </li>
             <li className="hero__tile-logo">
-              <Image src="/images/badge-checkatrade.png" alt="Checkatrade approved member" width={120} height={36} />
+              <Image src="/images/badge-checkatrade.png" alt="Checkatrade approved member" width={120} height={36} loading="eager" />
             </li>
           </ul>
         </div>

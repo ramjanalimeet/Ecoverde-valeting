@@ -27,8 +27,8 @@
   --danger: #b42318;
   --danger-tint: #fef3f2;
 
-  --font: "Hanken Grotesk Variable", "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --serif: "Fraunces Variable", "Fraunces", Georgia, "Times New Roman", serif;
+  --font: var(--font-hanken), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: var(--font-fraunces), Georgia, "Times New Roman", serif;
   --fs-sm: 0.875rem;
   --fs-xs: 0.78rem;
   --fs-h1: clamp(2.3rem, 1.5rem + 2.6vw, 3.4rem);
@@ -780,6 +780,9 @@ textarea {
   overflow-y: auto;
   padding: 92px var(--gutter) 48px;
 }
+.drawer:focus {
+  outline: none;
+}
 .drawer__list > li {
   border-bottom: 1px solid var(--border);
 }
@@ -821,6 +824,13 @@ textarea {
 }
 
 @media (max-width: 960px) {
+  /* On phones/tablets the header scrolls away with the page instead of floating over content */
+  .site-header {
+    position: absolute;
+  }
+  .site-header.is-menu-open {
+    position: fixed;
+  }
   .nav,
   .header__phone,
   .header__book {
@@ -860,6 +870,8 @@ textarea {
 }
 .hero__photo {
   overflow: hidden;
+  /* tiny blurred preview shown instantly while the real photo loads */
+  background: #6f7a62 url("data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAADwAwCdASoYAA0APtFUpEuoJKOhsAgBABoJQBOgBFKi1BjFvrU8NZsAAP5qNDbc3xW7J20KNYLKLItJjHZVS4xSHdU3tIETPWDqbOP9rC8PW8lHpqiYOS8egerDYQn2Om7uaJPQ1GaefGy8R9Q8BBsZ9SKvb3d6fQvgDf/u+OJqK9T9GfeWYQ1ZcBg1NbrqtAvlg1gFJObW6MsV1YZgAA==") center 55% / cover no-repeat;
 }
 .hero__photo img {
   object-fit: cover;

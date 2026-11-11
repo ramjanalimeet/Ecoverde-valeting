@@ -2,7 +2,7 @@
   "name": "ecoverde-valeting",
   "version": "1.0.0",
   "private": true,
-  "description": "Ecoverde Valeting \u2014 eco-friendly mobile car valeting & detailing, West London",
+  "description": "Ecoverde Valeting — eco-friendly mobile car valeting & detailing, West London",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -18,8 +18,6 @@
     "node": ">=20.9.0"
   },
   "dependencies": {
-    "@fontsource-variable/fraunces": "^5.3.0",
-    "@fontsource-variable/hanken-grotesk": "^5.3.0",
     "@opennextjs/cloudflare": "^1.20.16",
     "next": "^16.4.6",
     "react": "^19.3.1",
