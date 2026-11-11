@@ -73,7 +73,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div>
+        <div className="footer__areas-col">
           <h2 className="footer__title">Service Areas</h2>
           <ul className="footer__links">
             {AREA_BASES.map((a) => (
@@ -89,7 +89,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div>
+        <div className="footer__contact-col">
           <h2 className="footer__title">Get In Touch</h2>
           <ul className="footer__contact">
             {SITE.phones.map((p) => (
