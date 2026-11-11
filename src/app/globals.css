@@ -824,13 +824,6 @@ textarea {
 }
 
 @media (max-width: 960px) {
-  /* On phones/tablets the header scrolls away with the page instead of floating over content */
-  .site-header {
-    position: absolute;
-  }
-  .site-header.is-menu-open {
-    position: fixed;
-  }
   .nav,
   .header__phone,
   .header__book {
