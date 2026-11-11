@@ -294,13 +294,13 @@ export const REVIEW_CARDS = [
 
 // Social profiles — icons only render for entries with a URL.
 export const SOCIAL: { label: string; icon: "facebook" | "instagram" | "x" | "youtube" | "linkedin" | "tiktok"; href: string }[] = [
-  { label: "Facebook", icon: "facebook", href: "" },
-  { label: "Instagram", icon: "instagram", href: "" },
-  { label: "X", icon: "x", href: "" },
-  { label: "YouTube", icon: "youtube", href: "" },
-  { label: "LinkedIn", icon: "linkedin", href: "" },
-  { label: "TikTok", icon: "tiktok", href: "" },
-];
+  { label: "Facebook", icon: "facebook", href: "https://www.facebook.com/EcoverdeValetingServices" },
+  { label: "Instagram", icon: "instagram", href: "https://www.instagram.com/ecoverdevaletingservice/" },
+  { label: "X (Twitter)", icon: "x", href: "https://x.com/ecoverdevalet" },
+  { label: "YouTube", icon: "youtube", href: "https://www.youtube.com/@ecoverdevaletingservice" },
+  { label: "LinkedIn", icon: "linkedin", href: "https://www.linkedin.com/company/ecoverde-valeting-services/" },
+  { label: "TikTok", icon: "tiktok", href: "https://www.tiktok.com/@ecoverdevaleting" },
+]
 
 export const WHY = [
   {
