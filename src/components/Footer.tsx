@@ -129,7 +129,11 @@ export default function Footer() {
                   <MailIcon width={15} height={15} />
                 </span>
                 <span>
-                  <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+                  <a href={`mailto:${SITE.email}`}>
+                    {SITE.email.split("@")[0]}@
+                    <wbr />
+                    {SITE.email.split("@")[1]}
+                  </a>
                   <small>Quotes &amp; questions</small>
                 </span>
               </li>

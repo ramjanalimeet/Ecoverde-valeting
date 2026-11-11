@@ -2866,8 +2866,32 @@ textarea {
     grid-template-columns: 1fr 1fr;
     gap: 34px 20px;
   }
+  /* Get In Touch sits beside Service Areas */
+  .ft__col:last-child {
+    grid-column: auto;
+  }
   .ft__contact {
     grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .ft__contact li {
+    gap: 8px;
+  }
+  .ft__icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 7px;
+  }
+  .ft__icon svg {
+    width: 13px;
+    height: 13px;
+  }
+  .ft__contact a,
+  .ft__contact strong {
+    font-size: 0.78rem;
+  }
+  .ft__contact small {
+    font-size: 0.68rem;
   }
   .ft__links {
     gap: 4px;
