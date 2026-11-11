@@ -15,10 +15,19 @@
       "service": "ecoverde-valeting"
     }
   ],
+  "d1_databases": [
+    {
+      // Bookings, blog posts, email log and settings for the /dashboard
+      "binding": "DB",
+      "database_name": "ecoverde-db",
+      "database_id": "d1f32605-47d1-4b22-8de0-389a9d9da888",
+      "migrations_dir": "migrations"
+    }
+  ],
   "observability": {
     "enabled": true
   },
-  // Non-secret runtime settings. Secrets (RESEND_API_KEY) go in: npx wrangler secret put RESEND_API_KEY
+  // Non-secret runtime settings. Secrets (RESEND_API_KEY, DASHBOARD_PASSWORD, SESSION_SECRET): npx wrangler secret put <NAME>
   "vars": {
     "QUOTE_TO_EMAIL": "info@ecoverdevaleting.co.uk",
     "QUOTE_FROM_EMAIL": "Ecoverde Website <quotes@ecoverdevaleting.co.uk>"

@@ -66,12 +66,43 @@ Until the key is set, the form returns a clear "call or WhatsApp us" message and
 - Images in `/public` are served as-is (already optimised WebP); `next/image` optimisation is switched off,
   so no Cloudflare Images binding is needed.
 
+## Dashboard (`/login`)
+
+A private bookings dashboard at **`/login`** → `/dashboard` (not linked from the site, `noindex`).
+
+| Section | What it does |
+| --- | --- |
+| Overview | Totals, last 7 days, new / to action, completed, latest requests |
+| Bookings | Every quote request with status filters + search; open one to call/WhatsApp, change status (New → Contacted → Quoted → Booked → Completed / Cancelled) and keep private notes |
+| Messages | Customer notes from the form ("Anything else?"), read/unread |
+| Emails | Log of notification emails (sent / failed / skipped) |
+| Blog | Write, publish or unpublish posts — published posts appear on `/journal` |
+| Analytics | Requests per day (30 days), top services, top postcodes, pipeline |
+| Settings | Owner name, notification email address, change password |
+| Support | How-to and troubleshooting |
+
+**Data:** Cloudflare D1 database `ecoverde-db` (binding `DB`, schema in `migrations/`). Every quote request is
+saved there first, so nothing is lost if email delivery fails.
+
+**Secrets on the Worker:** `DASHBOARD_PASSWORD` (the sign-in password) and `SESSION_SECRET` (signs the login
+cookie). A password changed in Settings is stored hashed (PBKDF2) in D1 and overrides `DASHBOARD_PASSWORD`;
+changing it signs everyone out.
+
+**Schema changes:** add a new file in `migrations/` and run
+`npx wrangler d1 migrations apply ecoverde-db --remote`.
+
+**Local testing:** `npx wrangler d1 migrations apply ecoverde-db --local`, put `DASHBOARD_PASSWORD` and
+`SESSION_SECRET` in `.dev.vars`, then `npm run preview`.
+
 ## Pages
 
 | Route | What it is |
 | --- | --- |
 | `/` | Homepage, matching the live site: glass hero, Google review marquee, Trustindex block, premium brands band, 9 service cards, why eco, how it works, stats, founder, bento before/after gallery (lightbox), service areas, gift vouchers, used-car valet, final CTA, two-column FAQ |
-| `/journal` | Journal (empty state until articles are added in `src/app/journal/page.tsx`) |
+| `/services`, `/services/[slug]` | Services overview, 4 category pages and 18 service pages (content in `src/data/pages.ts`) |
+| `/areas`, `/areas/[slug]` | Service areas and 40 area pages (two bases + their areas, from `AREA_BASES` in `src/data/site.ts`) |
+| `/about`, `/why-choose-us`, `/contact` | Company pages; `/contact` has the quote form inline |
+| `/journal`, `/journal/[slug]` | Blog posts published from the dashboard |
 | `/privacy-policy` | Privacy policy |
 | `/cancellation-refund-policy` | Cancellation & refund policy (linked from the form's consent box) |
 | `/api/quote` | Quote form endpoint (POST, multipart) |
