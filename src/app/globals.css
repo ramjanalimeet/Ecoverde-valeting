@@ -858,9 +858,29 @@ textarea {
   inset: 0;
   z-index: -2;
 }
+.hero__photo {
+  overflow: hidden;
+}
 .hero__photo img {
   object-fit: cover;
   object-position: 50% 55%;
+  transform-origin: 50% 55%;
+  will-change: transform;
+  /* Slow, smooth "Ken Burns" zoom in and out */
+  animation: hero-zoom 20s ease-in-out infinite alternate;
+}
+@keyframes hero-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__photo img {
+    animation: none;
+  }
 }
 .hero__inner {
   display: flex;
