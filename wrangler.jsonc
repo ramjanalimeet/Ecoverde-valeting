@@ -1,0 +1,31 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ecoverde-valeting",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      // Lets the worker call itself (used by OpenNext for caching)
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "ecoverde-valeting"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  },
+  // Non-secret runtime settings. Secrets (RESEND_API_KEY) go in: npx wrangler secret put RESEND_API_KEY
+  "vars": {
+    "QUOTE_TO_EMAIL": "info@ecoverdevaleting.co.uk",
+    "QUOTE_FROM_EMAIL": "Ecoverde Website <quotes@ecoverdevaleting.co.uk>"
+  }
+  // To serve on your own domain, uncomment and adjust (the zone must be on your Cloudflare account):
+  // "routes": [
+  //   { "pattern": "ecoverdevaleting.co.uk", "custom_domain": true },
+  //   { "pattern": "www.ecoverdevaleting.co.uk", "custom_domain": true }
+  // ]
+}

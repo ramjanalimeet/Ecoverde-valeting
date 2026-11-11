@@ -1,4 +1,3 @@
-import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
 import { SITE } from "@/data/site";
 import { serviceLabel, validatePhotos, validateQuote, type QuoteFields } from "@/lib/quote";
@@ -6,7 +5,7 @@ import { serviceLabel, validatePhotos, validateQuote, type QuoteFields } from "@
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-// Very small in-memory rate limit (per server instance): 5 requests / 10 min / IP.
+// Light per-isolate rate limit (5 requests / 10 min / IP). For hard limits add a Cloudflare WAF rate-limiting rule on /api/quote.
 const hits = new Map<string, number[]>();
 function rateLimited(ip: string) {
   const now = Date.now();
@@ -20,7 +19,8 @@ const esc = (s: string) =>
   s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 
 export async function POST(req: Request) {
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  const ip =
+    req.headers.get("cf-connecting-ip") || req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
 
   let form: FormData;
   try {
@@ -60,9 +60,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, errors, message: "Please check the highlighted fields." }, { status: 422 });
   }
 
-  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_SECURE, QUOTE_TO_EMAIL, QUOTE_FROM_EMAIL } = process.env;
-  if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) {
-    console.error("[quote] SMTP is not configured — set SMTP_HOST, SMTP_USER and SMTP_PASS.");
+  const { RESEND_API_KEY, QUOTE_TO_EMAIL, QUOTE_FROM_EMAIL } = process.env;
+  if (!RESEND_API_KEY) {
+    console.error("[quote] RESEND_API_KEY is not set — quote emails cannot be sent.");
     return NextResponse.json(
       {
         ok: false,
@@ -87,31 +87,31 @@ export async function POST(req: Request) {
   ];
 
   try {
-    const transport = nodemailer.createTransport({
-      host: SMTP_HOST,
-      port: Number(SMTP_PORT || 465),
-      secure: (SMTP_SECURE ?? "true") !== "false",
-      auth: { user: SMTP_USER, pass: SMTP_PASS },
+    const attachments = await Promise.all(
+      photos.map(async (p, i) => ({
+        filename: p.name.replace(/[^\w.\-]+/g, "_").slice(-80) || `photo-${i + 1}.jpg`,
+        content: Buffer.from(await p.arrayBuffer()).toString("base64"),
+      }))
+    );
+    // Resend HTTP API — works on Cloudflare Workers (no raw SMTP sockets needed).
+    const res = await fetch(process.env.RESEND_API_URL || "https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${RESEND_API_KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from: QUOTE_FROM_EMAIL || "Ecoverde Website <quotes@ecoverdevaleting.co.uk>",
+        to: [QUOTE_TO_EMAIL || SITE.email],
+        reply_to: fields.email || undefined,
+        subject: `New quote request — ${fields.name} (${fields.car}, ${serviceLabel(fields.service)})`,
+        text: rows.map(([k, v]) => `${k}: ${v}`).join("\n"),
+        html: `<h2>New quote request</h2><table cellpadding="6" style="border-collapse:collapse">${rows
+          .map(([k, v]) => `<tr><th align="left" valign="top">${esc(k)}</th><td>${esc(v).replace(/\n/g, "<br>")}</td></tr>`)
+          .join("")}</table>`,
+        attachments: attachments.length ? attachments : undefined,
+      }),
     });
-    await transport.sendMail({
-      from: QUOTE_FROM_EMAIL || SMTP_USER,
-      to: QUOTE_TO_EMAIL || SITE.email,
-      replyTo: fields.email || undefined,
-      subject: `New quote request — ${fields.name} (${fields.car}, ${serviceLabel(fields.service)})`,
-      text: rows.map(([k, v]) => `${k}: ${v}`).join("\n"),
-      html: `<h2>New quote request</h2><table cellpadding="6" style="border-collapse:collapse">${rows
-        .map(([k, v]) => `<tr><th align="left" valign="top">${esc(k)}</th><td>${esc(v).replace(/\n/g, "<br>")}</td></tr>`)
-        .join("")}</table>`,
-      attachments: await Promise.all(
-        photos.map(async (p, i) => ({
-          filename: p.name.replace(/[^\w.\-]+/g, "_").slice(-80) || `photo-${i + 1}.jpg`,
-          content: Buffer.from(await p.arrayBuffer()),
-          contentType: p.type || undefined,
-        }))
-      ),
-    });
+    if (!res.ok) throw new Error(`Resend ${res.status}: ${(await res.text()).slice(0, 300)}`);
   } catch (e) {
-    console.error("[quote] sendMail failed", e);
+    console.error("[quote] email send failed", e);
     return NextResponse.json(
       { ok: false, message: "Sorry — we couldn't send your request just now. Please call or WhatsApp us instead." },
       { status: 502 }
