@@ -88,6 +88,11 @@ saved there first, so nothing is lost if email delivery fails.
 cookie). A password changed in Settings is stored hashed (PBKDF2) in D1 and overrides `DASHBOARD_PASSWORD`;
 changing it signs everyone out.
 
+**Journal posts:** the launch articles live in `content/blog/*.md` (front matter + Markdown with tables, images,
+call-outs and a `## Frequently asked questions` section that becomes an FAQ accordion and FAQPage schema).
+`node scripts/build-blog-seed.mjs` turns them into `migrations/0002_seed_journal.sql`. After seeding, posts are
+edited in the dashboard (Blog) — the seed never overwrites existing posts.
+
 **Schema changes:** add a new file in `migrations/` and run
 `npx wrangler d1 migrations apply ecoverde-db --remote`.
 
