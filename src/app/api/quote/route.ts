@@ -61,7 +61,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, errors, message: "Please check the highlighted fields." }, { status: 422 });
   }
 
-  const label = serviceLabel(fields.service);
+  const label = serviceLabel(fields.service, str("service_detail").slice(0, 80));
 
   // 1) Save the request so it appears in the dashboard (even if email fails).
   let bookingId: number | null = null;
