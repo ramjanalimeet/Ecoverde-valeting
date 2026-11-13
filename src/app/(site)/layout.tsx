@@ -1,8 +1,9 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import { WhatsAppIcon } from "@/components/Icons";
+import Link from "next/link";
+import { ArrowRight, PhoneIcon, WhatsAppIcon } from "@/components/Icons";
 import QuoteModal from "@/components/QuoteModal";
-import { ALL_AREAS, SITE, whatsappLink } from "@/data/site";
+import { ALL_AREAS, PRIMARY_PHONE, SITE, quoteHref, whatsappLink } from "@/data/site";
 
 // Only facts stated on the site — no review/rating markup.
 const jsonLd = {
@@ -38,6 +39,20 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <a className="wa-fab" href={whatsappLink()} target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
         <WhatsAppIcon width={28} height={28} />
       </a>
+      {/* Sticky action bar — phones & tablets only */}
+      <nav className="mbar" aria-label="Quick contact">
+        <a className="mbar__btn" href={`tel:${PRIMARY_PHONE.tel}`}>
+          <PhoneIcon width={18} height={18} />
+          <span>Call</span>
+        </a>
+        <a className="mbar__btn mbar__btn--wa" href={whatsappLink()} target="_blank" rel="noopener noreferrer">
+          <WhatsAppIcon width={18} height={18} />
+          <span>WhatsApp</span>
+        </a>
+        <Link className="mbar__cta" href={quoteHref()}>
+          Get a Free Quote <ArrowRight width={16} height={16} />
+        </Link>
+      </nav>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </>
   );

@@ -3130,6 +3130,97 @@ textarea {
   }
 }
 
+/* Sticky action bar (phones & tablets) */
+.mbar {
+  display: none;
+}
+@media (max-width: 960px) {
+  .mbar {
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+    z-index: 45;
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: 6px;
+    padding: 6px;
+    border-radius: 18px;
+    background: rgba(9, 40, 30, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: rgba(0, 0, 0, 0.35) 0 16px 36px -14px;
+    backdrop-filter: blur(14px) saturate(140%);
+    max-width: 620px;
+    margin-inline: auto;
+    animation: mbar-in 400ms var(--ease) both;
+  }
+  @keyframes mbar-in {
+    from {
+      transform: translateY(120%);
+      opacity: 0;
+    }
+  }
+  .mbar__btn {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-width: 64px;
+    min-height: 50px;
+    padding: 4px 10px;
+    border-radius: 13px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    transition: background 200ms var(--ease);
+  }
+  .mbar__btn svg {
+    color: var(--green-light);
+  }
+  .mbar__btn--wa svg {
+    color: var(--whatsapp);
+  }
+  .mbar__btn:active {
+    background: rgba(255, 255, 255, 0.16);
+  }
+  .mbar__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 50px;
+    border-radius: 13px;
+    background: var(--grad);
+    color: #fff;
+    font-size: 0.86rem;
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: var(--shadow-brand);
+  }
+  .mbar__cta:active {
+    filter: brightness(0.95);
+  }
+  /* the bar replaces the floating WhatsApp button and must not cover content */
+  .wa-fab {
+    display: none !important;
+  }
+  .ft__bottom {
+    padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  html.modal-open .mbar {
+    display: none;
+  }
+}
+@media print {
+  .mbar {
+    display: none !important;
+  }
+}
+
 /* Floating WhatsApp */
 .wa-fab {
   position: fixed;
