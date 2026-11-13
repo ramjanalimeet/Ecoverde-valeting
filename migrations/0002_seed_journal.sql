@@ -37,8 +37,9 @@ We are a fully mobile, eco-friendly service across West London, so we come to yo
 
 | Ecoverde service | Price | Typical time |
 |---|---|---|
-| [Mini valet](/services/valeting-service) | From £109 | 45–60 minutes |
-| [Full valet](/services/valeting-service) | Free tailored quote | 2–3 hours |
+| [Mini valet](/services/valeting-service) | From £109 | 60–90 minutes |
+| [Deluxe full valet](/services/valeting-service) | From £189 | Up to 2 hours |
+| [Extreme full plus valet](/services/valeting-service) | From £239 | Up to 4 hours |
 | [Interior deep clean & steam](/services/interior-deep-clean) | From £189 | Depends on condition |
 | [Used car fresh-start valet](/services/used-car-valet) | From £189 | 2–4 hours |
 | [Paint correction](/services/paint-correction) | From £189 | Single or multi-stage |
@@ -71,10 +72,10 @@ You can [request a free quote online](/#quote), WhatsApp photos, or call **07495
 ## Frequently asked questions
 
 ### How much is a full car valet in London?
-A full mobile valet in London typically costs £70–£145 depending on the size and condition of the car. At Ecoverde a full valet is quoted individually after we have seen photos, because a lightly used hatchback and a family SUV with pet hair are very different jobs.
+A full mobile valet in London typically costs £70–£145 depending on the size and condition of the car. At Ecoverde the Deluxe Full Valet starts from £189, and we confirm a tailored price from photos, because a lightly used hatchback and a family SUV with pet hair are very different jobs.
 
 ### How much is a mini valet?
-UK mini valets usually cost £35–£65. Ecoverde''s mini valet starts from £109 and takes 45–60 minutes, including a snow foam hand wash, wheels, a full vacuum, dash wipe-down and glass inside and out.
+UK mini valets usually cost £35–£65. Ecoverde''s mini valet starts from £109 and takes around 60–90 minutes, including a snow foam hand wash, wheels, a full vacuum, dash wipe-down and glass inside and out.
 
 ### Is mobile car valeting more expensive?
 Usually slightly, because the valeter travels to you with water, power and equipment. You save the drive, the queue and the time — and with an electric van like ours there is no generator noise outside your home.
@@ -102,7 +103,7 @@ At Ecoverde we work from an **electric van with no generator**, so there is no e
 | Service | Best for | Ecoverde price |
 |---|---|---|
 | [Mini valet](/services/valeting-service) | Well-kept cars that need a refresh | From £109 |
-| [Full valet](/services/valeting-service) | A complete inside-and-out reset | Free tailored quote |
+| [Deluxe full valet](/services/valeting-service) | A complete inside-and-out reset | From £189 |
 | [Mobile car wash](/services/mobile-car-wash) | Regular exterior cleans between valets | Free tailored quote |
 | [Interior deep clean & steam](/services/interior-deep-clean) | Stains, smells, pet hair, allergies | From £189 |
 | [Lease return valet](/services/lease-return-valet) | Avoiding end-of-lease charges | From £289 |
@@ -131,7 +132,7 @@ See the full list on our [service areas page](/areas). If your postcode is not l
 4. **Interior.** Full vacuum, steam on vents, seams and cup holders, and shampoo or leather care as booked.
 5. **Finish.** Glass streak-free, protection applied, and a final walk-round with you.
 
-A mini valet takes around 45–60 minutes; a full valet around 2–3 hours.
+A mini valet takes around 60–90 minutes; a deluxe full valet up to 2 hours.
 
 ## How to choose a mobile valeter in West London
 
@@ -162,7 +163,7 @@ Not necessarily. As long as we can access the car — and the keys for interior 
 Yes. Most of our West London jobs are on residential streets, mews and office car parks. Our setup is self-contained, so we do not need a driveway, water or power.
 
 ### How long does a mobile valet take?
-A mini valet takes around 45–60 minutes and a full valet around 2–3 hours, depending on the size and condition of the car.
+A mini valet takes around 60–90 minutes and a deluxe full valet up to 2 hours, depending on the size and condition of the car.
 
 ### Do you work weekends?
 Yes — we work 7 days a week, from 7am to 8pm, including early mornings before work.
@@ -181,9 +182,9 @@ Here is exactly what each includes, how long it takes and how to choose.
 | Purpose | Maintain a well-kept car | Deep clean and reset |
 | Exterior | Snow foam and hand wash, wheels, dry | Everything in a mini valet + paint protection finish |
 | Interior | Vacuum, dash and surface wipe-down, glass | Full vacuum, steam clean, upholstery shampoo, leather clean and condition |
-| Time | 45–60 minutes | 2–3 hours |
+| Time | 60–90 minutes | Up to 2 hours |
 | Typical UK price | £35–£65 | £85–£145 |
-| Ecoverde price | From £109 | Free tailored quote |
+| Ecoverde price | From £109 | From £189 (Deluxe Full Valet) |
 | How often | Every 2–6 weeks | Every 3–6 months |
 
 UK price ranges: [Clean Me booking study](https://www.yorkshirepost.co.uk/must-read/brits-willing-to-pay-for-mobile-car-wash-services-study-reveals-5308016) and [Checkatrade cost guide](https://www.checkatrade.com/blog/cost-guides/mobile-car-wash-price/).
@@ -235,10 +236,10 @@ The most cost-effective routine for most West London drivers is a full valet two
 ## Frequently asked questions
 
 ### How long does a mini valet take?
-Around 45–60 minutes for most cars. Larger vehicles or very dusty interiors can take a little longer.
+Around 60–90 minutes for most cars. Larger vehicles or very dusty interiors can take a little longer.
 
 ### How long does a full valet take?
-Typically 2–3 hours. Cars with heavy soiling, pet hair or stains can take longer, which is why we quote from photos.
+Our Deluxe Full Valet typically takes up to 2 hours. Cars with heavy soiling, pet hair or stains can take longer, which is why we quote from photos.
 
 ### Is a full valet worth it?
 Yes, if the car has not been deep cleaned for a few months. Steam and shampoo remove bacteria, allergens and smells that a vacuum cannot reach, and the protection step keeps the paint cleaner for longer.
@@ -590,7 +591,7 @@ We cover all of W4 from our nearby [Brentford (TW8) base](/areas/brentford), so 
 | Service | Why W4 drivers book it | Price |
 |---|---|---|
 | [Mini valet](/services/valeting-service) | Keeps a well-kept car looking sharp | From £109 |
-| [Full valet](/services/valeting-service) | A complete inside-and-out reset | Free tailored quote |
+| [Deluxe full valet](/services/valeting-service) | A complete inside-and-out reset | From £189 |
 | [Lease return valet](/services/lease-return-valet) | Avoid end-of-lease charges | From £289 |
 | [Interior deep clean & steam](/services/interior-deep-clean) | Family cars, pet hair, allergies | From £189 |
 | [Ceramic coating](/services/ceramic-coating) | Protects cars parked outdoors under trees | From £289 |

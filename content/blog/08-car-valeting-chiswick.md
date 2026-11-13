@@ -24,7 +24,7 @@ We cover all of W4 from our nearby [Brentford (TW8) base](/areas/brentford), so 
 | Service | Why W4 drivers book it | Price |
 |---|---|---|
 | [Mini valet](/services/valeting-service) | Keeps a well-kept car looking sharp | From £109 |
-| [Full valet](/services/valeting-service) | A complete inside-and-out reset | Free tailored quote |
+| [Deluxe full valet](/services/valeting-service) | A complete inside-and-out reset | From £189 |
 | [Lease return valet](/services/lease-return-valet) | Avoid end-of-lease charges | From £289 |
 | [Interior deep clean & steam](/services/interior-deep-clean) | Family cars, pet hair, allergies | From £189 |
 | [Ceramic coating](/services/ceramic-coating) | Protects cars parked outdoors under trees | From £289 |

@@ -23,6 +23,8 @@ export const PHOTOS = {
   mould: p("mould-car-interior-before-cleaning.webp", 800, 534, "Mould-covered car seats and dashboard before an eco steam clean", "Mould before the steam clean"),
   paintRed: p("machine-polish-paint-correction-red-car.webp", 900, 651, "Machine polisher restoring gloss to red paintwork during paint correction", "Paint correction on red paint"),
 
+  vacuumSeat: p("interior-vacuum-seat-clean.webp", 424, 351, "Ecoverde valeter vacuuming a fabric car seat during an interior clean", "Interior vacuum"),
+
   ecoBand: p("eco-snow-foam-wash-4x4.webp", 1200, 670, "Valeter applying eco-friendly snow foam to a 4x4 with a hand sprayer", "Eco snow foam wash"),
   beading: p("water-beading-blue-paintwork.webp", 1400, 1046, "Water beading on freshly protected dark blue paintwork", "Protected blue paintwork"),
   ctaFoam: p("snow-foam-pre-wash-cta.webp", 1400, 782, "Snow foam being sprayed over a car before a hand wash", "Snow foam pre-wash"),

@@ -112,6 +112,59 @@ export const FeatureIcon = ({ name, ...p }: P & { name: string }) => {
           <path d="M2 21c0-3 1.9-5.4 5.1-6C9.5 14.5 12 13 13 12" />
         </svg>
       );
+    case "shield":
+      return (
+        <svg {...base(p)}>
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          <path d="m9 12 2 2 4-4" />
+        </svg>
+      );
+    case "clock":
+      return (
+        <svg {...base(p)}>
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 7v5l3 2" />
+        </svg>
+      );
+    case "van":
+      return (
+        <svg {...base(p)}>
+          <path d="M3 7h11v9H3zM14 10h4l3 3v3h-7" />
+          <circle cx="7" cy="17.5" r="1.8" />
+          <circle cx="17" cy="17.5" r="1.8" />
+        </svg>
+      );
+    case "thumb":
+      return (
+        <svg {...base(p)}>
+          <path d="M7 10v11H4V10zM7 10l4-8a2.5 2.5 0 0 1 2.5 3L13 9h6a2 2 0 0 1 2 2.3l-1.3 7.5A2 2 0 0 1 17.7 21H7" />
+        </svg>
+      );
+    case "star":
+      return (
+        <svg {...base(p)}>
+          <path d="m12 3 2.8 5.8 6.2.9-4.5 4.4 1 6.2L12 17.4 6.5 20.3l1-6.2L3 9.7l6.2-.9z" />
+        </svg>
+      );
+    case "heart":
+      return (
+        <svg {...base(p)}>
+          <path d="M20.8 5.6a5.5 5.5 0 0 0-7.8 0L12 6.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 22l8.8-8.6a5.5 5.5 0 0 0 0-7.8z" />
+        </svg>
+      );
+    case "refresh":
+      return (
+        <svg {...base(p)}>
+          <path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5" />
+        </svg>
+      );
+    case "award":
+      return (
+        <svg {...base(p)}>
+          <circle cx="12" cy="9" r="6" />
+          <path d="m8.5 14-1.5 8 5-3 5 3-1.5-8" />
+        </svg>
+      );
     case "car":
       return (
         <svg {...base(p)}>

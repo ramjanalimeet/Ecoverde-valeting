@@ -76,21 +76,21 @@ export const SERVICE_PAGES: ServicePage[] = [
     packages: [
       {
         name: "Mini Valet",
-        meta: "From £109 · 45–60 minutes",
+        meta: "From £109 · 60–90 minutes",
         text: "A tidy-up inside and out for cars that are cleaned regularly.",
         items: ["Exterior hand wash & dry", "Wheels & tyres", "Interior vacuum", "Wipe-down of dash & surfaces", "Glass inside & out"],
       },
       {
-        name: "Full Valet",
-        meta: "Free tailored quote · 2–3 hours",
+        name: "Deluxe Full Valet",
+        meta: "From £189 · up to 2 hours",
         text: "Our deluxe deep clean for when the car needs a complete reset.",
         items: ["Everything in the mini valet", "Steam clean & sanitise", "Upholstery shampoo", "Leather clean & condition", "Paint protection"],
       },
     ],
-    duration: "45 minutes – 3 hours",
+    duration: "60 minutes – 4 hours",
     price: "From £109",
     faqs: [
-      { q: "What's the difference between a mini and full valet?", a: "A mini valet is a thorough tidy-up for well-kept cars (45–60 minutes). A full valet adds steam sanitisation, upholstery shampoo and leather care for a complete reset (2–3 hours)." },
+      { q: "What's the difference between a mini and full valet?", a: "A Mini Valet (from £109, 60–90 minutes) is a thorough tidy-up for well-kept cars. The Deluxe Full Valet (from £189, up to 2 hours) adds steam sanitisation, upholstery shampoo and leather care for a complete reset." },
       mobileFaq,
       ecoFaq,
     ],
@@ -300,7 +300,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     eyebrow: "Maintenance Packages · West London",
     intro:
       "Keep your car looking its best all year round with regular visits on a schedule that suits you — weekly, fortnightly or monthly. Easy reminders, no rebooking hassle.",
-    pill: ["Free tailored quote", "· weekly, fortnightly or monthly"],
+    pill: ["From £75 a month", "· weekly, fortnightly or monthly"],
     hero: "bmwI3",
     photo: "handWash",
     gallery: ["jobAudiA4", "jobTesla", "defender", "jobCivic"],

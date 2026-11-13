@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ServicePageView } from "@/components/PageTemplates";
+import ValetingPage from "@/components/ValetingPage";
 import { SERVICE_PAGES, getServicePage } from "@/data/pages";
 import { SITE } from "@/data/site";
 import { PHOTOS } from "@/data/images";
@@ -37,7 +38,7 @@ export default async function ServiceRoute({ params }: { params: Promise<{ slug:
   };
   return (
     <>
-      <ServicePageView page={page} />
+      {page.slug === "valeting-service" ? <ValetingPage /> : <ServicePageView page={page} />}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </>
   );

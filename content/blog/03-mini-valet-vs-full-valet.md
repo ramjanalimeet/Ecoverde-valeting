@@ -16,9 +16,9 @@ Here is exactly what each includes, how long it takes and how to choose.
 | Purpose | Maintain a well-kept car | Deep clean and reset |
 | Exterior | Snow foam and hand wash, wheels, dry | Everything in a mini valet + paint protection finish |
 | Interior | Vacuum, dash and surface wipe-down, glass | Full vacuum, steam clean, upholstery shampoo, leather clean and condition |
-| Time | 45–60 minutes | 2–3 hours |
+| Time | 60–90 minutes | Up to 2 hours |
 | Typical UK price | £35–£65 | £85–£145 |
-| Ecoverde price | From £109 | Free tailored quote |
+| Ecoverde price | From £109 | From £189 (Deluxe Full Valet) |
 | How often | Every 2–6 weeks | Every 3–6 months |
 
 UK price ranges: [Clean Me booking study](https://www.yorkshirepost.co.uk/must-read/brits-willing-to-pay-for-mobile-car-wash-services-study-reveals-5308016) and [Checkatrade cost guide](https://www.checkatrade.com/blog/cost-guides/mobile-car-wash-price/).
@@ -70,10 +70,10 @@ The most cost-effective routine for most West London drivers is a full valet two
 ## Frequently asked questions
 
 ### How long does a mini valet take?
-Around 45–60 minutes for most cars. Larger vehicles or very dusty interiors can take a little longer.
+Around 60–90 minutes for most cars. Larger vehicles or very dusty interiors can take a little longer.
 
 ### How long does a full valet take?
-Typically 2–3 hours. Cars with heavy soiling, pet hair or stains can take longer, which is why we quote from photos.
+Our Deluxe Full Valet typically takes up to 2 hours. Cars with heavy soiling, pet hair or stains can take longer, which is why we quote from photos.
 
 ### Is a full valet worth it?
 Yes, if the car has not been deep cleaned for a few months. Steam and shampoo remove bacteria, allergens and smells that a vacuum cannot reach, and the protection step keeps the paint cleaner for longer.

@@ -42,8 +42,9 @@ We are a fully mobile, eco-friendly service across West London, so we come to yo
 
 | Ecoverde service | Price | Typical time |
 |---|---|---|
-| [Mini valet](/services/valeting-service) | From £109 | 45–60 minutes |
-| [Full valet](/services/valeting-service) | Free tailored quote | 2–3 hours |
+| [Mini valet](/services/valeting-service) | From £109 | 60–90 minutes |
+| [Deluxe full valet](/services/valeting-service) | From £189 | Up to 2 hours |
+| [Extreme full plus valet](/services/valeting-service) | From £239 | Up to 4 hours |
 | [Interior deep clean & steam](/services/interior-deep-clean) | From £189 | Depends on condition |
 | [Used car fresh-start valet](/services/used-car-valet) | From £189 | 2–4 hours |
 | [Paint correction](/services/paint-correction) | From £189 | Single or multi-stage |
@@ -76,10 +77,10 @@ You can [request a free quote online](/#quote), WhatsApp photos, or call **07495
 ## Frequently asked questions
 
 ### How much is a full car valet in London?
-A full mobile valet in London typically costs £70–£145 depending on the size and condition of the car. At Ecoverde a full valet is quoted individually after we have seen photos, because a lightly used hatchback and a family SUV with pet hair are very different jobs.
+A full mobile valet in London typically costs £70–£145 depending on the size and condition of the car. At Ecoverde the Deluxe Full Valet starts from £189, and we confirm a tailored price from photos, because a lightly used hatchback and a family SUV with pet hair are very different jobs.
 
 ### How much is a mini valet?
-UK mini valets usually cost £35–£65. Ecoverde's mini valet starts from £109 and takes 45–60 minutes, including a snow foam hand wash, wheels, a full vacuum, dash wipe-down and glass inside and out.
+UK mini valets usually cost £35–£65. Ecoverde's mini valet starts from £109 and takes around 60–90 minutes, including a snow foam hand wash, wheels, a full vacuum, dash wipe-down and glass inside and out.
 
 ### Is mobile car valeting more expensive?
 Usually slightly, because the valeter travels to you with water, power and equipment. You save the drive, the queue and the time — and with an electric van like ours there is no generator noise outside your home.

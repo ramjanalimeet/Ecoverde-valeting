@@ -48,14 +48,23 @@ export function DarkHero({
   pill,
   image,
   service,
+  ctas = true,
+  updated,
+  extra,
 }: {
   crumbs: Crumb[];
   eyebrow: string;
-  title: [string, string];
+  title: [string, string] | [string, string, string];
   intro: string;
   pill?: [string, string];
   image: string;
   service?: string;
+  /** Show the quote / call buttons (default true) */
+  ctas?: boolean;
+  /** e.g. "November 2026" — shown as "Last updated: …" */
+  updated?: string;
+  /** Extra paragraph under the intro */
+  extra?: string;
 }) {
   return (
     <section className="dhero">
@@ -65,31 +74,34 @@ export function DarkHero({
         <p className="eyebrow eyebrow--light">{eyebrow}</p>
         <h1>
           {title[0]} <em>{title[1]}</em>
+          {title[2]}
         </h1>
         <p className="dhero__intro">{intro}</p>
+        {extra && <p className="dhero__intro">{extra}</p>}
         {pill && (
           <p className="dhero__pill">
             <strong>{pill[0]}</strong> {pill[1]}
           </p>
         )}
-        <div className="dhero__ctas">
+        {updated && <p className="dhero__updated">Last updated: {updated}</p>}
+        {ctas && <div className="dhero__ctas">
           <Link className="btn btn--primary" href={quoteHref(service)}>
             Get a Free Quote <ArrowRight width={16} height={16} />
           </Link>
           <a className="btn btn--ghost" href={`tel:${PRIMARY_PHONE.tel}`}>
             <PhoneIcon width={16} height={16} /> Call {PRIMARY_PHONE.display}
           </a>
-        </div>
+        </div>}
       </div>
     </section>
   );
 }
 
-export function FaqList({ faqs, title = ["Questions &", "answers"] }: { faqs: Faq[]; title?: [string, string] }) {
+export function FaqList({ faqs, title = ["Questions &", "answers"], eyebrow = "Good To Know" }: { faqs: Faq[]; title?: [string, string]; eyebrow?: string }) {
   return (
     <section className="section section--soft" aria-labelledby="page-faq-title">
       <div className="container">
-        <p className="eyebrow eyebrow--center">Good To Know</p>
+        <p className="eyebrow eyebrow--center">{eyebrow}</p>
         <h2 id="page-faq-title" className="center">
           {title[0]} <em>{title[1]}</em>
         </h2>

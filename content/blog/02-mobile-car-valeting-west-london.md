@@ -22,7 +22,7 @@ At Ecoverde we work from an **electric van with no generator**, so there is no e
 | Service | Best for | Ecoverde price |
 |---|---|---|
 | [Mini valet](/services/valeting-service) | Well-kept cars that need a refresh | From £109 |
-| [Full valet](/services/valeting-service) | A complete inside-and-out reset | Free tailored quote |
+| [Deluxe full valet](/services/valeting-service) | A complete inside-and-out reset | From £189 |
 | [Mobile car wash](/services/mobile-car-wash) | Regular exterior cleans between valets | Free tailored quote |
 | [Interior deep clean & steam](/services/interior-deep-clean) | Stains, smells, pet hair, allergies | From £189 |
 | [Lease return valet](/services/lease-return-valet) | Avoiding end-of-lease charges | From £289 |
@@ -51,7 +51,7 @@ See the full list on our [service areas page](/areas). If your postcode is not l
 4. **Interior.** Full vacuum, steam on vents, seams and cup holders, and shampoo or leather care as booked.
 5. **Finish.** Glass streak-free, protection applied, and a final walk-round with you.
 
-A mini valet takes around 45–60 minutes; a full valet around 2–3 hours.
+A mini valet takes around 60–90 minutes; a deluxe full valet up to 2 hours.
 
 ## How to choose a mobile valeter in West London
 
@@ -82,7 +82,7 @@ Not necessarily. As long as we can access the car — and the keys for interior 
 Yes. Most of our West London jobs are on residential streets, mews and office car parks. Our setup is self-contained, so we do not need a driveway, water or power.
 
 ### How long does a mobile valet take?
-A mini valet takes around 45–60 minutes and a full valet around 2–3 hours, depending on the size and condition of the car.
+A mini valet takes around 60–90 minutes and a deluxe full valet up to 2 hours, depending on the size and condition of the car.
 
 ### Do you work weekends?
 Yes — we work 7 days a week, from 7am to 8pm, including early mornings before work.
