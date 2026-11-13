@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { preload } from "react-dom";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import {
@@ -49,16 +50,26 @@ function Leaves({ className }: { className: string }) {
 }
 
 /* ------------------------------------------------------------------ Hero */
+const HERO = {
+  src: "/images/hero-green-bmw-valeted-west-london-1440.webp",
+  srcSet: [560, 960, 1440].map((w) => `/images/hero-green-bmw-valeted-west-london-${w}.webp ${w}w`).join(", "),
+};
+
 export function Hero() {
+  preload(HERO.src, { as: "image", imageSrcSet: HERO.srcSet, imageSizes: "100vw", fetchPriority: "high" });
   return (
     <section className="hero" aria-labelledby="hero-title">
       <div className="hero__photo">
-        <Image
-          src="/images/hero.webp"
-          alt="Freshly valeted dark green BMW on a tree-lined white stucco West London street"
-          fill
-          priority
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={HERO.src}
+          srcSet={HERO.srcSet}
           sizes="100vw"
+          width={1440}
+          height={785}
+          alt="Freshly valeted dark green BMW parked on a tree-lined, white stucco street in West London"
+          fetchPriority="high"
+          decoding="async"
         />
       </div>
       <div className="hero__shade" aria-hidden="true" />
@@ -126,10 +137,10 @@ export function Hero() {
               </span>
             </li>
             <li className="hero__tile-logo">
-              <Image src="/images/badge-wlcc.png" alt="Member of West London Chambers of Commerce" width={152} height={36} loading="eager" />
+              <Image src="/images/west-london-chambers-of-commerce-member.webp" alt="Member of West London Chambers of Commerce" width={152} height={36} loading="eager" />
             </li>
             <li className="hero__tile-logo">
-              <Image src="/images/badge-checkatrade.png" alt="Checkatrade approved member" width={120} height={36} loading="eager" />
+              <Image src="/images/checkatrade-approved-member.webp" alt="Checkatrade approved member" width={120} height={36} loading="eager" />
             </li>
           </ul>
         </div>
@@ -226,9 +237,8 @@ export function Reviews() {
             <span>
               Based on <b>{REVIEWS.total} reviews</b>
             </span>
-            <span className="ti-static__brand">
-              <CheckIcon width={16} height={16} /> Trustindex
-            </span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="ti-static__logo" src="/images/trustindex-logo.svg" alt="Trustindex" width={120} height={20} loading="lazy" />
           </div>
         )}
 
@@ -323,7 +333,7 @@ export function WhyChoose() {
   return (
     <section id="why" className="why" aria-labelledby="why-title">
       <div className="why__bg" aria-hidden="true">
-        <Image src="/images/why-bg.webp" alt="" fill sizes="50vw" />
+        <Image src="/images/eco-snow-foam-wash-4x4.webp" alt="" fill sizes="50vw" />
       </div>
       <div className="container why__inner">
         <Eyebrow light>Why West London Drivers Choose Ecoverde</Eyebrow>
@@ -396,7 +406,7 @@ export function Stats() {
   return (
     <section className="stats" aria-labelledby="stats-title">
       <div className="stats__bg" aria-hidden="true">
-        <Image src="/images/stats-bg.webp" alt="" fill sizes="100vw" />
+        <Image src="/images/water-beading-blue-paintwork.webp" alt="" fill sizes="100vw" />
       </div>
       <div className="container">
         <Eyebrow center light>
@@ -441,8 +451,8 @@ export function Founder() {
       <div className="container founder__grid">
         <div className="founder__photo">
           <Image
-            src="/images/founder.webp"
-            alt="John Muriel, founder of Ecoverde, standing beside the Ecoverde electric van"
+            src="/images/john-muriel-founder-ecoverde-van.webp"
+            alt="John Muriel, founder of Ecoverde Valeting, standing beside the branded Ecoverde valeting van"
             fill
             sizes="(max-width: 900px) 100vw, 420px"
           />
@@ -588,7 +598,7 @@ export function UsedCar() {
 export function FinalCta() {
   return (
     <section className="final-cta" aria-labelledby="final-title">
-      <Image src="/images/cta-bg.webp" alt="" fill sizes="100vw" className="final-cta__bg" />
+      <Image src="/images/snow-foam-pre-wash-cta.webp" alt="" fill sizes="100vw" className="final-cta__bg" />
       <div className="container final-cta__inner">
         <Eyebrow center light>
           Ready When You Are

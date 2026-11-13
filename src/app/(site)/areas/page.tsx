@@ -19,7 +19,7 @@ export default function AreasIndex() {
         eyebrow="Service Areas"
         title={["Mobile car valeting", "across West London"]}
         intro="Fully mobile — choose your area and we'll come to you, 7 days a week, from our bases in Ladbroke Grove (W10) and Brentford (TW8). Not sure if we reach you? Just ask."
-        image="/images/hero.webp"
+        image="/images/hero-green-bmw-valeted-west-london-1440.webp"
       />
       <section className="section section--mint">
         <div className="container">

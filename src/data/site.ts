@@ -53,25 +53,25 @@ export const SERVICE_CATEGORIES = [
     slug: "valeting-service",
     label: "Valeting Service",
     blurb: "A full deep clean inside & out — vacuum, steam, shampoo & protect.",
-    image: "/images/cat-valeting.webp",
+    image: "/images/menu-valeting-clean-car-interior.webp",
   },
   {
     slug: "car-detailing",
     label: "Car Detailing",
     blurb: "Paint correction, machine polish & ceramic coating for a flawless finish.",
-    image: "/images/cat-detailing.webp",
+    image: "/images/menu-car-detailing-machine-polish.webp",
   },
   {
     slug: "mobile-car-wash",
     label: "Mobile Car Wash",
     blurb: "A quick, eco-friendly exterior wash & refresh — we come to you.",
-    image: "/images/cat-car-wash.webp",
+    image: "/images/menu-mobile-car-wash-pressure-rinse.webp",
   },
   {
     slug: "car-restoration",
     label: "Car Restoration",
     blurb: "Alloy refurb, dent & scuff repair and bodywork respray.",
-    image: "/images/cat-restoration.webp",
+    image: "/images/menu-alloy-wheel-restoration.webp",
   },
 ];
 
@@ -175,8 +175,8 @@ export const SERVICES: ServiceCard[] = [
     category: "Valeting",
     description:
       "Inside-and-out valets — from a tidy mini valet to our deluxe full valet. Vacuum, steam, deep clean, protect and finish.",
-    image: "/images/service-1.webp",
-    alt: "Valeter hand-washing a black car with a wash mitt and snow foam",
+    image: "/images/hand-wash-mini-full-valet.webp",
+    alt: "Ecoverde valeter hand-washing a black car with a sheepskin wash mitt during a mobile valet",
     formValue: "valeting-service",
     page: "valeting-service",
   },
@@ -186,8 +186,8 @@ export const SERVICES: ServiceCard[] = [
     category: "Detailing",
     description:
       "Meticulous, multi-stage detailing for classics, supercars and high-end vehicles — the perfectionist's choice.",
-    image: "/images/service-2.webp",
-    alt: "Black saloon covered in snow foam during a premium detail",
+    image: "/images/premium-detailing-snow-foam-black-car.webp",
+    alt: "Black saloon covered in pH-neutral snow foam during a premium detail",
     formValue: "supercar-detailing",
     page: "supercar-detailing",
   },
@@ -197,8 +197,8 @@ export const SERVICES: ServiceCard[] = [
     category: "Paintwork",
     description:
       "Machine polishing, swirl & scratch removal, paint enhancement and long-lasting ceramic coating protection.",
-    image: "/images/service-3.webp",
-    alt: "Water beading on freshly protected red paintwork",
+    image: "/images/ceramic-coating-water-beading-red-paint.webp",
+    alt: "Water beading on red paintwork after a ceramic coating",
     formValue: "paint-correction",
     page: "ceramic-coating",
   },
@@ -208,8 +208,8 @@ export const SERVICES: ServiceCard[] = [
     category: "Interior",
     description:
       "Steam sanitisation, stain & odour removal, mould treatment and ozone — a fresh, hygienic, allergy-friendly cabin.",
-    image: "/images/service-4.webp",
-    alt: "Valeter cleaning a steering wheel and dashboard during an interior deep clean",
+    image: "/images/interior-deep-clean-steering-wheel.webp",
+    alt: "Valeter cleaning the steering wheel and dashboard during an interior deep clean",
     formValue: "interior-deep-clean",
     page: "interior-deep-clean",
   },
@@ -219,8 +219,8 @@ export const SERVICES: ServiceCard[] = [
     category: "Specialist",
     description:
       "Convertible roof deep clean, re-colour and re-proofing to keep fabric tops protected from the British weather.",
-    image: "/images/service-5.webp",
-    alt: "Convertible fabric roof being deep cleaned and reproofed",
+    image: "/images/soft-top-convertible-roof-cleaning.webp",
+    alt: "Gloved hand cleaning a convertible fabric soft-top roof on a red sports car",
     formValue: "soft-top-cleaning",
     page: "soft-top-cleaning",
   },
@@ -230,8 +230,8 @@ export const SERVICES: ServiceCard[] = [
     category: "Restoration",
     description:
       "Alloy wheel refurbishment, dent & scuff repair and bodywork respraying — restore resale value before you sell.",
-    image: "/images/service-6.webp",
-    alt: "Refurbished Ferrari alloy wheel with red brake caliper",
+    image: "/images/alloy-wheel-refurbishment-ferrari.webp",
+    alt: "Refurbished Ferrari alloy wheel with a red brake caliper",
     formValue: "bodywork-respray",
     page: "car-restoration",
   },
@@ -241,8 +241,8 @@ export const SERVICES: ServiceCard[] = [
     category: "Valeting",
     description:
       "Handing a lease back? We deep clean the areas inspectors check to help you avoid end-of-lease charges. Just bought used? A full reset removes the previous owner's dirt, stains & odours.",
-    image: "/images/service-7.webp",
-    alt: "Car covered in eco-friendly snow foam from a foam sprayer",
+    image: "/images/snow-foam-valet-brentford.webp",
+    alt: "Valeter spraying eco-friendly snow foam over a car before a lease return valet",
     formValue: "lease-return-valet",
     page: "lease-return-valet",
   },
@@ -252,8 +252,8 @@ export const SERVICES: ServiceCard[] = [
     category: "Interior",
     description:
       "Mould thrives in damp cabins — we remove it at the source with eco-friendly steam sanitisation, stain treatment and ozone for stubborn, deeply embedded odours.",
-    image: "/images/service-8.webp",
-    alt: "Mouldy car interior before an eco steam clean",
+    image: "/images/mould-car-interior-before-cleaning.webp",
+    alt: "Mould-covered car seats and dashboard before an eco steam clean",
     formValue: "mould-odour-removal",
     page: "mould-odour-removal",
   },
@@ -263,7 +263,7 @@ export const SERVICES: ServiceCard[] = [
     category: "Paintwork",
     description:
       "Single or multi-stage machine polish to lift swirls and restore gloss — finished with wax, sealant or ceramic to lock in the shine.",
-    image: "/images/service-9.webp",
+    image: "/images/machine-polish-paint-correction-red-car.webp",
     alt: "Machine polisher restoring gloss to red paintwork",
     formValue: "paint-correction",
     page: "paint-correction",
@@ -357,16 +357,32 @@ export const STATS = [
 
 // Real Ecoverde job photos (cropped from the live site — swap for full-resolution originals when available).
 export const GALLERY = [
-  { src: "/images/gallery-1.webp", alt: "White Fiat 500 after a full eco valet", caption: "Car interior deep clean after an eco valet in West London", span: "tall" },
-  { src: "/images/gallery-2.webp", alt: "Convertible soft-top roof, half cleaned, showing before and after", caption: "Soft-top roof clean before and after in West London", span: "wide" },
-  { src: "/images/gallery-3.webp", alt: "Red Porsche Taycan valeted on a residential street beside the Ecoverde van", caption: "Porsche valeted at home by Ecoverde's mobile van", span: "" },
-  { src: "/images/gallery-4.webp", alt: "BMW i3 covered in snow foam beside the Ecoverde electric van", caption: "Eco-friendly snow foam car wash beside the Ecoverde van", span: "wide" },
-  { src: "/images/gallery-5.webp", alt: "Land Rover Defender being snow-foamed on a driveway", caption: "Exterior car detailing result in West London", span: "" },
-  { src: "/images/gallery-6.webp", alt: "Toyota SUV covered in snow foam during a mobile valet", caption: "Mobile car valeting in progress", span: "" },
-  { src: "/images/gallery-7.webp", alt: "Car interior covered in mould before a deep clean", caption: "Interior mould removal and deep clean", span: "wide" },
-  { src: "/images/gallery-8.webp", alt: "Machine polishing red paintwork to remove scratches", caption: "Paint enhancement and scratch removal", span: "" },
+  { src: "/images/fiat-500-eco-valet-driveway.webp", alt: "White Fiat 500 after a full eco valet", caption: "Car interior deep clean after an eco valet in West London", span: "tall" },
+  { src: "/images/soft-top-roof-before-after.webp", alt: "Convertible soft-top roof, half cleaned, showing before and after", caption: "Soft-top roof clean before and after in West London", span: "wide" },
+  { src: "/images/porsche-taycan-valet-at-home.webp", alt: "Red Porsche Taycan valeted on a residential street beside the Ecoverde van", caption: "Porsche valeted at home by Ecoverde's mobile van", span: "" },
+  { src: "/images/bmw-i3-snow-foam-ecoverde-van.webp", alt: "BMW i3 covered in snow foam beside the Ecoverde electric van", caption: "Eco-friendly snow foam car wash beside the Ecoverde van", span: "wide" },
+  { src: "/images/land-rover-defender-snow-foam.webp", alt: "Land Rover Defender being snow-foamed on a driveway", caption: "Exterior car detailing result in West London", span: "" },
+  { src: "/images/toyota-4x4-mobile-valet-snow-foam.webp", alt: "Toyota SUV covered in snow foam during a mobile valet", caption: "Mobile car valeting in progress", span: "" },
+  { src: "/images/mould-car-interior-before-cleaning.webp", alt: "Car interior covered in mould before a deep clean", caption: "Interior mould removal and deep clean", span: "wide" },
+  { src: "/images/machine-polish-paint-correction-red-car.webp", alt: "Machine polishing red paintwork to remove scratches", caption: "Paint enhancement and scratch removal", span: "" },
 ];
 
+
+// Real Ecoverde jobs (from the business's Google reviews), shown under the gallery.
+export const JOBS = [
+  { src: "/images/job-honda-civic-type-r-valet.webp", alt: "Yellow Honda Civic Type R after a mobile valet outside a West London home", caption: "Honda Civic Type R valet" },
+  { src: "/images/job-machine-polishing-silver-bmw.webp", alt: "Ecoverde valeter machine polishing the rear of a silver BMW hatchback", caption: "Machine polish on a BMW" },
+  { src: "/images/job-red-porsche-718-detail.webp", alt: "Red Porsche 718 gleaming after a full detail on a West London street", caption: "Porsche 718 detail" },
+  { src: "/images/job-audi-a4-avant-valet.webp", alt: "Grey Audi A4 Avant estate after a full valet on a residential driveway", caption: "Audi A4 Avant full valet" },
+  { src: "/images/job-audi-hatchback-full-valet.webp", alt: "Blue-grey Audi hatchback with fresh gloss after a full valet on a block-paved driveway", caption: "Audi hatchback full valet" },
+  { src: "/images/job-subaru-impreza-sti-detail.webp", alt: "Blue Subaru Impreza WRX STI with rear wing after an exterior detail", caption: "Subaru Impreza STI detail" },
+  { src: "/images/job-tesla-model-s-detailing.webp", alt: "Detailer polishing the side of a dark blue Tesla Model S at the kerbside", caption: "Tesla Model S detailing" },
+  { src: "/images/job-toyota-mr2-classic-valet.webp", alt: "Silver classic Toyota MR2 after a valet, with the Ecoverde valeter beside it", caption: "Classic Toyota MR2 valet" },
+  { src: "/images/job-nissan-300zx-classic-detail.webp", alt: "Red classic Nissan 300ZX freshly detailed on a block-paved drive", caption: "Nissan 300ZX classic detail" },
+  { src: "/images/job-blue-paint-gloss-finish.webp", alt: "Mirror-like reflections in deep blue paintwork after machine polishing", caption: "Mirror gloss finish" },
+  { src: "/images/job-yellow-supercar-hand-finish.webp", alt: "Gloved hand wiping down the yellow bodywork of a supercar with a microfibre cloth", caption: "Supercar hand finish" },
+  { src: "/images/job-black-porsche-911-cabriolet.webp", alt: "Black Porsche 911 Cabriolet valeted on a white stucco street in West London", caption: "Porsche 911 Cabriolet valet" },
+];
 
 export const PRIMARY_AREAS = [
   { name: "Brentford", postcode: "TW8" },

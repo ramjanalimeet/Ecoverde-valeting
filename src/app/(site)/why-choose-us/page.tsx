@@ -17,7 +17,7 @@ export default function WhyPage() {
         title={["Genuinely green —", "not just a label"]}
         intro="Eco isn't a marketing word for us — it's how every job is done. Better for your car's finish, better for your family's health, and better for the planet."
         pill={["Electric van", "· biodegradable products · steam cleaning"]}
-        image="/images/why-bg.webp"
+        image="/images/eco-snow-foam-wash-4x4.webp"
       />
       <WhyChoose />
       <HowItWorks />
