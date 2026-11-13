@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: "Mobile Car Valeting & Detailing West London | Ecoverde",
     description:
       "Eco-friendly mobile car valeting and detailing across West London. Biodegradable products, electric van, meticulous results.",
-    images: [{ url: "/images/hero.webp", width: 636, height: 656, alt: "Eco-friendly mobile car valeting" }],
+    images: [{ url: "/images/hero-green-bmw-valeted-west-london-1440.webp", width: 636, height: 656, alt: "Eco-friendly mobile car valeting" }],
   },
   twitter: { card: "summary_large_image" },
   icons: { icon: "/images/logo.png", apple: "/images/logo.png" },

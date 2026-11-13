@@ -867,6 +867,10 @@ textarea {
   background: #6f7a62 url("data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAADwAwCdASoYAA0APtFUpEuoJKOhsAgBABoJQBOgBFKi1BjFvrU8NZsAAP5qNDbc3xW7J20KNYLKLItJjHZVS4xSHdU3tIETPWDqbOP9rC8PW8lHpqiYOS8egerDYQn2Om7uaJPQ1GaefGy8R9Q8BBsZ9SKvb3d6fQvgDf/u+OJqK9T9GfeWYQ1ZcBg1NbrqtAvlg1gFJObW6MsV1YZgAA==") center 55% / cover no-repeat;
 }
 .hero__photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: 50% 55%;
   transform-origin: 50% 55%;
@@ -1275,6 +1279,11 @@ textarea {
 }
 .ti-static span {
   font-size: 0.82rem;
+}
+.ti-static__logo {
+  height: 20px;
+  width: auto;
+  margin-top: 2px;
 }
 .ti-static__brand {
   display: inline-flex;
@@ -1805,6 +1814,73 @@ textarea {
 .bento__item:focus-visible .bento__caption {
   opacity: 1;
   transform: none;
+}
+
+/* More recent jobs strip */
+.jobs {
+  margin-top: 34px;
+}
+.jobs__title {
+  margin: 0 0 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.jobs__row {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 172px;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 4px 2px 14px;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #b9d6c6 transparent;
+}
+.jobs__row > li {
+  scroll-snap-align: start;
+}
+.jobs__item {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  padding: 0;
+  border: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: zoom-in;
+  background: var(--mint-3);
+  box-shadow: rgba(8, 46, 33, 0.18) 0 10px 20px -14px;
+}
+.jobs__item img {
+  object-fit: cover;
+  transition: transform 500ms var(--ease);
+}
+.jobs__item:hover img {
+  transform: scale(1.05);
+}
+.jobs__caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 22px 10px 9px;
+  background: linear-gradient(transparent, rgba(6, 26, 19, 0.82));
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: left;
+}
+@media (max-width: 640px) {
+  .jobs__row {
+    grid-auto-columns: 140px;
+    margin-inline: calc(-1 * var(--gutter));
+    padding-inline: var(--gutter);
+    scroll-padding-inline: var(--gutter);
+  }
 }
 
 /* Lightbox */

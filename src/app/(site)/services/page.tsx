@@ -20,7 +20,7 @@ export default function ServicesIndex() {
         title={["Eco-friendly car care,", "your way"]}
         intro="In the UK, a “valet” means a thorough deep clean — here's the full range, all fully mobile. From a quick wash to ceramic coating and bodywork repair, every service uses eco-friendly products and comes to your door."
         pill={["Free tailored quote", "· prices vary with size & condition"]}
-        image="/images/service-1.webp"
+        image="/images/hand-wash-mini-full-valet.webp"
       />
       <section className="section section--mint">
         <div className="container">

@@ -29,7 +29,7 @@ export default async function JournalPage() {
         eyebrow="Journal"
         title={["Car care notes from", "the driveway"]}
         intro="Eco-valeting advice, detailing tips and recent jobs from across West London."
-        image="/images/gallery-4.webp"
+        image="/images/bmw-i3-snow-foam-ecoverde-van.webp"
       />
       <section className="section section--mint">
         <div className="container">
@@ -54,7 +54,7 @@ export default async function JournalPage() {
                 <li key={p.id} className="scard">
                   <Link href={`/journal/${p.slug}`} className="scard__media" tabIndex={-1} aria-hidden="true">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={p.cover || "/images/gallery-4.webp"} alt="" loading="lazy" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+                    <img src={p.cover || "/images/bmw-i3-snow-foam-ecoverde-van.webp"} alt="" loading="lazy" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
                   </Link>
                   <div className="scard__body">
                     <p className="journal__date">{fmt(p.published_at || p.created_at)}</p>

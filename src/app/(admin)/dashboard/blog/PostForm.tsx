@@ -60,7 +60,7 @@ export default function PostForm({ post, flash }: { post?: Post; flash?: { saved
               </label>
               <label>
                 Cover image <span className="hint">(optional — a /images/… path or image URL)</span>
-                <input name="cover" form="post-form" defaultValue={post?.cover ?? ""} placeholder="/images/gallery-4.webp" maxLength={500} />
+                <input name="cover" form="post-form" defaultValue={post?.cover ?? ""} placeholder="/images/bmw-i3-snow-foam-ecoverde-van.webp" maxLength={500} />
               </label>
               <div className="form-a__row">
                 <button className="abtn" type="submit" form="post-form">

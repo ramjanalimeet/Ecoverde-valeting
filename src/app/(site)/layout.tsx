@@ -13,7 +13,7 @@ const jsonLd = {
   url: SITE.url,
   email: SITE.email,
   telephone: SITE.phones[0].tel,
-  image: `${SITE.url}/images/hero.webp`,
+  image: `${SITE.url}/images/hero-green-bmw-valeted-west-london-1440.webp`,
   logo: `${SITE.url}/images/logo.png`,
   description: "Eco-friendly, fully mobile car valeting and detailing service across West London.",
   openingHoursSpecification: [

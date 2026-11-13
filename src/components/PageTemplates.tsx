@@ -304,7 +304,7 @@ export function AreaPageView({ area }: { area: Area }) {
         title={["Mobile car valeting in", area.name]}
         intro={intro}
         pill={[`${base.name} (${base.postcode}) base`, "· fully mobile, 7 days a week"]}
-        image="/images/hero.webp"
+        image="/images/hero-green-bmw-valeted-west-london-1440.webp"
       />
 
       <section className="section section--mint" aria-labelledby="area-services-title">

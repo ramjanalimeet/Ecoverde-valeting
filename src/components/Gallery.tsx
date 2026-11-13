@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { GALLERY } from "@/data/site";
+import { GALLERY, JOBS } from "@/data/site";
+
+const ALL = [...GALLERY, ...JOBS];
 import { ArrowRight, CloseIcon } from "./Icons";
 
 export default function Gallery() {
@@ -18,7 +20,7 @@ export default function Gallery() {
   }, [index]);
 
   const step = useCallback((dir: 1 | -1) => {
-    setIndex((i) => (i === null ? i : (i + dir + GALLERY.length) % GALLERY.length));
+    setIndex((i) => (i === null ? i : (i + dir + ALL.length) % ALL.length));
   }, []);
 
   useEffect(() => {
@@ -31,7 +33,7 @@ export default function Gallery() {
     return () => window.removeEventListener("keydown", onKey);
   }, [index, step]);
 
-  const item = index !== null ? GALLERY[index] : null;
+  const item = index !== null ? ALL[index] : null;
 
   return (
     <section id="gallery" className="section section--soft" aria-labelledby="gallery-title">
@@ -58,6 +60,28 @@ export default function Gallery() {
             </li>
           ))}
         </ul>
+
+        <div className="jobs">
+          <h3 className="jobs__title">More recent jobs</h3>
+          <ul className="jobs__row" aria-label="More recent jobs">
+            {JOBS.map((j, k) => (
+              <li key={j.src}>
+                <button
+                  type="button"
+                  className="jobs__item"
+                  onClick={(e) => {
+                    lastTrigger.current = e.currentTarget;
+                    setIndex(GALLERY.length + k);
+                  }}
+                  aria-label={`Open image: ${j.caption}`}
+                >
+                  <Image src={j.src} alt={j.alt} fill sizes="200px" />
+                  <span className="jobs__caption">{j.caption}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       <dialog
@@ -78,7 +102,7 @@ export default function Gallery() {
               <Image src={item.src} alt={item.alt} fill sizes="90vw" />
             </div>
             <figcaption>
-              {item.caption} <span>({(index ?? 0) + 1} / {GALLERY.length})</span>
+              {item.caption} <span>({(index ?? 0) + 1} / {ALL.length})</span>
             </figcaption>
           </figure>
         )}

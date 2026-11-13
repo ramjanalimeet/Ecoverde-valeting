@@ -18,7 +18,7 @@ export default function AboutPage() {
         title={["Premium car care,", "without costing the earth"]}
         intro="Ecoverde Valeting is a fully mobile, eco-friendly car valeting and detailing service founded by John Muriel. For over 8 years we've cared for everything from daily drivers to supercars and classics across West London."
         pill={["5.0 from 560+ reviews", "· fully insured & verified"]}
-        image="/images/gallery-4.webp"
+        image="/images/bmw-i3-snow-foam-ecoverde-van.webp"
       />
       <Founder />
       <Stats />
