@@ -61,7 +61,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, errors, message: "Please check the highlighted fields." }, { status: 422 });
   }
 
-  const label = serviceLabel(fields.service);
+  const label = serviceLabel(fields.service, str("service_detail").slice(0, 80));
 
   // 1) Save the request so it appears in the dashboard (even if email fails).
   let bookingId: number | null = null;
@@ -121,7 +121,7 @@ export async function POST(req: Request) {
         }))
       );
       const site = (await getEnv("NEXT_PUBLIC_SITE_URL")) || SITE.url;
-      const link = bookingId ? `<p><a href="${site}/dashboard/bookings/${bookingId}">Open in dashboard</a></p>` : "";
+      const link = bookingId ? `<p><a href="${site}/login/bookings/${bookingId}">Open in dashboard</a></p>` : "";
       // Resend HTTP API — works on Cloudflare Workers (no raw SMTP sockets needed).
       const res = await fetch((await getEnv("RESEND_API_URL")) || "https://api.resend.com/emails", {
         method: "POST",

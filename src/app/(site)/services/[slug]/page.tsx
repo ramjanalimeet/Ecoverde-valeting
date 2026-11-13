@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ServicePageView } from "@/components/PageTemplates";
+import ValetingPage from "@/components/ValetingPage";
 import { SERVICE_PAGES, getServicePage } from "@/data/pages";
 import { SITE } from "@/data/site";
+import { PHOTOS } from "@/data/images";
 
 export const dynamicParams = false;
 
@@ -18,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `${page.name} West London`,
     description: page.intro.slice(0, 158),
     alternates: { canonical: `/services/${page.slug}` },
-    openGraph: { title: `${page.name} West London | ${SITE.name}`, description: page.intro.slice(0, 158), images: [{ url: page.hero }] },
+    openGraph: { title: `${page.name} West London | ${SITE.name}`, description: page.intro.slice(0, 158), images: [{ url: PHOTOS[page.hero].src, alt: PHOTOS[page.hero].alt }] },
   };
 }
 
@@ -36,7 +38,7 @@ export default async function ServiceRoute({ params }: { params: Promise<{ slug:
   };
   return (
     <>
-      <ServicePageView page={page} />
+      {page.slug === "valeting-service" ? <ValetingPage /> : <ServicePageView page={page} />}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </>
   );

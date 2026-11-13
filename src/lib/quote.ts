@@ -25,8 +25,77 @@ export type FieldErrors = Partial<Record<keyof QuoteFields | "photos", string>>;
 const UK_PHONE = /^(?:\+44\s?|0044\s?|0)(?:\d\s?){9,10}$/;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-export const serviceLabel = (slug: string) =>
-  slug === NOT_SURE ? "Not sure — please advise" : ALL_MENU_SERVICES.find((s) => s.slug === slug)?.label ?? "";
+/** The options shown in the quote form's "Service you're interested in" dropdown. */
+export const QUOTE_OPTIONS = [
+  { value: NOT_SURE, label: "Not sure — please advise" },
+  { value: "mini-full-valet", label: "Mini / Full Valet" },
+  { value: "premium-supercar-detailing", label: "Premium / Supercar Detailing" },
+  { value: "paint-correction-ceramic", label: "Paint Correction & Ceramic Coating" },
+  { value: "interior-deep-clean-steam", label: "Interior Deep Clean & Steam" },
+  { value: "soft-top-cleaning-proofing", label: "Soft-Top Cleaning & Proofing" },
+  { value: "restoration-refurb", label: "Restoration & Refurb" },
+] as const;
+
+/** Which dropdown option each service page / link preselects. */
+const PAGE_TO_OPTION: Record<string, string> = {
+  "valeting-service": "mini-full-valet",
+  "mobile-car-wash": "mini-full-valet",
+  "lease-return-valet": "mini-full-valet",
+  "pre-sale-valet": "mini-full-valet",
+  "used-car-valet": "mini-full-valet",
+  "maintenance-packages": "mini-full-valet",
+  "gift-vouchers": "mini-full-valet",
+  "fleet-commercial": "mini-full-valet",
+  "car-detailing": "premium-supercar-detailing",
+  "supercar-detailing": "premium-supercar-detailing",
+  "classic-car-detailing": "premium-supercar-detailing",
+  "leather-upholstery": "premium-supercar-detailing",
+  "paint-correction": "paint-correction-ceramic",
+  "ceramic-coating": "paint-correction-ceramic",
+  "interior-deep-clean": "interior-deep-clean-steam",
+  "mould-odour-removal": "interior-deep-clean-steam",
+  "soft-top-cleaning": "soft-top-cleaning-proofing",
+  "car-restoration": "restoration-refurb",
+  "alloy-wheel-refurb": "restoration-refurb",
+  "dent-removal": "restoration-refurb",
+  "bumper-scuff-repair": "restoration-refurb",
+  "bodywork-respray": "restoration-refurb",
+};
+
+/** Map any stored service value (old page slugs or dropdown values) to a dropdown option. */
+export const optionFor = (v: string) => (QUOTE_OPTIONS.some((o) => o.value === v) ? v : PAGE_TO_OPTION[v] ?? NOT_SURE);
+
+/** Lowest advertised price per option — used for a conservative "value of enquiries" estimate. */
+export const OPTION_FLOOR_PRICE: Record<string, number> = {
+  [NOT_SURE]: 109,
+  "mini-full-valet": 109,
+  "premium-supercar-detailing": 289,
+  "paint-correction-ceramic": 189,
+  "interior-deep-clean-steam": 189,
+  "soft-top-cleaning-proofing": 189,
+  "restoration-refurb": 109,
+};
+
+const isOption = (v: string) => QUOTE_OPTIONS.some((o) => o.value === v);
+
+/** Resolve a preset (?service=<slug>) into the dropdown option plus the specific page it came from. */
+export function resolvePreset(slug?: string | null): { option: string; detail: string } | null {
+  if (!slug) return null;
+  if (isOption(slug)) return { option: slug, detail: "" };
+  const option = PAGE_TO_OPTION[slug];
+  if (!option) return null;
+  const page = ALL_MENU_SERVICES.find((s) => s.slug === slug)?.label ?? "";
+  const optLabel = QUOTE_OPTIONS.find((o) => o.value === option)?.label ?? "";
+  return { option, detail: page && page !== optLabel ? page : "" };
+}
+
+/** Label for a dropdown option, optionally followed by the specific service page, e.g. "Mini / Full Valet (Lease Return Valet)". */
+export const serviceLabel = (value: string, detail = "") => {
+  const base = QUOTE_OPTIONS.find((o) => o.value === value)?.label ?? "";
+  if (!base) return "";
+  const d = ALL_MENU_SERVICES.find((s) => s.label === detail)?.label;
+  return d ? `${base} (${d})` : base;
+};
 
 export function validateQuote(f: QuoteFields): FieldErrors {
   const e: FieldErrors = {};

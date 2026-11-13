@@ -29,7 +29,7 @@ export default async function JournalPage() {
         eyebrow="Journal"
         title={["Car care notes from", "the driveway"]}
         intro="Eco-valeting advice, detailing tips and recent jobs from across West London."
-        image="/images/bmw-i3-snow-foam-ecoverde-van.webp"
+        image="/images/toyota-4x4-mobile-valet-snow-foam.webp"
       />
       <section className="section section--mint">
         <div className="container">

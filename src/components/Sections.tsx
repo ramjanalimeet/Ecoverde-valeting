@@ -432,7 +432,7 @@ export function Stats() {
         <ul className="stats__chips">
           {REVIEWS.breakdown.map((r) => (
             <li key={r.source}>
-              {r.count} {r.source}
+              <b>{r.count}</b> {r.source}
               {r.source === "Google" ? " reviews" : ""}
             </li>
           ))}
@@ -595,26 +595,30 @@ export function UsedCar() {
 }
 
 /* ------------------------------------------------------------- Final CTA */
-export function FinalCta() {
+export function FinalCta({
+  eyebrow = "Ready When You Are",
+  title = "Get your free, no-obligation quote",
+  text = "Send a quick photo or video of your car and we'll come back with a tailored quote. Fully mobile, fully eco, across West London — 7 days a week.",
+  whatsapp = true,
+}: { eyebrow?: string; title?: string; text?: string; whatsapp?: boolean } = {}) {
   return (
     <section className="final-cta" aria-labelledby="final-title">
       <Image src="/images/snow-foam-pre-wash-cta.webp" alt="" fill sizes="100vw" className="final-cta__bg" />
       <div className="container final-cta__inner">
         <Eyebrow center light>
-          Ready When You Are
+          {eyebrow}
         </Eyebrow>
-        <h2 id="final-title">Get your free, no-obligation quote</h2>
-        <p>
-          Send a quick photo or video of your car and we&apos;ll come back with a tailored quote. Fully mobile, fully eco,
-          across West London — 7 days a week.
-        </p>
+        <h2 id="final-title">{title}</h2>
+        <p>{text}</p>
         <div className="final-cta__actions">
           <Link className="btn btn--white" href={quoteHref()}>
             Get a Free Quote <ArrowRight width={16} height={16} />
           </Link>
-          <a className="btn btn--ghost" href={whatsappLink()} target="_blank" rel="noopener noreferrer">
-            <WhatsAppIcon width={16} height={16} /> Message on WhatsApp
-          </a>
+          {whatsapp && (
+            <a className="btn btn--ghost" href={whatsappLink()} target="_blank" rel="noopener noreferrer">
+              <WhatsAppIcon width={16} height={16} /> Message on WhatsApp
+            </a>
+          )}
           <a className="btn btn--ghost" href={`tel:${PRIMARY_PHONE.tel}`}>
             <PhoneIcon width={16} height={16} /> Call {PRIMARY_PHONE.display}
           </a>

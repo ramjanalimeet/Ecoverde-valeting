@@ -428,7 +428,7 @@ export const FAQS = [
   },
   {
     q: "Do you offer a quick turnaround for busy schedules?",
-    a: "Our express mini valet takes 45–60 minutes; a full valet takes 2–3 hours. We offer flexible time slots including early mornings, daytime and weekends.",
+    a: "Our Mini Valet takes around 60–90 minutes and the Deluxe Full Valet up to 2 hours. We offer flexible time slots including early mornings, daytime and weekends.",
   },
   {
     q: "Can you valet a luxury or classic car?",

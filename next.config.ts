@@ -8,6 +8,13 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   poweredByHeader: false,
+  // The dashboard now lives at /login — keep old links (incl. notification emails) working.
+  async redirects() {
+    return [
+      { source: "/dashboard", destination: "/login", permanent: true },
+      { source: "/dashboard/:path*", destination: "/login/:path*", permanent: true },
+    ];
+  },
   async headers() {
     return [
       {

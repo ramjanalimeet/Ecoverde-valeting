@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { getServicePage, type Faq, type ServicePage } from "@/data/pages";
+import { HERO_POOL, JOB_KEYS, PHOTOS, pickFor, type PhotoKey } from "@/data/images";
 import {
   AREA_BASES,
   PRIMARY_PHONE,
@@ -47,14 +48,23 @@ export function DarkHero({
   pill,
   image,
   service,
+  ctas = true,
+  updated,
+  extra,
 }: {
   crumbs: Crumb[];
   eyebrow: string;
-  title: [string, string];
+  title: [string, string] | [string, string, string];
   intro: string;
   pill?: [string, string];
   image: string;
   service?: string;
+  /** Show the quote / call buttons (default true) */
+  ctas?: boolean;
+  /** e.g. "November 2026" — shown as "Last updated: …" */
+  updated?: string;
+  /** Extra paragraph under the intro */
+  extra?: string;
 }) {
   return (
     <section className="dhero">
@@ -64,31 +74,34 @@ export function DarkHero({
         <p className="eyebrow eyebrow--light">{eyebrow}</p>
         <h1>
           {title[0]} <em>{title[1]}</em>
+          {title[2]}
         </h1>
         <p className="dhero__intro">{intro}</p>
+        {extra && <p className="dhero__intro">{extra}</p>}
         {pill && (
           <p className="dhero__pill">
             <strong>{pill[0]}</strong> {pill[1]}
           </p>
         )}
-        <div className="dhero__ctas">
+        {updated && <p className="dhero__updated">Last updated: {updated}</p>}
+        {ctas && <div className="dhero__ctas">
           <Link className="btn btn--primary" href={quoteHref(service)}>
             Get a Free Quote <ArrowRight width={16} height={16} />
           </Link>
           <a className="btn btn--ghost" href={`tel:${PRIMARY_PHONE.tel}`}>
             <PhoneIcon width={16} height={16} /> Call {PRIMARY_PHONE.display}
           </a>
-        </div>
+        </div>}
       </div>
     </section>
   );
 }
 
-export function FaqList({ faqs, title = ["Questions &", "answers"] }: { faqs: Faq[]; title?: [string, string] }) {
+export function FaqList({ faqs, title = ["Questions &", "answers"], eyebrow = "Good To Know" }: { faqs: Faq[]; title?: [string, string]; eyebrow?: string }) {
   return (
     <section className="section section--soft" aria-labelledby="page-faq-title">
       <div className="container">
-        <p className="eyebrow eyebrow--center">Good To Know</p>
+        <p className="eyebrow eyebrow--center">{eyebrow}</p>
         <h2 id="page-faq-title" className="center">
           {title[0]} <em>{title[1]}</em>
         </h2>
@@ -107,12 +120,13 @@ export function FaqList({ faqs, title = ["Questions &", "answers"] }: { faqs: Fa
   );
 }
 
-function SplitIntro({ photo, photoAlt, eyebrow, title, children }: { photo: string; photoAlt: string; eyebrow: string; title: [string, string]; children: ReactNode }) {
+export function SplitIntro({ photo, eyebrow, title, children, reverse = false }: { photo: PhotoKey; eyebrow: string; title: [string, string]; children: ReactNode; reverse?: boolean }) {
+  const ph = PHOTOS[photo];
   return (
-    <section className="founder page-split">
+    <section className={`founder page-split${reverse ? " page-split--reverse" : ""}`}>
       <div className="container founder__grid">
         <div className="founder__photo">
-          <Image src={photo} alt={photoAlt} fill sizes="(max-width: 900px) 100vw, 420px" />
+          <Image src={ph.src} alt={ph.alt} fill sizes="(max-width: 900px) 100vw, 420px" />
         </div>
         <div>
           <p className="eyebrow">{eyebrow}</p>
@@ -121,6 +135,41 @@ function SplitIntro({ photo, photoAlt, eyebrow, title, children }: { photo: stri
           </h2>
           {children}
         </div>
+      </div>
+    </section>
+  );
+}
+
+/** A row of photos with captions; tiles open full size in a new tab. */
+export function PhotoStrip({ keys, eyebrow, title, intro, tone = "soft" }: { keys: PhotoKey[]; eyebrow: string; title: [string, string]; intro?: string; tone?: "soft" | "mint" }) {
+  if (!keys.length) return null;
+  return (
+    <section className={`section section--${tone} pstrip`} aria-labelledby={`pstrip-${eyebrow.replace(/\W+/g, "-").toLowerCase()}`}>
+      <div className="container">
+        <div className="pstrip__head">
+          <div>
+            <p className="eyebrow">{eyebrow}</p>
+            <h2 id={`pstrip-${eyebrow.replace(/\W+/g, "-").toLowerCase()}`}>
+              {title[0]} <em>{title[1]}</em>
+            </h2>
+          </div>
+          {intro && <p className="lead">{intro}</p>}
+        </div>
+        <ul className={`pstrip__grid pstrip__grid--${keys.length}`}>
+          {keys.map((k) => {
+            const ph = PHOTOS[k];
+            return (
+              <li key={k}>
+                <figure className="pstrip__item">
+                  <span className="pstrip__img">
+                    <Image src={ph.src} alt={ph.alt} fill sizes="(max-width: 640px) 50vw, 280px" />
+                  </span>
+                  <figcaption>{ph.caption}</figcaption>
+                </figure>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );
@@ -140,7 +189,7 @@ function ServiceCards({ slugs, title, eyebrow }: { slugs: string[]; title: [stri
           {pages.map((p) => (
             <li key={p.slug} className="scard">
               <Link href={serviceHref(p.slug)} className="scard__media" tabIndex={-1} aria-hidden="true">
-                <Image src={p.hero} alt="" fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 300px" />
+                <Image src={PHOTOS[p.hero].src} alt="" fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 300px" />
                 {p.price && <span className="scard__price">{p.price}</span>}
               </Link>
               <div className="scard__body">
@@ -177,9 +226,9 @@ export function ServicePageView({ page }: { page: ServicePage }) {
 
   return (
     <>
-      <DarkHero crumbs={crumbs} eyebrow={page.eyebrow} title={page.h1} intro={page.intro} pill={page.pill} image={page.hero} service={page.slug} />
+      <DarkHero crumbs={crumbs} eyebrow={page.eyebrow} title={page.h1} intro={page.intro} pill={page.pill} image={PHOTOS[page.hero].src} service={page.slug} />
 
-      <SplitIntro photo={page.photo} photoAlt={page.photoAlt} eyebrow={page.sectionEyebrow} title={page.sectionTitle}>
+      <SplitIntro photo={page.photo} eyebrow={page.sectionEyebrow} title={page.sectionTitle}>
         {page.body.map((p) => (
           <p key={p.slice(0, 24)}>{p}</p>
         ))}
@@ -252,6 +301,14 @@ export function ServicePageView({ page }: { page: ServicePage }) {
         </div>
       </section>
 
+      <PhotoStrip
+        keys={page.gallery}
+        tone="mint"
+        eyebrow="Recent Work"
+        title={[`${page.name}`, "in action"]}
+        intro="Real jobs from driveways and offices across West London — fully mobile, eco-friendly, finished by hand."
+      />
+
       {page.isCategory ? (
         <ServiceCards slugs={children} eyebrow={`More ${page.name}`} title={["Specialist", "services"]} />
       ) : (
@@ -281,6 +338,9 @@ export function AreaPageView({ area }: { area: Area }) {
     ? `Our ${area.name} (${base.postcode}) base serves drivers across ${base.areas.slice(0, 4).join(", ")} and beyond. Premium, eco-friendly car valeting and detailing at your home or workplace — biodegradable products, an electric van and a meticulous finish, 7 days a week.`
     : `Fully mobile, eco-friendly car valeting and detailing in ${area.name}. We come to your home, office or car park from our ${base.name} (${base.postcode}) base — biodegradable products, an electric van and a meticulous showroom finish, 7 days a week.`;
 
+  const heroKey = pickFor(area.slug, HERO_POOL, 1)[0];
+  const jobKeys = pickFor(area.slug, JOB_KEYS, 4);
+
   const faqs: Faq[] = [
     {
       q: `Do you cover all of ${area.name}?`,
@@ -304,8 +364,21 @@ export function AreaPageView({ area }: { area: Area }) {
         title={["Mobile car valeting in", area.name]}
         intro={intro}
         pill={[`${base.name} (${base.postcode}) base`, "· fully mobile, 7 days a week"]}
-        image="/images/hero-green-bmw-valeted-west-london-1440.webp"
+        image={PHOTOS[heroKey].src}
       />
+
+      <SplitIntro photo="john" eyebrow={`We Come To You · ${area.name}`} title={["Your driveway, your office —", "we bring everything"]} reverse>
+        <p>
+          John and the Ecoverde electric van arrive fully self-contained, so there&apos;s nothing to plug in and no generator
+          noise — perfect for {area.name}&apos;s residential streets, mews and office car parks.
+        </p>
+        <p>
+          Biodegradable products, low-water techniques and a meticulous hand finish, from a quick wash to ceramic coating.
+        </p>
+        <Link className="btn btn--primary" href={quoteHref()}>
+          Get a Free Quote in {area.name} <ArrowRight width={16} height={16} />
+        </Link>
+      </SplitIntro>
 
       <section className="section section--mint" aria-labelledby="area-services-title">
         <div className="container">
@@ -370,6 +443,13 @@ export function AreaPageView({ area }: { area: Area }) {
           </div>
         </div>
       </section>
+
+      <PhotoStrip
+        keys={jobKeys}
+        eyebrow="Recent Jobs"
+        title={["Cars we've", "cared for"]}
+        intro={`A few recent valets and details from across West London — the same care we bring to ${area.name}.`}
+      />
 
       <Stats />
       <FaqList faqs={faqs} />

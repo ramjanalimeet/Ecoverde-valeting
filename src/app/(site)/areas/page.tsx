@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { DarkHero } from "@/components/PageTemplates";
+import { DarkHero, PhotoStrip, SplitIntro } from "@/components/PageTemplates";
+import { PHOTOS } from "@/data/images";
 import { FinalCta } from "@/components/Sections";
 import { AREA_BASES, areaHref, slugify } from "@/data/site";
 import { ArrowRight } from "@/components/Icons";
@@ -19,7 +20,7 @@ export default function AreasIndex() {
         eyebrow="Service Areas"
         title={["Mobile car valeting", "across West London"]}
         intro="Fully mobile — choose your area and we'll come to you, 7 days a week, from our bases in Ladbroke Grove (W10) and Brentford (TW8). Not sure if we reach you? Just ask."
-        image="/images/hero-green-bmw-valeted-west-london-1440.webp"
+        image={PHOTOS.heroBmw.src}
       />
       <section className="section section--mint">
         <div className="container">
@@ -41,6 +42,19 @@ export default function AreasIndex() {
           </div>
         </div>
       </section>
+      <SplitIntro photo="john" eyebrow="Fully Mobile" title={["From Ladbroke Grove to", "Brentford — and beyond"]} reverse>
+        <p>
+          Our electric van carries everything we need, so we can valet your car on a street, driveway, mews or office car
+          park anywhere across West London — 7 days a week.
+        </p>
+        <p>Not on the list? Send your postcode on WhatsApp and we&apos;ll let you know straight away.</p>
+      </SplitIntro>
+      <PhotoStrip
+        keys={["jobCivic", "jobPorsche911", "jobAudiA4", "jobTesla"]}
+        eyebrow="Recent Jobs"
+        title={["Across", "West London"]}
+        intro="A few of the cars we've valeted and detailed at customers' homes and workplaces."
+      />
       <FinalCta />
     </>
   );

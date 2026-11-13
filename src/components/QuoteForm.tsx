@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { useEffect, useId, useRef, useState, type DragEvent, type FormEvent } from "react";
-import { PET_OPTIONS, PRIMARY_PHONE, SERVICE_CATEGORIES, SERVICE_GROUPS, whatsappLink } from "@/data/site";
+import { PET_OPTIONS, PRIMARY_PHONE, whatsappLink } from "@/data/site";
 import {
   ACCEPT_ATTR,
   MAX_FILES,
   NOT_SURE,
-  serviceLabel,
+  QUOTE_OPTIONS,
+  resolvePreset,
   validatePhotos,
   validateQuote,
   type FieldErrors,
@@ -41,13 +42,19 @@ export default function QuoteForm({ preset, nonce, onClose }: { preset?: string 
   const [serverError, setServerError] = useState("");
   const [sentName, setSentName] = useState("");
   const [dragging, setDragging] = useState(false);
+  // The specific service page the visitor came from (e.g. "Lease Return Valet"), sent with the request
+  const [detail, setDetail] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
   const successRef = useRef<HTMLDivElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const uid = useId();
 
   useEffect(() => {
-    if (preset && serviceLabel(preset)) setFields((f) => ({ ...f, service: preset }));
+    const r = resolvePreset(preset);
+    if (r) {
+      setFields((f) => ({ ...f, service: r.option }));
+      setDetail(r.detail);
+    }
     setStatus((st) => (st === "success" ? "idle" : st));
   }, [preset, nonce]);
 
@@ -98,6 +105,7 @@ export default function QuoteForm({ preset, nonce, onClose }: { preset?: string 
         setSentName(fields.name.trim().split(/\s+/)[0] || "there");
         setStatus("success");
         setFields(EMPTY);
+        setDetail("");
         setPhotos([]);
         return;
       }
@@ -222,23 +230,21 @@ export default function QuoteForm({ preset, nonce, onClose }: { preset?: string 
         </div>
         <div className="field field--full">
           <label htmlFor={`${uid}-service`}>Service you&apos;re interested in</label>
-          <select id={`${uid}-service`} name="service" value={fields.service} onChange={(e) => set("service", e.target.value)} {...a11y("service")}>
-            <option value={NOT_SURE}>Not sure — please advise</option>
-            <optgroup label="Main services">
-              {SERVICE_CATEGORIES.map((c) => (
-                <option key={c.slug} value={c.slug}>
-                  {c.label}
-                </option>
-              ))}
-            </optgroup>
-            {SERVICE_GROUPS.map((g) => (
-              <optgroup key={g.title} label={g.title}>
-                {g.items.map((s) => (
-                  <option key={s.slug} value={s.slug}>
-                    {s.label}
-                  </option>
-                ))}
-              </optgroup>
+          <input type="hidden" name="service_detail" value={detail} />
+          <select
+            id={`${uid}-service`}
+            name="service"
+            value={fields.service}
+            onChange={(e) => {
+              set("service", e.target.value);
+              setDetail("");
+            }}
+            {...a11y("service")}
+          >
+            {QUOTE_OPTIONS.map((o) => (
+              <option key={o.value} value={o.value}>
+                {o.label}
+              </option>
             ))}
           </select>
           {err("service")}

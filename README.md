@@ -68,25 +68,34 @@ Until the key is set, the form returns a clear "call or WhatsApp us" message and
 
 ## Dashboard (`/login`)
 
-A private bookings dashboard at **`/login`** → `/dashboard` (not linked from the site, `noindex`).
+A private bookings dashboard at **`/login`** (not linked from the site, `noindex`). Signed out, `/login` shows the
+sign-in screen; signed in, it is the dashboard, with sections at `/login/bookings`, `/login/blog`, etc. Old
+`/dashboard/*` links redirect to `/login/*`.
 
 | Section | What it does |
 | --- | --- |
 | Overview | Totals, last 7 days, new / to action, completed, latest requests |
 | Bookings | Every quote request with status filters + search; open one to call/WhatsApp, change status (New → Contacted → Quoted → Booked → Completed / Cancelled) and keep private notes |
 | Messages | Customer notes from the form ("Anything else?"), read/unread |
-| Emails | Log of notification emails (sent / failed / skipped) |
+| Emails | Preview of the review-request email (sent from a booking via "Complete & request review") and a log of sent emails |
 | Blog | Write, publish or unpublish posts — published posts appear on `/journal` |
-| Analytics | Requests per day (30 days), top services, top postcodes, pipeline |
-| Settings | Owner name, notification email address, change password |
+| Analytics | Date ranges (7 days–1 year): estimated value from enquiries, WhatsApp clicks, enquiries by service, live booking totals, cookieless website traffic (visitors, page views, time on site, new visitors), visitors over time, top pages, sources, pipeline |
+| Settings | Change password |
 | Support | How-to and troubleshooting |
 
 **Data:** Cloudflare D1 database `ecoverde-db` (binding `DB`, schema in `migrations/`). Every quote request is
 saved there first, so nothing is lost if email delivery fails.
 
+**Review link:** set `GOOGLE_REVIEW_URL` (your Google "write a review" link) on the Worker so review emails point straight to it.
+
 **Secrets on the Worker:** `DASHBOARD_PASSWORD` (the sign-in password) and `SESSION_SECRET` (signs the login
 cookie). A password changed in Settings is stored hashed (PBKDF2) in D1 and overrides `DASHBOARD_PASSWORD`;
 changing it signs everyone out.
+
+**Journal posts:** the launch articles live in `content/blog/*.md` (front matter + Markdown with tables, images,
+call-outs and a `## Frequently asked questions` section that becomes an FAQ accordion and FAQPage schema).
+`node scripts/build-blog-seed.mjs` turns them into `migrations/0002_seed_journal.sql`. After seeding, posts are
+edited in the dashboard (Blog) — the seed never overwrites existing posts.
 
 **Schema changes:** add a new file in `migrations/` and run
 `npx wrangler d1 migrations apply ecoverde-db --remote`.
@@ -120,6 +129,8 @@ preselects that service. Deep links like `/?service=ceramic-coating#quote` open 
   accents) + Hanken Grotesk (body), brand greens/teal gradient sampled from the live site.
 - `src/components/` — `Header` (dropdowns, services mega menu, mobile drawer), `Footer`, `Sections`
   (homepage sections), `Gallery`, `Faq`, `QuoteModal`, `Trustindex`, `Icons` (incl. logo).
+- `src/data/images.ts` — photo library: every photo's path, size, alt text and caption. Pages pick photos by key
+  (e.g. `"paintRed"`), so alt text stays consistent. Add new photos here.
 - `src/lib/quote.ts` — validation shared by the browser and the server.
 
 ## Quote form

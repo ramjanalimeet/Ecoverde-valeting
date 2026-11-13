@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/PageTemplates";
 import { ClockIcon, MailIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "@/components/Icons";
+import Image from "next/image";
 import QuoteForm from "@/components/QuoteForm";
+import { PHOTOS } from "@/data/images";
 import { AREA_BASES, SITE, whatsappLink } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -76,6 +78,12 @@ export default function ContactPage() {
                 </span>
               </li>
             </ul>
+            <figure className="contact__photo">
+              <Image src={PHOTOS.john.src} alt={PHOTOS.john.alt} width={PHOTOS.john.w} height={PHOTOS.john.h} sizes="(max-width: 900px) 100vw, 520px" />
+              <figcaption>
+                <strong>John Muriel</strong> — founder. You&apos;ll speak to John directly about your quote.
+              </figcaption>
+            </figure>
           </div>
           <div className="contact__form">
             <QuoteForm />
