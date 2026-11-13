@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { DarkHero } from "@/components/PageTemplates";
+import { DarkHero, PhotoStrip } from "@/components/PageTemplates";
+import { PHOTOS } from "@/data/images";
 import { FinalCta, HowItWorks } from "@/components/Sections";
 import { SERVICE_CATEGORIES, SERVICE_GROUPS, serviceHref } from "@/data/site";
 
@@ -20,7 +21,7 @@ export default function ServicesIndex() {
         title={["Eco-friendly car care,", "your way"]}
         intro="In the UK, a “valet” means a thorough deep clean — here's the full range, all fully mobile. From a quick wash to ceramic coating and bodywork repair, every service uses eco-friendly products and comes to your door."
         pill={["Free tailored quote", "· prices vary with size & condition"]}
-        image="/images/hand-wash-mini-full-valet.webp"
+        image={PHOTOS.ctaFoam.src}
       />
       <section className="section section--mint">
         <div className="container">
@@ -53,6 +54,12 @@ export default function ServicesIndex() {
           </div>
         </div>
       </section>
+      <PhotoStrip
+        keys={["snowFoamBlack", "paintRed", "interiorWheel", "ferrariWheel"]}
+        eyebrow="Finished By Hand"
+        title={["Every service,", "done properly"]}
+        intro="From snow foam and steam to machine polishing and wheel refurbs — this is what each service looks like on the day."
+      />
       <HowItWorks />
       <FinalCta />
     </>

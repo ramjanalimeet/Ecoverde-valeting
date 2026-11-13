@@ -120,6 +120,8 @@ preselects that service. Deep links like `/?service=ceramic-coating#quote` open 
   accents) + Hanken Grotesk (body), brand greens/teal gradient sampled from the live site.
 - `src/components/` — `Header` (dropdowns, services mega menu, mobile drawer), `Footer`, `Sections`
   (homepage sections), `Gallery`, `Faq`, `QuoteModal`, `Trustindex`, `Icons` (incl. logo).
+- `src/data/images.ts` — photo library: every photo's path, size, alt text and caption. Pages pick photos by key
+  (e.g. `"paintRed"`), so alt text stays consistent. Add new photos here.
 - `src/lib/quote.ts` — validation shared by the browser and the server.
 
 ## Quote form

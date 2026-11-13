@@ -3454,6 +3454,106 @@ textarea {
   }
 }
 
+/* Photo strip (service / area / company pages) */
+.pstrip__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 40px;
+  margin-bottom: 26px;
+}
+.pstrip__head h2 {
+  margin: 0;
+  max-width: 18ch;
+}
+.pstrip__head .lead {
+  margin: 0;
+  max-width: 44ch;
+  font-size: 0.84rem;
+}
+.pstrip__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.pstrip__grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.pstrip__item {
+  margin: 0;
+}
+.pstrip__img {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--mint-3);
+  box-shadow: rgba(8, 46, 33, 0.2) 0 14px 28px -18px;
+}
+.pstrip__img img {
+  object-fit: cover;
+  transition: transform 600ms var(--ease);
+}
+.pstrip__item:hover .pstrip__img img {
+  transform: scale(1.05);
+}
+.pstrip__item figcaption {
+  margin-top: 9px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--heading);
+}
+.page-split--reverse .founder__grid {
+  grid-template-columns: 1fr 410px;
+}
+.page-split--reverse .founder__photo {
+  order: 2;
+  border-radius: 90px 24px 24px 24px;
+}
+.contact__photo {
+  margin: 28px 0 0;
+}
+.contact__photo img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 800 / 584;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 4px solid #fff;
+  box-shadow: rgba(8, 46, 33, 0.25) 0 24px 40px -26px;
+}
+.contact__photo figcaption {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.contact__photo strong {
+  color: var(--heading);
+}
+@media (max-width: 900px) {
+  .pstrip__head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .pstrip__grid,
+  .pstrip__grid--3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .pstrip__grid--3 > li:last-child {
+    grid-column: span 2;
+  }
+  .pstrip__grid--3 > li:last-child .pstrip__img {
+    aspect-ratio: 16 / 9;
+  }
+  .page-split--reverse .founder__grid {
+    grid-template-columns: 1fr;
+  }
+  .page-split--reverse .founder__photo {
+    order: 0;
+  }
+}
+
 /* Journal articles */
 .journal__date {
   margin: 0 0 4px !important;
