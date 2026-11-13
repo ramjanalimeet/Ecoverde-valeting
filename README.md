@@ -70,21 +70,23 @@ Until the key is set, the form returns a clear "call or WhatsApp us" message and
 
 A private bookings dashboard at **`/login`** (not linked from the site, `noindex`). Signed out, `/login` shows the
 sign-in screen; signed in, it is the dashboard, with sections at `/login/bookings`, `/login/blog`, etc. Old
-`/login/*` links redirect to `/login/*`.
+`/dashboard/*` links redirect to `/login/*`.
 
 | Section | What it does |
 | --- | --- |
 | Overview | Totals, last 7 days, new / to action, completed, latest requests |
 | Bookings | Every quote request with status filters + search; open one to call/WhatsApp, change status (New → Contacted → Quoted → Booked → Completed / Cancelled) and keep private notes |
 | Messages | Customer notes from the form ("Anything else?"), read/unread |
-| Emails | Log of notification emails (sent / failed / skipped) |
+| Emails | Preview of the review-request email (sent from a booking via "Complete & request review") and a log of sent emails |
 | Blog | Write, publish or unpublish posts — published posts appear on `/journal` |
-| Analytics | Requests per day (30 days), top services, top postcodes, pipeline |
-| Settings | Owner name, notification email address, change password |
+| Analytics | Date ranges (7 days–1 year): estimated value from enquiries, WhatsApp clicks, enquiries by service, live booking totals, cookieless website traffic (visitors, page views, time on site, new visitors), visitors over time, top pages, sources, pipeline |
+| Settings | Change password |
 | Support | How-to and troubleshooting |
 
 **Data:** Cloudflare D1 database `ecoverde-db` (binding `DB`, schema in `migrations/`). Every quote request is
 saved there first, so nothing is lost if email delivery fails.
+
+**Review link:** set `GOOGLE_REVIEW_URL` (your Google "write a review" link) on the Worker so review emails point straight to it.
 
 **Secrets on the Worker:** `DASHBOARD_PASSWORD` (the sign-in password) and `SESSION_SECRET` (signs the login
 cookie). A password changed in Settings is stored hashed (PBKDF2) in D1 and overrides `DASHBOARD_PASSWORD`;

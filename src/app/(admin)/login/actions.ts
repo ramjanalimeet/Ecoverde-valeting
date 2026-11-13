@@ -3,7 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { destroySession, hashPassword, requireAuth, checkPassword } from "@/lib/auth";
-import { requireDB, setSetting, STATUSES } from "@/lib/db";
+import { requireDB, setSetting, STATUSES, type Booking } from "@/lib/db";
+import { reviewEmail, reviewUrl, sendEmail } from "@/lib/email";
 
 const now = () => new Date().toISOString();
 const str = (f: FormData, k: string, max = 5000) => String(f.get(k) ?? "").trim().slice(0, max);
@@ -36,6 +37,23 @@ export async function setBookingStatus(form: FormData) {
   const db = await requireDB();
   await db.prepare("UPDATE bookings SET status = ?, updated_at = ? WHERE id = ?").bind(status, now(), id).run();
   revalidatePath("/login", "layout");
+}
+
+/** Mark a booking completed and email the customer a Google review request. */
+export async function completeAndRequestReview(form: FormData) {
+  await requireAuth();
+  const id = Number(form.get("id"));
+  const db = await requireDB();
+  const b = await db.prepare("SELECT * FROM bookings WHERE id = ?").bind(id).first<Booking>();
+  if (!b) redirect("/login/bookings");
+  await db.prepare("UPDATE bookings SET status = 'completed', updated_at = ? WHERE id = ?").bind(now(), id).run();
+  let result = "noemail";
+  if (b.email) {
+    const mail = reviewEmail(b.name.trim().split(/\s+/)[0], await reviewUrl());
+    result = await sendEmail({ to: b.email, ...mail, bookingId: id });
+  }
+  revalidatePath("/login", "layout");
+  redirect(`/login/bookings/${id}?review=${result}`);
 }
 
 export async function deleteBooking(form: FormData) {

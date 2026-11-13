@@ -62,6 +62,20 @@ const PAGE_TO_OPTION: Record<string, string> = {
   "bodywork-respray": "restoration-refurb",
 };
 
+/** Map any stored service value (old page slugs or dropdown values) to a dropdown option. */
+export const optionFor = (v: string) => (QUOTE_OPTIONS.some((o) => o.value === v) ? v : PAGE_TO_OPTION[v] ?? NOT_SURE);
+
+/** Lowest advertised price per option — used for a conservative "value of enquiries" estimate. */
+export const OPTION_FLOOR_PRICE: Record<string, number> = {
+  [NOT_SURE]: 109,
+  "mini-full-valet": 109,
+  "premium-supercar-detailing": 289,
+  "paint-correction-ceramic": 189,
+  "interior-deep-clean-steam": 189,
+  "soft-top-cleaning-proofing": 189,
+  "restoration-refurb": 109,
+};
+
 const isOption = (v: string) => QUOTE_OPTIONS.some((o) => o.value === v);
 
 /** Resolve a preset (?service=<slug>) into the dropdown option plus the specific page it came from. */

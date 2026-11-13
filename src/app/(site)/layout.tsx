@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Link from "next/link";
 import { ArrowRight, PhoneIcon, WhatsAppIcon } from "@/components/Icons";
 import QuoteModal from "@/components/QuoteModal";
+import Tracker from "@/components/Tracker";
 import { ALL_AREAS, PRIMARY_PHONE, SITE, quoteHref, whatsappLink } from "@/data/site";
 
 // Only facts stated on the site — no review/rating markup.
@@ -36,6 +37,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <main id="main">{children}</main>
       <Footer />
       <QuoteModal />
+      <Tracker />
       <a className="wa-fab" href={whatsappLink()} target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
         <WhatsAppIcon width={28} height={28} />
       </a>

@@ -2,7 +2,7 @@ import { requireAuth } from "@/lib/auth";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getDB, STATUSES, statusLabel, type Booking, type EmailLog } from "@/lib/db";
-import { deleteBooking, markMessageRead, updateBooking } from "../../actions";
+import { completeAndRequestReview, deleteBooking, markMessageRead, updateBooking } from "../../actions";
 import { ConfirmSubmit, DbMissing, StatusPill, fmtDateTime } from "../../ui";
 
 export const metadata = { title: "Request" };
@@ -46,6 +46,17 @@ export default async function BookingDetail({
         <StatusPill status={b.status} label={statusLabel(b.status)} />
       </div>
       {sp.saved && <p className="flash">Saved.</p>}
+      {sp.review && (
+        <p className={`flash${sp.review === "sent" ? "" : " flash--err"}`}>
+          {sp.review === "sent"
+            ? "Marked as completed — review request emailed to the customer."
+            : sp.review === "noemail"
+              ? "Marked as completed. No email address on this request, so no review email was sent — try WhatsApp instead."
+              : sp.review === "skipped"
+                ? "Marked as completed. Review email not sent — email sending isn't switched on yet (RESEND_API_KEY)."
+                : "Marked as completed, but the review email failed to send — see Emails."}
+        </p>
+      )}
       {sp.error && <p className="flash flash--err">Couldn&apos;t save — please try again.</p>}
 
       <div className="detail">
@@ -85,6 +96,15 @@ export default async function BookingDetail({
                 <p className="msg">{b.message}</p>
               </>
             )}
+            <form action={completeAndRequestReview} className="review-cta">
+              <input type="hidden" name="id" value={b.id} />
+              <button className="abtn abtn--lg" type="submit">
+                ★ Complete &amp; request review
+              </button>
+              <span className="main__hello">
+                {b.email ? `Marks the job completed and emails ${b.email} a Google review request.` : "Marks the job completed (no email on file for a review request)."}
+              </span>
+            </form>
             <div className="quick">
               <a className="abtn" href={`tel:${b.phone}`}>
                 Call {first}

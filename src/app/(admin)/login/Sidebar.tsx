@@ -57,7 +57,7 @@ export default function Shell({ children, counts }: { children: ReactNode; count
           </button>
         </form>
         <p className="side__foot">
-          <a href="/" target="_blank" rel="noopener">
+          <a href="/" target="_blank" rel="noopener" className="side__site">
             View website ↗
           </a>
         </p>

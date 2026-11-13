@@ -1,56 +1,46 @@
-import { requireAuth } from "@/lib/auth";
 import Link from "next/link";
-import { getDB, getEnv, getSetting, type EmailLog } from "@/lib/db";
-import { SITE } from "@/data/site";
-import { DbMissing, StatusPill, fmtDateTime } from "../ui";
+import { requireAuth } from "@/lib/auth";
+import { getDB, getEnv, type EmailLog } from "@/lib/db";
+import { reviewEmail, reviewUrl } from "@/lib/email";
+import { StatusPill, fmtDateTime } from "../ui";
 
 export const metadata = { title: "Emails" };
 
 export default async function Emails() {
   await requireAuth();
   const db = await getDB();
-  if (!db) return <DbMissing />;
-  const [rows, stats] = await Promise.all([
-    db.prepare("SELECT * FROM email_log ORDER BY created_at DESC LIMIT 100").all<EmailLog>(),
-    db.prepare("SELECT status, COUNT(*) AS n FROM email_log GROUP BY status").all<{ status: string; n: number }>(),
-  ]);
-  const n = (s: string) => stats.results.find((x) => x.status === s)?.n ?? 0;
+  const preview = reviewEmail("Sarah", await reviewUrl());
   const hasKey = Boolean(await getEnv("RESEND_API_KEY"));
-  const to = (await getSetting("notify_email")) || (await getEnv("QUOTE_TO_EMAIL")) || SITE.email;
+  const log = db ? (await db.prepare("SELECT * FROM email_log ORDER BY created_at DESC LIMIT 50").all<EmailLog>()).results : [];
 
   return (
     <>
       <div className="main__head">
         <h1>Emails</h1>
-        <span className="main__hello">Notifications sent to {to}</span>
+        <span className="main__hello">The templates currently in use (preview only)</span>
       </div>
       {!hasKey && (
         <p className="flash flash--err">
-          Email delivery isn&apos;t set up yet — add the <code>RESEND_API_KEY</code> secret on the Cloudflare Worker. Requests are
-          still saved here in the dashboard.
+          Email sending isn&apos;t switched on yet — add the <code>RESEND_API_KEY</code> secret on the Cloudflare Worker.
         </p>
       )}
-      <div className="stats4">
-        <div className="stat">
-          <strong>{n("sent")}</strong>
-          <span>Sent</span>
-        </div>
-        <div className="stat">
-          <strong>{n("failed")}</strong>
-          <span>Failed</span>
-        </div>
-        <div className="stat">
-          <strong>{n("skipped")}</strong>
-          <span>Skipped (not set up)</span>
-        </div>
-        <div className="stat">
-          <strong>{hasKey ? "On" : "Off"}</strong>
-          <span>Email delivery</span>
-        </div>
-      </div>
       <section className="panel">
-        {rows.results.length === 0 ? (
-          <div className="empty-state">No emails yet.</div>
+        <div className="panel__head">
+          <h2>Review request — sent when you click &ldquo;Complete &amp; request review&rdquo;</h2>
+        </div>
+        <div className="panel__body">
+          <div className="email-prev">
+            <iframe title="Review request email preview" srcDoc={preview.html} sandbox="" loading="lazy" />
+          </div>
+        </div>
+      </section>
+
+      <section className="panel">
+        <div className="panel__head">
+          <h2>Recently sent</h2>
+        </div>
+        {log.length === 0 ? (
+          <div className="empty-state">No emails sent yet.</div>
         ) : (
           <div className="tbl-wrap">
             <table className="tbl">
@@ -63,7 +53,7 @@ export default async function Emails() {
                 </tr>
               </thead>
               <tbody>
-                {rows.results.map((e) => (
+                {log.map((e) => (
                   <tr key={e.id}>
                     <td>{fmtDateTime(e.created_at)}</td>
                     <td>

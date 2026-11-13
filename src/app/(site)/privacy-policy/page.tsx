@@ -61,8 +61,10 @@ export default function PrivacyPage() {
 
           <h2>Cookies</h2>
           <p>
-            This website uses only the cookies strictly necessary for it to work. If we add analytics or marketing cookies in
-            future we will ask for your consent first.
+            This website does not use advertising or tracking cookies. To understand how the site is used we record anonymous,
+            cookieless statistics — pages viewed, time on page, the referring website and clicks on our WhatsApp button. Visitors
+            are counted using a one-way hash of the connection and browser details, so nothing is stored on your device and we
+            cannot identify you. If your browser sends a &ldquo;Do Not Track&rdquo; signal, nothing is recorded.
           </p>
 
           <h2>Changes</h2>
