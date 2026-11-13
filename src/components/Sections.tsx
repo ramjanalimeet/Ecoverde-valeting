@@ -432,7 +432,7 @@ export function Stats() {
         <ul className="stats__chips">
           {REVIEWS.breakdown.map((r) => (
             <li key={r.source}>
-              {r.count} {r.source}
+              <b>{r.count}</b> {r.source}
               {r.source === "Google" ? " reviews" : ""}
             </li>
           ))}
