@@ -1,6 +1,8 @@
+import { requireAuth } from "@/lib/auth";
 export const metadata = { title: "Support" };
 
-export default function Support() {
+export default async function Support() {
+  await requireAuth();
   return (
     <>
       <div className="main__head">

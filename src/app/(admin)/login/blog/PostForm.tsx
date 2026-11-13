@@ -66,7 +66,7 @@ export default function PostForm({ post, flash }: { post?: Post; flash?: { saved
                 <button className="abtn" type="submit" form="post-form">
                   {post ? "Save changes" : "Create post"}
                 </button>
-                <Link className="abtn abtn--ghost" href="/dashboard/blog">
+                <Link className="abtn abtn--ghost" href="/login/blog">
                   Cancel
                 </Link>
               </div>

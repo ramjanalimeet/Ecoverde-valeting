@@ -106,7 +106,7 @@ export function RequestRows({ items }: { items: Booking[] }) {
     <ul className="rows">
       {items.map((b) => (
         <li key={b.id}>
-          <Link href={`/dashboard/bookings/${b.id}`} className="row">
+          <Link href={`/login/bookings/${b.id}`} className="row">
             <span className="row__date">
               {fmtDate(b.created_at)} ·
               <br />

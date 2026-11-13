@@ -1,3 +1,4 @@
+import { requireAuth } from "@/lib/auth";
 import Link from "next/link";
 import { getDB, type Booking } from "@/lib/db";
 import { markMessageRead } from "../actions";
@@ -7,6 +8,7 @@ export const metadata = { title: "Messages" };
 
 /** Customer messages — the "Anything else?" notes left on quote requests. */
 export default async function Messages({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
+  await requireAuth();
   const sp = await searchParams;
   const db = await getDB();
   if (!db) return <DbMissing />;
@@ -26,10 +28,10 @@ export default async function Messages({ searchParams }: { searchParams: Promise
       </div>
       <div className="toolbar">
         <nav className="tabs">
-          <Link href="/dashboard/messages" aria-current={!unreadOnly ? "true" : undefined}>
+          <Link href="/login/messages" aria-current={!unreadOnly ? "true" : undefined}>
             All
           </Link>
-          <Link href="/dashboard/messages?filter=unread" aria-current={unreadOnly ? "true" : undefined}>
+          <Link href="/login/messages?filter=unread" aria-current={unreadOnly ? "true" : undefined}>
             Unread
           </Link>
         </nav>
@@ -42,7 +44,7 @@ export default async function Messages({ searchParams }: { searchParams: Promise
             {rows.results.map((b) => (
               <li key={b.id} className="panel__body">
                 <div className="form-a__row" style={{ justifyContent: "space-between" }}>
-                  <Link href={`/dashboard/bookings/${b.id}`} className={`row__main${b.message_read ? "" : " is-unread"}`}>
+                  <Link href={`/login/bookings/${b.id}`} className={`row__main${b.message_read ? "" : " is-unread"}`}>
                     <strong>{b.name}</strong>
                     {b.car} · {b.service_label}
                   </Link>

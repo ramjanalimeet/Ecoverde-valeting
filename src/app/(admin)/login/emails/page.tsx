@@ -1,3 +1,4 @@
+import { requireAuth } from "@/lib/auth";
 import Link from "next/link";
 import { getDB, getEnv, getSetting, type EmailLog } from "@/lib/db";
 import { SITE } from "@/data/site";
@@ -6,6 +7,7 @@ import { DbMissing, StatusPill, fmtDateTime } from "../ui";
 export const metadata = { title: "Emails" };
 
 export default async function Emails() {
+  await requireAuth();
   const db = await getDB();
   if (!db) return <DbMissing />;
   const [rows, stats] = await Promise.all([
@@ -65,7 +67,7 @@ export default async function Emails() {
                   <tr key={e.id}>
                     <td>{fmtDateTime(e.created_at)}</td>
                     <td>
-                      {e.booking_id ? <Link href={`/dashboard/bookings/${e.booking_id}`}>{e.subject}</Link> : e.subject}
+                      {e.booking_id ? <Link href={`/login/bookings/${e.booking_id}`}>{e.subject}</Link> : e.subject}
                       {e.error && <div className="main__hello">{e.error}</div>}
                     </td>
                     <td>{e.to_addr}</td>

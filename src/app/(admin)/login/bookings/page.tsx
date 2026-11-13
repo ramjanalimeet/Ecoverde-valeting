@@ -1,3 +1,4 @@
+import { requireAuth } from "@/lib/auth";
 import Link from "next/link";
 import { getDB, STATUSES, type Booking } from "@/lib/db";
 import { DbMissing, RequestRows } from "../ui";
@@ -7,6 +8,7 @@ export const metadata = { title: "Bookings" };
 const PAGE = 25;
 
 export default async function Bookings({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
+  await requireAuth();
   const sp = await searchParams;
   const db = await getDB();
   if (!db) return <DbMissing />;
@@ -43,7 +45,7 @@ export default async function Bookings({ searchParams }: { searchParams: Promise
     const merged = { status, q, ...o };
     Object.entries(merged).forEach(([k, v]) => v && p.set(k, String(v)));
     const s = p.toString();
-    return `/dashboard/bookings${s ? `?${s}` : ""}`;
+    return `/login/bookings${s ? `?${s}` : ""}`;
   };
 
   return (
@@ -64,7 +66,7 @@ export default async function Bookings({ searchParams }: { searchParams: Promise
             </Link>
           ))}
         </nav>
-        <form className="search" action="/dashboard/bookings" role="search">
+        <form className="search" action="/login/bookings" role="search">
           {status && <input type="hidden" name="status" value={status} />}
           <input type="search" name="q" defaultValue={q} placeholder="Search name, phone, car, postcode…" aria-label="Search requests" />
           <button className="abtn abtn--ghost" type="submit">

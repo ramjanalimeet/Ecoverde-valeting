@@ -1,11 +1,12 @@
-import { requireAuth } from "@/lib/auth";
+import { isAuthenticated } from "@/lib/auth";
 import { getDB } from "@/lib/db";
 import Shell from "./Sidebar";
 
 export const dynamic = "force-dynamic";
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
-  await requireAuth();
+  // Signed out: /login shows the sign-in screen (sub-pages redirect here themselves).
+  if (!(await isAuthenticated())) return <>{children}</>;
   const db = await getDB();
   let counts = { newBookings: 0, unread: 0 };
   if (db) {

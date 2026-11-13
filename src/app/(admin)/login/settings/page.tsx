@@ -1,3 +1,4 @@
+import { requireAuth } from "@/lib/auth";
 import { SITE } from "@/data/site";
 import { getEnv, getSetting } from "@/lib/db";
 import { changePassword, saveSettings } from "../actions";
@@ -12,6 +13,7 @@ const ERRORS: Record<string, string> = {
 };
 
 export default async function Settings({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
+  await requireAuth();
   const sp = await searchParams;
   const notify = (await getSetting("notify_email")) || "";
   const owner = (await getSetting("owner_name")) || "John";

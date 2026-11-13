@@ -121,7 +121,7 @@ export async function POST(req: Request) {
         }))
       );
       const site = (await getEnv("NEXT_PUBLIC_SITE_URL")) || SITE.url;
-      const link = bookingId ? `<p><a href="${site}/dashboard/bookings/${bookingId}">Open in dashboard</a></p>` : "";
+      const link = bookingId ? `<p><a href="${site}/login/bookings/${bookingId}">Open in dashboard</a></p>` : "";
       // Resend HTTP API — works on Cloudflare Workers (no raw SMTP sockets needed).
       const res = await fetch((await getEnv("RESEND_API_URL")) || "https://api.resend.com/emails", {
         method: "POST",

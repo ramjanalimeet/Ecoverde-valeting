@@ -1,3 +1,4 @@
+import { requireAuth } from "@/lib/auth";
 import Link from "next/link";
 import { getDB, type Post } from "@/lib/db";
 import { DbMissing, StatusPill, fmtDate } from "../ui";
@@ -5,6 +6,7 @@ import { DbMissing, StatusPill, fmtDate } from "../ui";
 export const metadata = { title: "Blog" };
 
 export default async function Blog({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
+  await requireAuth();
   const sp = await searchParams;
   const db = await getDB();
   if (!db) return <DbMissing />;
@@ -14,7 +16,7 @@ export default async function Blog({ searchParams }: { searchParams: Promise<Rec
     <>
       <div className="main__head">
         <h1>Blog</h1>
-        <Link className="abtn" href="/dashboard/blog/new">
+        <Link className="abtn" href="/login/blog/new">
           + New post
         </Link>
       </div>
@@ -22,7 +24,7 @@ export default async function Blog({ searchParams }: { searchParams: Promise<Rec
       <section className="panel">
         {posts.results.length === 0 ? (
           <div className="empty-state">
-            No posts yet. <Link href="/dashboard/blog/new">Write your first post</Link> — it&apos;ll appear on the website&apos;s Journal
+            No posts yet. <Link href="/login/blog/new">Write your first post</Link> — it&apos;ll appear on the website&apos;s Journal
             once published.
           </div>
         ) : (
@@ -40,7 +42,7 @@ export default async function Blog({ searchParams }: { searchParams: Promise<Rec
                 {posts.results.map((p) => (
                   <tr key={p.id}>
                     <td>
-                      <Link href={`/dashboard/blog/${p.id}`}>{p.title}</Link>
+                      <Link href={`/login/blog/${p.id}`}>{p.title}</Link>
                       <div className="main__hello">/journal/{p.slug}</div>
                     </td>
                     <td>

@@ -1,3 +1,4 @@
+import { requireAuth } from "@/lib/auth";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getDB, type Post } from "@/lib/db";
@@ -13,6 +14,7 @@ export default async function EditPost({
   params: Promise<{ id: string }>;
   searchParams: Promise<Record<string, string | undefined>>;
 }) {
+  await requireAuth();
   const { id } = await params;
   const sp = await searchParams;
   const db = await getDB();
@@ -21,7 +23,7 @@ export default async function EditPost({
   if (!post) notFound();
   return (
     <>
-      <Link href="/dashboard/blog" className="back">
+      <Link href="/login/blog" className="back">
         ← All posts
       </Link>
       <div className="main__head">

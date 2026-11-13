@@ -1,3 +1,4 @@
+import { requireAuth } from "@/lib/auth";
 import { getDB, statusLabel } from "@/lib/db";
 import { DbMissing } from "../ui";
 
@@ -6,6 +7,7 @@ export const metadata = { title: "Analytics" };
 const DAYS = 30;
 
 export default async function Analytics() {
+  await requireAuth();
   const db = await getDB();
   if (!db) return <DbMissing />;
   const since = new Date(Date.now() - (DAYS - 1) * 864e5);

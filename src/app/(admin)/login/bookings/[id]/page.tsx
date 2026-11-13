@@ -1,3 +1,4 @@
+import { requireAuth } from "@/lib/auth";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getDB, STATUSES, statusLabel, type Booking, type EmailLog } from "@/lib/db";
@@ -18,6 +19,7 @@ export default async function BookingDetail({
   params: Promise<{ id: string }>;
   searchParams: Promise<Record<string, string | undefined>>;
 }) {
+  await requireAuth();
   const { id } = await params;
   const sp = await searchParams;
   const db = await getDB();
@@ -36,7 +38,7 @@ export default async function BookingDetail({
 
   return (
     <>
-      <Link href="/dashboard/bookings" className="back">
+      <Link href="/login/bookings" className="back">
         ← All bookings
       </Link>
       <div className="main__head">

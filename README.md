@@ -68,7 +68,9 @@ Until the key is set, the form returns a clear "call or WhatsApp us" message and
 
 ## Dashboard (`/login`)
 
-A private bookings dashboard at **`/login`** → `/dashboard` (not linked from the site, `noindex`).
+A private bookings dashboard at **`/login`** (not linked from the site, `noindex`). Signed out, `/login` shows the
+sign-in screen; signed in, it is the dashboard, with sections at `/login/bookings`, `/login/blog`, etc. Old
+`/login/*` links redirect to `/login/*`.
 
 | Section | What it does |
 | --- | --- |
