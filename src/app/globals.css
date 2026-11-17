@@ -1482,15 +1482,61 @@ textarea:where(:not(.lv *)) {
   background: rgba(6, 26, 19, 0.45);
   backdrop-filter: blur(6px);
 }
-.quote-modal__close {
+/* Zero-height sticky bar: on desktop the close button floats over the card corner exactly as before */
+.quote-modal__bar {
   position: sticky;
-  top: 12px;
-  float: right;
-  margin: 12px 12px 0 0;
+  top: 0;
   z-index: 2;
+  height: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+.quote-modal__close {
+  margin: 12px 12px 0 0;
   width: 28px;
   height: 28px;
   border-radius: 8px;
+}
+/* Phones: a bottom sheet that fills the screen, with a real top bar for the close button */
+@media (max-width: 640px) {
+  .quote-modal {
+    width: 100%;
+    max-width: 100%;
+    max-height: calc(100dvh - 12px);
+    margin: auto 0 0;
+    border-radius: 22px 22px 0 0;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .quote-modal[open] {
+    animation: sheet-in 320ms var(--ease);
+  }
+  @keyframes sheet-in {
+    from {
+      transform: translateY(40px);
+      opacity: 0;
+    }
+  }
+  .quote-modal__bar {
+    height: auto;
+    align-items: center;
+    padding: 12px 14px 10px;
+    background: var(--mint);
+    border-bottom: 1px solid rgba(11, 51, 38, 0.08);
+  }
+  .quote-modal__close {
+    margin: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--r-pill);
+  }
+  .quote-modal .qf {
+    padding: 6px 18px 22px;
+  }
+  /* one field per row: nothing gets squeezed or cut off */
+  .quote-modal .qf__grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
 }
 .qf {
   padding: 22px 22px 18px;
@@ -2826,4 +2872,11 @@ textarea:where(:not(.lv *)) {
   html.mbar-on .mbar {
     transition: none;
   }
+}
+
+/* No transitions while the window is resizing (see src/components/ResizeCalm.tsx). */
+html.is-resizing *,
+html.is-resizing *::before,
+html.is-resizing *::after {
+  transition: none !important;
 }

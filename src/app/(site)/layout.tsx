@@ -7,6 +7,7 @@ import Tracker from "@/components/Tracker";
 import { PRIMARY_PHONE, quoteHref, whatsappLink } from "@/data/site";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import MobileBarReveal from "@/components/MobileBarReveal";
+import ResizeCalm from "@/components/ResizeCalm";
 import "../clone.css";
 import "../clone-mobile.css";
 
@@ -40,6 +41,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       </nav>
       <GoogleAnalytics />
       <MobileBarReveal />
+      <ResizeCalm />
     </>
   );
 }
