@@ -2781,7 +2781,9 @@ textarea:where(:not(.lv *)) {
   }
   .hero__tile-logo img:where(:not(.lv *)) {
     height: 32px;
+    width: auto;
     max-width: 100%;
+    object-fit: contain;
   }
 }
 @media (max-width: 360px) {

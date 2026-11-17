@@ -933,3 +933,4 @@
 .lv .hero,.lv .page-hero{margin-top:0}
 .lv img{height:auto}
 .lv > section:nth-of-type(-n+2) .reveal{opacity:1;transform:none;transition:none}
+.lv picture{display:contents}

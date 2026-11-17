@@ -128,6 +128,25 @@ async function responsiveVariants(src, widths, quality) {
   return result;
 }
 
+// AVIF version of every candidate in a srcset, written to public/assets/img/avif/<same path>.avif.
+async function avifSrcset(srcset, quality) {
+  const out = [];
+  for (const part of srcset.split(",").map((x) => x.trim()).filter(Boolean)) {
+    const [url, descriptor = ""] = part.split(/\s+/);
+    if (!url.startsWith("/assets/img/")) return null;
+    const file = path.join(REPO, "public", url);
+    if (!fs.existsSync(file)) return null;
+    const rel = url.replace(/^\/assets\/img\//, "/assets/img/avif/").replace(/\.[a-z0-9]+$/i, ".avif");
+    const dest = path.join(REPO, "public", rel);
+    if (!fs.existsSync(dest)) {
+      fs.mkdirSync(path.dirname(dest), { recursive: true });
+      await sharp(file).avif({ quality, effort: 4 }).toFile(dest);
+    }
+    out.push(descriptor ? `${rel} ${descriptor}` : rel);
+  }
+  return out.join(", ");
+}
+
 const pages = {};
 for (const slug of slugs) {
   const file = path.join(LIVE, "html", (slug || "index") + ".html");
@@ -185,6 +204,17 @@ for (const slug of slugs) {
     .toArray()
     .find((el) => !$(el).closest(".page-hero-bg, .imgband-bg, .hero-bg").length);
   if (firstImg) $(firstImg).removeAttr("loading").attr("fetchpriority", "high");
+  // AVIF copies (same look, roughly half the bytes) offered through <picture>; browsers without AVIF
+  // keep using the WebP/JPG in the <img>. Only local images, and never inside an existing <picture>.
+  for (const el of main.find("img[src^='/assets/']").toArray()) {
+    if ($(el).parent().is("picture")) continue;
+    const isBackdrop = $(el).closest(".page-hero-bg, .imgband-bg, .hero-bg").length > 0;
+    const srcset = $(el).attr("srcset") || `${$(el).attr("src")} ${$(el).attr("width") || 1}w`;
+    const avif = await avifSrcset(srcset, isBackdrop ? 40 : 55);
+    if (!avif) continue;
+    const sizes = $(el).attr("sizes");
+    $(el).wrap("<picture></picture>").before(`<source type="image/avif" srcset="${avif}"${sizes ? ` sizes="${sizes}"` : ""}>`);
+  }
   main.find("[style]").each((_, el) => $(el).attr("style", $(el).attr("style").replace(/url\((['"]?)(\.\/)?assets\//g, "url($1/assets/")));
   // the repo's quote pop-up is <dialog id="quote">; keep ids unique
   main.find("#quote").attr("id", "quote-cta");
@@ -274,6 +304,7 @@ const overrides = `
 .lv .hero,.lv .page-hero{margin-top:0}
 .lv img{height:auto}
 .lv > section:nth-of-type(-n+2) .reveal{opacity:1;transform:none;transition:none}
+.lv picture{display:contents}
 `;
 // Drop rules that cannot match anything: every class/id they need must appear in some cloned page
 // (or be one CloneEnhancer adds at runtime). Keeps the render-blocking stylesheet small.
