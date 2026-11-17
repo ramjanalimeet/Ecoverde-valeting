@@ -4,30 +4,11 @@ import Link from "next/link";
 import { ArrowRight, PhoneIcon, WhatsAppIcon } from "@/components/Icons";
 import QuoteModal from "@/components/QuoteModal";
 import Tracker from "@/components/Tracker";
-import { ALL_AREAS, PRIMARY_PHONE, SITE, quoteHref, whatsappLink } from "@/data/site";
+import { PRIMARY_PHONE, quoteHref, whatsappLink } from "@/data/site";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
+import "../clone.css";
 
-// Only facts stated on the site — no review/rating markup.
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "AutoWash",
-  name: SITE.legalName,
-  alternateName: SITE.name,
-  url: SITE.url,
-  email: SITE.email,
-  telephone: SITE.phones[0].tel,
-  image: `${SITE.url}/images/hero-green-bmw-valeted-west-london-1440.webp`,
-  logo: `${SITE.url}/images/logo.png`,
-  description: "Eco-friendly, fully mobile car valeting and detailing service across West London.",
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      opens: "07:00",
-      closes: "20:00",
-    },
-  ],
-  areaServed: ALL_AREAS.map((a) => a.name),
-};
+// Structured data (Organization, Service, FAQPage, BreadcrumbList…) comes per page from the live site — see src/lib/clone.ts.
 
 /** Public website chrome: header, footer, quote pop-up and WhatsApp button. */
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
@@ -55,7 +36,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
           Get a Free Quote <ArrowRight width={16} height={16} />
         </Link>
       </nav>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <GoogleAnalytics />
     </>
   );
 }

@@ -13,3 +13,6 @@ npm-debug.log*
 .wrangler/
 .dev.vars
 cloudflare-env.d.ts
+
+# Live-site clone cache (scripts/clone-live-site.mjs)
+.clone-cache/

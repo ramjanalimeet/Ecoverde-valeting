@@ -1,3 +1,5 @@
+import { LIVE_AREA_URLS, LIVE_SERVICE_URLS } from "./live-urls";
+
 // Single source of truth for site content. Verify prices, review counts and
 // contact details with the business before publishing — see README.
 
@@ -121,7 +123,7 @@ export const ALL_MENU_SERVICES: MenuService[] = [
   ...SERVICE_GROUPS.flatMap((g) => g.items),
 ];
 
-export const serviceHref = (slug: string) => `/services/${slug}`;
+export const serviceHref = (slug: string) => LIVE_SERVICE_URLS[slug] ?? `/services/${slug}`;
 
 /** Our two bases and the areas each one covers (Service Areas menu + area pages). */
 export const AREA_BASES = [
@@ -151,7 +153,7 @@ export const ALL_AREAS: Area[] = AREA_BASES.flatMap((b) => [
   { name: b.name, slug: b.slug, base: b, isBase: true },
   ...b.areas.map((n) => ({ name: n, slug: slugify(n), base: b, isBase: false })),
 ]);
-export const areaHref = (slug: string) => `/areas/${slug}`;
+export const areaHref = (slug: string) => LIVE_AREA_URLS[slug] ?? `/areas/${slug}`;
 
 /** Link that preselects a service in the quote form. */
 export const quoteHref = (slug?: string) => (slug ? `/?service=${slug}#quote` : "/#quote");
@@ -457,6 +459,6 @@ export const NAV = [
   },
   { label: "Services", mega: "services" as const },
   { label: "Service Areas", mega: "areas" as const },
-  { label: "Journal", href: "/journal" },
+  { label: "Journal", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];

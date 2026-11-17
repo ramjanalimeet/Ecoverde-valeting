@@ -105,17 +105,47 @@ edited in the dashboard (Blog) — the seed never overwrites existing posts.
 
 ## Pages
 
+Every public page is a **clone of the live site** (https://ecoverdevaleting.co.uk), at the **same URL**, with
+the same `<head>` SEO: title, meta description, keywords, canonical, Open Graph, Twitter card and every JSON-LD
+block (Organization, WebSite, WebPage, Service, FAQPage, BreadcrumbList, Article…). Only the page body is
+cloned; the app's own `Header`, `Footer`, quote pop-up and WhatsApp button are kept as they are.
+
 | Route | What it is |
 | --- | --- |
-| `/` | Homepage, matching the live site: glass hero, Google review marquee, Trustindex block, premium brands band, 9 service cards, why eco, how it works, stats, founder, bento before/after gallery (lightbox), service areas, gift vouchers, used-car valet, final CTA, two-column FAQ |
-| `/services`, `/services/[slug]` | Services overview, 4 category pages and 18 service pages (content in `src/data/pages.ts`) |
-| `/areas`, `/areas/[slug]` | Service areas and 40 area pages (two bases + their areas, from `AREA_BASES` in `src/data/site.ts`) |
-| `/about`, `/why-choose-us`, `/contact` | Company pages; `/contact` has the quote form inline |
-| `/journal`, `/journal/[slug]` | Blog posts published from the dashboard |
-| `/privacy-policy` | Privacy policy |
-| `/cancellation-refund-policy` | Cancellation & refund policy (linked from the form's consent box) |
+| `/` | Live homepage |
+| `/[slug]` | The other 109 live pages: services (`/valeting-service`, `/car-ceramic-coating`…), areas (`/chiswick`, `/mobile-car-valeting-kensington`…), `/about`, `/why-choose-us`, `/contact`, `/gift-vouchers`, `/blog` and its articles, `/privacy-policy`, `/refund-policy`. Any other slug is a 404. |
+| `/journal/[slug]` | Extra articles published from the dashboard |
 | `/api/quote` | Quote form endpoint (POST, multipart) |
-| `/sitemap.xml`, `/robots.txt` | Generated |
+| `/sitemap.xml` | Every URL from the live sitemap (same lastmod / changefreq / priority) + dashboard articles |
+| `/robots.txt` | Same rules as the live robots.txt |
+
+Old URLs from the previous build of this app (`/services/*`, `/areas/*`, `/journal`, `/cancellation-refund-policy`)
+permanently redirect to the matching live URL (`src/data/live-urls.ts`), and the header menus link straight to them.
+
+### How the clone works
+
+- `scripts/clone-live-site.mjs` downloads the live sitemap, every page, the stylesheet, `main.js` and all images
+  and fonts, then writes:
+  - `src/content/clone/pages.json`: each page's `<main>` HTML (links and asset paths made root-relative) plus its SEO tags
+  - `src/content/clone/sitemap.json`, `reviews.json`
+  - `src/app/clone.css`: the live stylesheet, every selector scoped to `.lv` so it never touches the app header/footer
+  - `public/assets/img`, `public/assets/fonts`: the live images and fonts, at the same paths as on the live site
+- `src/app/(site)/page.tsx` and `src/app/(site)/[slug]/page.tsx` render a page with `ClonePage`; metadata comes from
+  `src/lib/clone.ts`.
+- `src/components/CloneEnhancer.tsx` re-creates the live page interactions: scroll reveals, review marquee,
+  "What's included" pop-ups, one-open-at-a-time FAQs, Trustindex (real widget on the live domain, fallback elsewhere).
+  Every "Get a Free Quote" / "Book Now" button opens the app's quote pop-up.
+- `src/app/globals.css`: rules that would also match the cloned markup (shared class names such as `.btn`, `.hero`,
+  `.faq`, and bare `h1`/`p`/`a`…) carry a zero-specificity `:where(:not(.lv *))` guard, so the app styles stop at
+  the cloned content and the header/footer look exactly as before.
+- Google Analytics (`G-61XV0XK8SJ`, same key events as the live site) loads only on `ecoverdevaleting.co.uk`, so
+  preview traffic on `*.workers.dev` never reaches the live property.
+
+To re-sync after the live site changes:
+
+```bash
+node scripts/clone-live-site.mjs
+```
 
 The quote form is a pop-up (`src/components/QuoteModal.tsx`) available on every page. Any link to `#quote`
 (Book Now, Get a Free Quote, Contact, every service card / menu / footer link) opens it, and `?service=<slug>#quote`
@@ -127,8 +157,8 @@ preselects that service. Deep links like `/?service=ceramic-coating#quote` open 
   FAQs, gallery. Edit here and the header, footer, cards, form and JSON-LD all update.
 - `src/app/globals.css` — design tokens (`:root`) and all styles. Fraunces (serif headings, green italic
   accents) + Hanken Grotesk (body), brand greens/teal gradient sampled from the live site.
-- `src/components/` — `Header` (dropdowns, services mega menu, mobile drawer), `Footer`, `Sections`
-  (homepage sections), `Gallery`, `Faq`, `QuoteModal`, `Trustindex`, `Icons` (incl. logo).
+- `src/components/` — `Header` (dropdowns, services mega menu, mobile drawer), `Footer`, `ClonePage` /
+  `CloneEnhancer` (cloned live pages), `QuoteModal`, `GoogleAnalytics`, `Icons` (incl. logo).
 - `src/data/images.ts` — photo library: every photo's path, size, alt text and caption. Pages pick photos by key
   (e.g. `"paintRed"`), so alt text stays consistent. Add new photos here.
 - `src/lib/quote.ts` — validation shared by the browser and the server.

@@ -104,6 +104,12 @@ export default function QuoteForm({ preset, nonce, onClose }: { preset?: string 
       if (res.ok && data.ok) {
         setSentName(fields.name.trim().split(/\s+/)[0] || "there");
         setStatus("success");
+        // GA4 key event, same name as on the live site (gtag only exists on the live domain)
+        try {
+          window.gtag?.("event", "Contact_Us", { transport_type: "beacon" });
+        } catch {
+          /* never block the form */
+        }
         setFields(EMPTY);
         setDetail("");
         setPhotos([]);

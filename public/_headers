@@ -1,2 +1,6 @@
 # Cloudflare static asset headers
-/_next/static
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*
+  Cache-Control: public, max-age=2592000
