@@ -2880,3 +2880,54 @@ html.is-resizing *::before,
 html.is-resizing *::after {
   transition: none !important;
 }
+
+/* Very narrow screens (<340px: small phones, a narrow browser window, DevTools while it opens):
+   keep the header buttons on screen and let the hero headline scale with the width. */
+@media (max-width: 340px) {
+  .header__inner {
+    gap: 6px;
+    padding: 6px 6px 6px 10px;
+    min-height: 52px;
+  }
+  .header__logo .logo {
+    gap: 6px;
+  }
+  .header__logo .logo__mark {
+    width: 30px;
+    height: 30px;
+  }
+  .header__logo .logo__name {
+    font-size: 1.02rem;
+  }
+  .header__logo .logo__sub {
+    font-size: 0.44rem;
+    letter-spacing: 0.12em;
+  }
+  .header__actions {
+    gap: 4px;
+  }
+  .header__menu,
+  .header__call-mobile {
+    width: 34px;
+    height: 34px;
+  }
+  .hero__card {
+    padding: 22px 16px 18px;
+  }
+  .hero__card .eyebrow:where(:not(.lv *)) {
+    font-size: 0.5rem;
+    letter-spacing: 0.04em;
+    gap: 6px;
+  }
+  .hero__card h1:where(:not(.lv *)) {
+    font-size: clamp(1.35rem, 8.6vw, 1.75rem);
+  }
+  .hero__lead {
+    font-size: 0.84rem;
+  }
+}
+@media (max-width: 300px) {
+  .header__logo .logo__sub {
+    display: none;
+  }
+}
