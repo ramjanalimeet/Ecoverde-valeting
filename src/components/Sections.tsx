@@ -25,20 +25,32 @@ const HERO = {
   src: "/images/hero-green-bmw-valeted-west-london-1440.webp",
   sizes: "100vw",
   srcSet: [720, 960, 1440].map((w) => `/images/hero-green-bmw-valeted-west-london-${w}.webp ${w}w`).join(", "),
+  // AVIF copies: same look, roughly half the size of the WebP files (browsers without AVIF get WebP).
+  avifSrcSet: [720, 960, 1440].map((w) => `/images/hero-green-bmw-valeted-west-london-${w}.avif ${w}w`).join(", "),
   // Phones: the hero is tall and narrow, so only a slice of the wide photo shows. A full-resolution
   // portrait crop of that slice (same framing as object-position 34% on the full photo) keeps it sharp
   // instead of enlarging a small file.
   portrait: "/images/hero-green-bmw-valeted-west-london-portrait.webp",
+  portraitAvif: "/images/hero-green-bmw-valeted-west-london-portrait.avif",
   phoneMedia: "(max-width: 760px)",
 };
 
 export function Hero() {
-  preload(HERO.portrait, { as: "image", media: HERO.phoneMedia, fetchPriority: "high" });
-  preload(HERO.src, { as: "image", imageSrcSet: HERO.srcSet, imageSizes: HERO.sizes, media: "(min-width: 761px)", fetchPriority: "high" });
+  preload(HERO.portraitAvif, { as: "image", type: "image/avif", media: HERO.phoneMedia, fetchPriority: "high" });
+  preload(HERO.src, {
+    as: "image",
+    type: "image/avif",
+    imageSrcSet: HERO.avifSrcSet,
+    imageSizes: HERO.sizes,
+    media: "(min-width: 761px)",
+    fetchPriority: "high",
+  });
   return (
     <section className="hero" aria-labelledby="hero-title">
       <picture className="hero__photo">
-        <source media={HERO.phoneMedia} srcSet={HERO.portrait} width={760} height={785} />
+        <source media={HERO.phoneMedia} type="image/avif" srcSet={HERO.portraitAvif} width={760} height={785} />
+        <source media={HERO.phoneMedia} type="image/webp" srcSet={HERO.portrait} width={760} height={785} />
+        <source type="image/avif" srcSet={HERO.avifSrcSet} sizes={HERO.sizes} />
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={HERO.src}
