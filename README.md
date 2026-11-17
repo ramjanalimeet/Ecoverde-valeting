@@ -139,9 +139,9 @@ permanently redirect to the matching live URL (`src/data/live-urls.ts`), and the
   `.faq`, and bare `h1`/`p`/`a`…) carry a zero-specificity `:where(:not(.lv *))` guard, so the app styles stop at
   the cloned content and the header/footer look exactly as before.
 - Performance: the clone script also drops unused selectors from the live CSS, adds width/height to every
-  image, writes compressed WebP copies (`public/assets/img/opt/`, with `srcset`) and a ~1 KB blurred phone copy
-  of each page-hero backdrop (it sits under a dark overlay; being low-detail, the headline counts as LCP). On
-  phones, inner-page heroes fill the first screen. Lighthouse (mobile and desktop): 99–100 in every category.
+  image and writes compressed WebP copies (`public/assets/img/opt/`, with `srcset`). The homepage hero uses a
+  ~1 KB blurred photo on phones (it sits behind the glass card). Lighthouse: homepage 100 in every category;
+  inner pages 100 except Performance ~90 on mobile (a content photo in the first screen is the LCP element).
 - `src/app/clone-mobile.css`: hand-written phone tweaks for the inner pages (scoped to `.lv-inner`, kept out of
   the generated `clone.css` so a re-sync never overwrites them).
 - Google Analytics (`G-61XV0XK8SJ`, same key events as the live site) loads only on `ecoverdevaleting.co.uk`, so

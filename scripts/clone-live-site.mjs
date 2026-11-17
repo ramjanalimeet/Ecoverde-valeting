@@ -128,26 +128,6 @@ async function responsiveVariants(src, widths, quality) {
   return result;
 }
 
-// ~1 KB, blurred, 160px-wide WebP of a backdrop photo for phones.
-async function phoneBackdrop(src) {
-  const file = path.join(REPO, "public", src);
-  if (!fs.existsSync(file)) return null;
-  const base = path.basename(src).replace(/\.[a-z0-9]+$/i, "");
-  const dir = path.dirname(src).replace(/^\/assets\/img/, "");
-  const rel = `/assets/img/opt${dir}/${base}-phone.webp`;
-  const out = path.join(REPO, "public", rel);
-  if (!fs.existsSync(out)) {
-    fs.mkdirSync(path.dirname(out), { recursive: true });
-    for (const [w, q] of [[160, 25], [140, 20], [120, 15]]) {
-      const buf = await sharp(file).resize({ width: w }).blur(1.5).webp({ quality: q, effort: 6 }).toBuffer();
-      fs.writeFileSync(out, buf);
-      if (buf.length <= 1300) break;
-    }
-  }
-  const m = await sharp(out).metadata();
-  return { src: rel, width: m.width, height: m.height };
-}
-
 const pages = {};
 for (const slug of slugs) {
   const file = path.join(LIVE, "html", (slug || "index") + ".html");
@@ -205,12 +185,6 @@ for (const slug of slugs) {
     .toArray()
     .find((el) => !$(el).closest(".page-hero-bg, .imgband-bg, .hero-bg").length);
   if (firstImg) $(firstImg).removeAttr("loading").attr("fetchpriority", "high");
-  // Page-hero backdrops sit under a 60–92% dark overlay. Phones get a tiny pre-blurred copy (~1 KB):
-  // it looks the same under the overlay, loads instantly and, being low-detail, lets the headline be LCP.
-  for (const el of main.find(".page-hero-bg > img[src^='/assets/']").toArray()) {
-    const phone = await phoneBackdrop($(el).attr("src"));
-    if (phone) $(el).wrap("<picture></picture>").before(`<source media="(max-width: 760px)" srcset="${phone.src}" width="${phone.width}" height="${phone.height}">`);
-  }
   main.find("[style]").each((_, el) => $(el).attr("style", $(el).attr("style").replace(/url\((['"]?)(\.\/)?assets\//g, "url($1/assets/")));
   // the repo's quote pop-up is <dialog id="quote">; keep ids unique
   main.find("#quote").attr("id", "quote-cta");
@@ -299,7 +273,6 @@ const overrides = `
 .lv{font-size:16px${undefinedVars.map((v) => `;${v}:initial`).join("")}}
 .lv .hero,.lv .page-hero{margin-top:0}
 .lv img{height:auto}
-.lv .page-hero-bg picture{display:contents}
 .lv > section:nth-of-type(-n+2) .reveal{opacity:1;transform:none;transition:none}
 `;
 // Drop rules that cannot match anything: every class/id they need must appear in some cloned page
