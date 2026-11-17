@@ -108,7 +108,11 @@ async function responsiveVariants(src, widths, quality) {
     const base = path.basename(src).replace(/\.[a-z0-9]+$/i, "");
     const dir = path.dirname(src).replace(/^\/assets\/img/, "");
     const entries = [];
-    for (const w of widths.filter((w) => w < size.width)) {
+    // Non-WebP originals (JPG/PNG) also get a full-width WebP copy, so no browser downloads the JPG.
+    const list = widths.filter((w) => w < size.width);
+    const isWebp = /\.webp$/i.test(src);
+    if (!isWebp) list.push(size.width);
+    for (const w of list) {
       const rel = `/assets/img/opt${dir}/${base}-${w}.webp`;
       const out = path.join(REPO, "public", rel);
       if (!fs.existsSync(out)) {
@@ -117,11 +121,31 @@ async function responsiveVariants(src, widths, quality) {
       }
       entries.push(`${rel} ${w}w`);
     }
-    entries.push(`${src} ${size.width}w`);
+    if (isWebp) entries.push(`${src} ${size.width}w`);
     result = entries.join(", ");
   }
   variantCache.set(key, result);
   return result;
+}
+
+// ~1 KB, blurred, 160px-wide WebP of a backdrop photo for phones.
+async function phoneBackdrop(src) {
+  const file = path.join(REPO, "public", src);
+  if (!fs.existsSync(file)) return null;
+  const base = path.basename(src).replace(/\.[a-z0-9]+$/i, "");
+  const dir = path.dirname(src).replace(/^\/assets\/img/, "");
+  const rel = `/assets/img/opt${dir}/${base}-phone.webp`;
+  const out = path.join(REPO, "public", rel);
+  if (!fs.existsSync(out)) {
+    fs.mkdirSync(path.dirname(out), { recursive: true });
+    for (const [w, q] of [[160, 25], [140, 20], [120, 15]]) {
+      const buf = await sharp(file).resize({ width: w }).blur(1.5).webp({ quality: q, effort: 6 }).toBuffer();
+      fs.writeFileSync(out, buf);
+      if (buf.length <= 1300) break;
+    }
+  }
+  const m = await sharp(out).metadata();
+  return { src: rel, width: m.width, height: m.height };
 }
 
 const pages = {};
@@ -168,9 +192,24 @@ for (const slug of slugs) {
   for (const el of main.find("img[src^='/assets/']:not([srcset])").toArray()) {
     const src = $(el).attr("src");
     const isBackdrop = $(el).closest(".page-hero-bg, .imgband-bg, .hero-bg").length > 0;
-    const variants = await responsiveVariants(src, isBackdrop ? [640, 760, 960, 1440] : [480, 800, 1200], isBackdrop ? 52 : 68);
+    const variants = await responsiveVariants(src, isBackdrop ? [640, 760, 960, 1440] : [480, 640, 800, 1200], isBackdrop ? 38 : 64);
     if (!variants) continue;
-    $(el).attr("srcset", variants).attr("sizes", isBackdrop ? "100vw" : "(max-width: 640px) 100vw, 50vw");
+    $(el).attr("srcset", variants).attr("sizes", isBackdrop ? "100vw" : "(max-width: 640px) calc(100vw - 40px), 50vw");
+  }
+  // Above the fold: the first content image in the first two sections (often the LCP element on
+  // phones) loads straight away with high priority instead of waiting for lazy-load.
+  const firstImg = main
+    .children("section")
+    .slice(0, 2)
+    .find("img")
+    .toArray()
+    .find((el) => !$(el).closest(".page-hero-bg, .imgband-bg, .hero-bg").length);
+  if (firstImg) $(firstImg).removeAttr("loading").attr("fetchpriority", "high");
+  // Page-hero backdrops sit under a 60–92% dark overlay. Phones get a tiny pre-blurred copy (~1 KB):
+  // it looks the same under the overlay, loads instantly and, being low-detail, lets the headline be LCP.
+  for (const el of main.find(".page-hero-bg > img[src^='/assets/']").toArray()) {
+    const phone = await phoneBackdrop($(el).attr("src"));
+    if (phone) $(el).wrap("<picture></picture>").before(`<source media="(max-width: 760px)" srcset="${phone.src}" width="${phone.width}" height="${phone.height}">`);
   }
   main.find("[style]").each((_, el) => $(el).attr("style", $(el).attr("style").replace(/url\((['"]?)(\.\/)?assets\//g, "url($1/assets/")));
   // the repo's quote pop-up is <dialog id="quote">; keep ids unique
@@ -252,13 +291,50 @@ root.walkRules((rule) => {
 // - the live header is sticky (94px in flow) and heroes pull up under it with margin-top:-94px;
 //   the app header is fixed (out of flow), so the heroes start at the top already.
 // - the live body inherits the browser's 16px; the app's body is 15px.
+// - content in the first two sections is visible straight away (no scroll-reveal fade), so the first
+//   screen does not wait for JavaScript.
 // - images now carry width/height attributes (no layout shift); keep their aspect ratio when CSS
 //   narrows them (rules that set an explicit height are more specific and still win).
 const overrides = `
 .lv{font-size:16px${undefinedVars.map((v) => `;${v}:initial`).join("")}}
 .lv .hero,.lv .page-hero{margin-top:0}
 .lv img{height:auto}
+.lv .page-hero-bg picture{display:contents}
+.lv > section:nth-of-type(-n+2) .reveal{opacity:1;transform:none;transition:none}
 `;
+// Drop rules that cannot match anything: every class/id they need must appear in some cloned page
+// (or be one CloneEnhancer adds at runtime). Keeps the render-blocking stylesheet small.
+const present = new Set([
+  // added by src/components/CloneEnhancer.tsx at runtime
+  "in", "open", "bookable", "rcard", "rc-top", "av", "who", "stars", "gicon", "ti-placeholder",
+  "modal", "inc-modal", "modal-backdrop", "modal-card", "modal-x", "modal-body", "modal-head", "eyebrow",
+  "inc-content", "inc-actions", "btn", "btn-primary", "btn-ghost", "inc-fullpage", "inc-quote",
+  "lv", "lv-home", "lv-inner", "#incModal", "#incTitle", "#incContent", "#lv-root",
+]);
+for (const p of Object.values(pages)) {
+  for (const m of p.html.matchAll(/class="([^"]*)"/g)) m[1].split(/\s+/).forEach((c) => c && present.add(c));
+  for (const m of p.html.matchAll(/id="([^"]*)"/g)) present.add("#" + m[1]);
+}
+const canMatch = (sel) => {
+  const bare = sel.replace(/:(not|where|is|has)\((?:[^()]|\([^()]*\))*\)/g, "");
+  for (const m of bare.matchAll(/([.#])(-?[_a-zA-Z][\w-]*)/g)) {
+    if (!present.has(m[1] === "." ? m[2] : "#" + m[2])) return false;
+  }
+  return true;
+};
+let dropped = 0;
+root.walkRules((rule) => {
+  if (rule.parent?.type === "atrule" && /keyframes/.test(rule.parent.name)) return;
+  const keep = rule.selectors.filter(canMatch);
+  dropped += rule.selectors.length - keep.length;
+  if (!keep.length) rule.remove();
+  else rule.selectors = keep;
+});
+root.walkAtRules((r) => {
+  if (r.nodes && r.nodes.length === 0) r.remove();
+});
+console.log("unused selectors dropped:", dropped);
+
 const cssOut =
   "/* Generated by scripts/clone-live-site.mjs from the live ecoverdevaleting.co.uk stylesheet, scoped to .lv (page content only). Do not edit by hand. */\n" +
   root.toResult().css + overrides;
