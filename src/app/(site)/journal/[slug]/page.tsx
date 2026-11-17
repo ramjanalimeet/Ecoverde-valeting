@@ -99,7 +99,7 @@ export default async function JournalPost({ params }: { params: Promise<{ slug: 
       <article className="article">
         <header className="article__head">
           <div className="container">
-            <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Journal", href: "/journal" }, { label: post.title }]} />
+            <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Journal", href: "/blog" }, { label: post.title }]} />
             <p className="eyebrow">
               {fmt(published)} · {minutes} min read
             </p>

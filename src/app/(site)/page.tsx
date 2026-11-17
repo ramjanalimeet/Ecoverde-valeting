@@ -1,37 +1,11 @@
-import Faq from "@/components/Faq";
-import Gallery from "@/components/Gallery";
-import {
-  BrandStrip,
-  FinalCta,
-  Founder,
-  GiftVouchers,
-  Hero,
-  HowItWorks,
-  Reviews,
-  ServiceAreas,
-  Services,
-  Stats,
-  UsedCar,
-  WhyChoose,
-} from "@/components/Sections";
+import type { Metadata } from "next";
+import ClonePage from "@/components/ClonePage";
+import { cloneMetadata, getClonePage } from "@/lib/clone";
+
+const page = getClonePage("")!;
+
+export const metadata: Metadata = cloneMetadata(page);
 
 export default function Home() {
-  return (
-    <>
-      <Hero />
-      <Reviews />
-      <BrandStrip />
-      <Services />
-      <WhyChoose />
-      <HowItWorks />
-      <Stats />
-      <Founder />
-      <Gallery />
-      <ServiceAreas />
-      <GiftVouchers />
-      <UsedCar />
-      <FinalCta />
-      <Faq />
-    </>
-  );
+  return <ClonePage page={page} path="/" />;
 }

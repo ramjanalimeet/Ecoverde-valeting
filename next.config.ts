@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
+import { LEGACY_REDIRECTS } from "./src/data/live-urls";
 
 const nextConfig: NextConfig = {
   images: {
@@ -13,6 +14,7 @@ const nextConfig: NextConfig = {
     return [
       { source: "/dashboard", destination: "/login", permanent: true },
       { source: "/dashboard/:path*", destination: "/login/:path*", permanent: true },
+      ...LEGACY_REDIRECTS.map((r) => ({ ...r, permanent: true })),
     ];
   },
   async headers() {
