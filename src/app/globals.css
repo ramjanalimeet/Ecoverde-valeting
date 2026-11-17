@@ -4453,3 +4453,116 @@ textarea:where(:not(.lv *)) {
     aspect-ratio: 4 / 3;
   }
 }
+
+/* ---------------------------------------------------------------------------------------------
+   Homepage hero — phones (≤760px). Keeps the desktop layout's three features as a compact row
+   under the glass card, shortens the card so the photo shows, and clears the sticky contact bar.
+   --------------------------------------------------------------------------------------------- */
+@media (max-width: 760px) {
+  .hero:where(:not(.lv *)) {
+    padding: calc(88px + env(safe-area-inset-top, 0px)) 0 calc(96px + env(safe-area-inset-bottom, 0px));
+  }
+  .hero__photo img:where(:not(.lv *)) {
+    object-position: 34% 50%;
+  }
+  .hero__shade {
+    background: linear-gradient(0deg, rgba(8, 44, 32, 0.9) 0%, rgba(11, 58, 41, 0.45) 26%, transparent 52%);
+  }
+  .hero__inner {
+    gap: 12px;
+  }
+  .hero__card {
+    padding: 20px 16px 16px;
+    border-radius: 20px;
+  }
+  .hero__card h1:where(:not(.lv *)) {
+    font-size: clamp(1.7rem, 1.05rem + 3.4vw, 2.05rem);
+    line-height: 1.08;
+    margin-bottom: 10px;
+  }
+  .hero__lead {
+    font-size: 0.84rem;
+    line-height: 1.55;
+    margin-bottom: 14px;
+  }
+  .hero__ctas {
+    margin-bottom: 12px;
+  }
+  .hero__ctas .btn:where(:not(.lv *)) {
+    min-height: 44px;
+  }
+  /* trust tiles: a tidy 2 × 2 instead of four stacked rows */
+  .hero__tiles li:nth-child(-n + 2):where(:not(.lv *)) {
+    grid-column: auto;
+  }
+  .hero__tiles li:where(:not(.lv *)) {
+    min-height: 48px;
+    padding: 7px 10px;
+  }
+  .hero__tiles li:first-child:where(:not(.lv *)) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+  }
+  .hero__tile-logo img:where(:not(.lv *)) {
+    height: 26px;
+    max-width: 100%;
+  }
+  /* the three features from the desktop hero, as a compact row */
+  .hero__features {
+    display: grid;
+    grid-row: 2;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    max-width: none;
+    width: 100%;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+  .hero__features li:where(:not(.lv *)) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    padding: 12px 6px;
+    border-radius: 16px;
+    background: rgba(8, 44, 32, 0.6);
+    border: 1px solid rgba(111, 220, 159, 0.22);
+    backdrop-filter: blur(10px);
+  }
+  .hero__features li:where(:not(.lv *))::after {
+    display: none;
+  }
+  .hero__feature-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+  }
+  .hero__feature-icon svg:where(:not(.lv *)) {
+    width: 19px;
+    height: 19px;
+  }
+  .hero__features strong:where(:not(.lv *)) {
+    margin: 0;
+    font-size: 0.78rem;
+    line-height: 1.25;
+  }
+  .hero__features small:where(:not(.lv *)) {
+    display: none;
+  }
+}
+@media (max-width: 360px) {
+  .hero__card .eyebrow:where(:not(.lv *)) {
+    letter-spacing: 0.06em;
+    font-size: 0.56rem;
+  }
+  .hero__tiles li:where(:not(.lv *)) {
+    padding: 6px 8px;
+  }
+  .hero__features strong:where(:not(.lv *)) {
+    font-size: 0.72rem;
+  }
+}
