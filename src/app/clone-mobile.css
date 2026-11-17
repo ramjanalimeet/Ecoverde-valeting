@@ -4,17 +4,9 @@
  * every re-sync. Scoped to .lv-inner so the homepage is untouched.
  */
 @media (max-width: 640px) {
-  /* ---------- page hero: fills the first screen, text anchored to the bottom (cover style) ----------
-     The first screen is then the headline itself, so it paints immediately (fast LCP). */
+  /* ---------- page hero ---------- */
   .lv-inner .page-hero {
-    min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: calc(100px + env(safe-area-inset-top, 0px)) 0 44px;
-  }
-  .lv-inner .page-hero > .wrap {
-    width: 100%;
+    padding: calc(100px + env(safe-area-inset-top, 0px)) 0 40px;
   }
   .lv-inner .breadcrumb {
     flex-wrap: wrap;
