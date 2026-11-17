@@ -4455,21 +4455,23 @@ textarea:where(:not(.lv *)) {
 }
 
 /* ---------------------------------------------------------------------------------------------
-   Homepage hero — phones (≤760px). Keeps the desktop layout's three features as a compact row
-   under the glass card, shortens the card so the photo shows, and clears the sticky contact bar.
+   Homepage hero — tablets & phones. The feature list on the left is a desktop-only element.
    --------------------------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .hero__features,
+  .hero__waves {
+    display: none;
+  }
+  .hero__shade {
+    background: none;
+  }
+}
 @media (max-width: 760px) {
   .hero:where(:not(.lv *)) {
-    padding: calc(88px + env(safe-area-inset-top, 0px)) 0 calc(96px + env(safe-area-inset-bottom, 0px));
+    padding: calc(88px + env(safe-area-inset-top, 0px)) 0 calc(28px + env(safe-area-inset-bottom, 0px));
   }
   .hero__photo img:where(:not(.lv *)) {
     object-position: 34% 50%;
-  }
-  .hero__shade {
-    background: linear-gradient(0deg, rgba(8, 44, 32, 0.9) 0%, rgba(11, 58, 41, 0.45) 26%, transparent 52%);
-  }
-  .hero__inner {
-    gap: 12px;
   }
   .hero__card {
     padding: 20px 16px 16px;
@@ -4508,51 +4510,6 @@ textarea:where(:not(.lv *)) {
     height: 26px;
     max-width: 100%;
   }
-  /* the three features from the desktop hero, as a compact row */
-  .hero__features {
-    display: grid;
-    grid-row: 2;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    max-width: none;
-    width: 100%;
-    padding: 0;
-    background: none;
-    border: 0;
-    box-shadow: none;
-    backdrop-filter: none;
-  }
-  .hero__features li:where(:not(.lv *)) {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 8px;
-    padding: 12px 6px;
-    border-radius: 16px;
-    background: rgba(8, 44, 32, 0.6);
-    border: 1px solid rgba(111, 220, 159, 0.22);
-    backdrop-filter: blur(10px);
-  }
-  .hero__features li:where(:not(.lv *))::after {
-    display: none;
-  }
-  .hero__feature-icon {
-    width: 38px;
-    height: 38px;
-    border-radius: 11px;
-  }
-  .hero__feature-icon svg:where(:not(.lv *)) {
-    width: 19px;
-    height: 19px;
-  }
-  .hero__features strong:where(:not(.lv *)) {
-    margin: 0;
-    font-size: 0.78rem;
-    line-height: 1.25;
-  }
-  .hero__features small:where(:not(.lv *)) {
-    display: none;
-  }
 }
 @media (max-width: 360px) {
   .hero__card .eyebrow:where(:not(.lv *)) {
@@ -4562,7 +4519,36 @@ textarea:where(:not(.lv *)) {
   .hero__tiles li:where(:not(.lv *)) {
     padding: 6px 8px;
   }
-  .hero__features strong:where(:not(.lv *)) {
-    font-size: 0.72rem;
+}
+
+/* Sticky contact bar (phones & tablets): hidden at the top of the page, slides up once the visitor
+   scrolls down (html.mbar-on is set by src/components/MobileBarReveal.tsx). */
+@media (max-width: 960px) {
+  .mbar {
+    animation: none;
+    transform: translateY(calc(100% + 24px));
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      transform 350ms var(--ease),
+      opacity 250ms var(--ease),
+      visibility 0s linear 350ms;
+  }
+  html.mbar-on .mbar {
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition:
+      transform 350ms var(--ease),
+      opacity 250ms var(--ease),
+      visibility 0s;
+  }
+}
+@media (max-width: 960px) and (prefers-reduced-motion: reduce) {
+  .mbar,
+  html.mbar-on .mbar {
+    transition: none;
   }
 }
