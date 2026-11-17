@@ -25,19 +25,20 @@ const HERO = {
   src: "/images/hero-green-bmw-valeted-west-london-1440.webp",
   sizes: "100vw",
   srcSet: [720, 960, 1440].map((w) => `/images/hero-green-bmw-valeted-west-london-${w}.webp ${w}w`).join(", "),
-  // Phones: the photo sits behind the frosted glass card (which blurs it anyway), so a tiny, pre-blurred
-  // 1 KB version is used. It loads instantly and, being low-detail, lets the headline count as LCP.
-  phone: "/images/hero-green-bmw-valeted-west-london-phone.webp",
+  // Phones: the hero is tall and narrow, so only a slice of the wide photo shows. A full-resolution
+  // portrait crop of that slice (same framing as object-position 34% on the full photo) keeps it sharp
+  // instead of enlarging a small file.
+  portrait: "/images/hero-green-bmw-valeted-west-london-portrait.webp",
   phoneMedia: "(max-width: 760px)",
 };
 
 export function Hero() {
-  preload(HERO.phone, { as: "image", media: HERO.phoneMedia, fetchPriority: "high" });
+  preload(HERO.portrait, { as: "image", media: HERO.phoneMedia, fetchPriority: "high" });
   preload(HERO.src, { as: "image", imageSrcSet: HERO.srcSet, imageSizes: HERO.sizes, media: "(min-width: 761px)", fetchPriority: "high" });
   return (
     <section className="hero" aria-labelledby="hero-title">
       <picture className="hero__photo">
-        <source media={HERO.phoneMedia} srcSet={HERO.phone} width={160} height={87} />
+        <source media={HERO.phoneMedia} srcSet={HERO.portrait} width={760} height={785} />
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={HERO.src}
