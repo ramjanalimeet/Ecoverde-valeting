@@ -63,9 +63,12 @@ export default function QuoteModal() {
         if (e.target === dialogRef.current) close();
       }}
     >
-      <button type="button" className="quote-modal__close icon-btn icon-btn--sm" onClick={close} aria-label="Close quote form">
-        <CloseIcon width={16} height={16} />
-      </button>
+      {/* sticky bar so the close button never sits on top of the form fields while scrolling */}
+      <div className="quote-modal__bar">
+        <button type="button" className="quote-modal__close icon-btn icon-btn--sm" onClick={close} aria-label="Close quote form">
+          <CloseIcon width={16} height={16} />
+        </button>
+      </div>
       {nonce > 0 && <QuoteForm preset={preset} nonce={nonce} onClose={close} />}
     </dialog>
   );

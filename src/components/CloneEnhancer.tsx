@@ -68,11 +68,19 @@ export default function CloneEnhancer() {
       reveals.forEach((el) => el.classList.add("in"));
     }
 
-    /* ---- eco decor parallax (desktop only) ---- */
+    /* ---- eco decor parallax (desktop only; follows the screen size if the window is resized) ---- */
     const deco = root.querySelectorAll<HTMLElement>(".deco-item[data-parallax]");
-    if (deco.length && matchMedia("(min-width: 769px)").matches && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (deco.length) {
+      const desktop = matchMedia("(min-width: 769px)");
+      const reduced = matchMedia("(prefers-reduced-motion: reduce)");
       let ticking = false;
+      const active = () => desktop.matches && !reduced.matches;
       const run = () => {
+        ticking = false;
+        if (!active()) {
+          deco.forEach((el) => (el.style.transform = ""));
+          return;
+        }
         const vh = innerHeight;
         const rects = Array.from(deco, (el) => el.getBoundingClientRect());
         deco.forEach((el, i) => {
@@ -80,7 +88,6 @@ export default function CloneEnhancer() {
           const sp = parseFloat(el.dataset.parallax || "") || 0.1;
           el.style.transform = `translateY(${(-c * sp).toFixed(1)}px)`;
         });
-        ticking = false;
       };
       const onPara = () => {
         if (!ticking) {
@@ -90,6 +97,7 @@ export default function CloneEnhancer() {
       };
       on(window, "scroll", onPara, { passive: true });
       on(window, "resize", onPara, { passive: true });
+      on(desktop, "change", onPara);
       run();
     }
 

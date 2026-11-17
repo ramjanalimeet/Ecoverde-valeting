@@ -19,8 +19,10 @@ export default function MobileBarReveal() {
     };
     update();
     addEventListener("scroll", onScroll, { passive: true });
+    addEventListener("resize", onScroll, { passive: true });
     return () => {
       removeEventListener("scroll", onScroll);
+      removeEventListener("resize", onScroll);
       root.classList.remove("mbar-on");
     };
   }, []);
