@@ -17,7 +17,29 @@ export type ClonePage = {
   html: string;
 };
 
-const PAGES = pages as Record<string, ClonePage>;
+/**
+ * Accessibility: some live pages skip heading levels (e.g. an <h4> card title straight after an <h2>).
+ * Keep the tags (the live CSS styles them by tag) and give skipped headings the correct aria-level.
+ * Every page body follows an <h1> (the page or homepage hero), so the outline starts at level 1.
+ */
+function fixHeadingOrder(html: string): string {
+  let prevTag = 1; // tag level of the previous heading
+  let prevEff = 1; // its effective (announced) level
+  return html.replace(/<h([1-6])(\s[^>]*)?>/g, (tag, lvl: string, attrs = "") => {
+    const level = Number(lvl);
+    let eff: number;
+    if (level === prevTag) eff = prevEff; // sibling of the previous heading
+    else if (level > prevTag) eff = Math.min(level, prevEff + 1); // one level deeper at most
+    else eff = Math.min(level, prevEff); // back up the outline
+    prevTag = level;
+    prevEff = eff;
+    return eff === level ? tag : `<h${level}${attrs} aria-level="${eff}">`;
+  });
+}
+
+const PAGES = Object.fromEntries(
+  Object.entries(pages as Record<string, ClonePage>).map(([slug, p]) => [slug, { ...p, html: fixHeadingOrder(p.html) }]),
+);
 
 /** Slug without leading slash; "" is the homepage. */
 export const CLONE_SLUGS = Object.keys(PAGES);

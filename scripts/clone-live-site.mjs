@@ -14,6 +14,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import * as cheerio from "cheerio";
 import postcss from "postcss";
+import sharp from "sharp";
 
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const LIVE = path.join(REPO, ".clone-cache");
@@ -42,7 +43,7 @@ if (!process.argv.includes("--offline")) {
     ...fs.readdirSync(path.join(LIVE, "html")).map((f) => fs.readFileSync(path.join(LIVE, "html", f), "utf8")),
     fs.readFileSync(path.join(LIVE, "site/assets/css/style.css"), "utf8").replace(/\.\.\/(fonts|img)\//g, "assets/$1/"),
   ].join("\n");
-  const assets = [...new Set([...text.matchAll(/assets\/(?:img|fonts)\/[\w./-]+/g)].map((m) => m[0]))];
+  const assets = [...new Set([...text.matchAll(/assets\/img\/[\w./-]+/g)].map((m) => m[0]))];
   for (const a of assets) {
     const dest = path.join(REPO, "public", a);
     if (fs.existsSync(dest)) continue;
@@ -86,6 +87,43 @@ const fixHref = (v) => {
 };
 const toPath = (u) => (u && u.startsWith(LIVE_ORIGIN) ? u.slice(LIVE_ORIGIN.length) || "/" : u);
 
+const sizeCache = new Map();
+async function imageSize(file) {
+  if (!sizeCache.has(file)) {
+    sizeCache.set(file, fs.existsSync(file) ? await sharp(file).metadata().then((m) => ({ width: m.width, height: m.height })) : null);
+  }
+  return sizeCache.get(file);
+}
+
+// Writes public/assets/img/opt/<name>-<w>.webp for each width smaller than the original and returns a
+// srcset, or null when the image is already small. Existing files are reused.
+const variantCache = new Map();
+async function responsiveVariants(src, widths, quality) {
+  const key = src + widths.join();
+  if (variantCache.has(key)) return variantCache.get(key);
+  const file = path.join(REPO, "public", src);
+  const size = await imageSize(file);
+  let result = null;
+  if (size && size.width > widths[0]) {
+    const base = path.basename(src).replace(/\.[a-z0-9]+$/i, "");
+    const dir = path.dirname(src).replace(/^\/assets\/img/, "");
+    const entries = [];
+    for (const w of widths.filter((w) => w < size.width)) {
+      const rel = `/assets/img/opt${dir}/${base}-${w}.webp`;
+      const out = path.join(REPO, "public", rel);
+      if (!fs.existsSync(out)) {
+        fs.mkdirSync(path.dirname(out), { recursive: true });
+        await sharp(file).resize({ width: w }).webp({ quality, effort: 6 }).toFile(out);
+      }
+      entries.push(`${rel} ${w}w`);
+    }
+    entries.push(`${src} ${size.width}w`);
+    result = entries.join(", ");
+  }
+  variantCache.set(key, result);
+  return result;
+}
+
 const pages = {};
 for (const slug of slugs) {
   const file = path.join(LIVE, "html", (slug || "index") + ".html");
@@ -119,6 +157,21 @@ for (const slug of slugs) {
   main.find("[data-inc-page]").each((_, el) => $(el).attr("data-inc-page", fixHref($(el).attr("data-inc-page"))));
   for (const a of ["src", "data-src", "poster"]) main.find(`[${a}]`).each((_, el) => $(el).attr(a, toAbsAsset($(el).attr(a))));
   for (const a of ["srcset", "data-srcset", "imagesrcset"]) main.find(`[${a}]`).each((_, el) => $(el).attr(a, toAbsAsset($(el).attr(a))));
+  // width/height on every local image so the browser reserves its space (no layout shift)
+  for (const el of main.find("img[src^='/assets/']").toArray()) {
+    if ($(el).attr("width") && $(el).attr("height")) continue;
+    const size = await imageSize(path.join(REPO, "public", $(el).attr("src")));
+    if (size) $(el).attr("width", String(size.width)).attr("height", String(size.height));
+  }
+  // Responsive, compressed WebP copies for large images that have no srcset. The original file stays
+  // as src (same URL as the live site); browsers pick the smallest copy that fits.
+  for (const el of main.find("img[src^='/assets/']:not([srcset])").toArray()) {
+    const src = $(el).attr("src");
+    const isBackdrop = $(el).closest(".page-hero-bg, .imgband-bg, .hero-bg").length > 0;
+    const variants = await responsiveVariants(src, isBackdrop ? [640, 760, 960, 1440] : [480, 800, 1200], isBackdrop ? 52 : 68);
+    if (!variants) continue;
+    $(el).attr("srcset", variants).attr("sizes", isBackdrop ? "100vw" : "(max-width: 640px) 100vw, 50vw");
+  }
   main.find("[style]").each((_, el) => $(el).attr("style", $(el).attr("style").replace(/url\((['"]?)(\.\/)?assets\//g, "url($1/assets/")));
   // the repo's quote pop-up is <dialog id="quote">; keep ids unique
   main.find("#quote").attr("id", "quote-cta");
@@ -172,12 +225,13 @@ root.walkDecls((d) => {
   for (const m of d.value.matchAll(/var\((--[\w-]+)/g)) used.add(m[1]);
 });
 const undefinedVars = [...used].filter((v) => !defined.has(v));
-// Fonts: the live font files under their own family names, so they cannot collide with the
-// app's next/font families (CSS family names match case-insensitively).
+// Fonts: the live site uses the same families (Fraunces, Hanken Grotesk) as the app, so point the
+// cloned CSS at the app's self-hosted next/font files instead of downloading a second copy.
+root.walkAtRules("font-face", (r) => r.remove());
 root.walkDecls((d) => {
   d.value = d.value
-    .replace(/(['"])Fraunces\1/g, '"Fraunces Live"')
-    .replace(/(['"])Hanken Grotesk\1/g, '"Hanken Live"');
+    .replace(/(['"])Fraunces\1/g, "var(--font-fraunces)")
+    .replace(/(['"])Hanken Grotesk\1/g, "var(--font-hanken)");
 });
 const scopeSel = (s) => {
   s = s.trim();
@@ -198,9 +252,12 @@ root.walkRules((rule) => {
 // - the live header is sticky (94px in flow) and heroes pull up under it with margin-top:-94px;
 //   the app header is fixed (out of flow), so the heroes start at the top already.
 // - the live body inherits the browser's 16px; the app's body is 15px.
+// - images now carry width/height attributes (no layout shift); keep their aspect ratio when CSS
+//   narrows them (rules that set an explicit height are more specific and still win).
 const overrides = `
 .lv{font-size:16px${undefinedVars.map((v) => `;${v}:initial`).join("")}}
 .lv .hero,.lv .page-hero{margin-top:0}
+.lv img{height:auto}
 `;
 const cssOut =
   "/* Generated by scripts/clone-live-site.mjs from the live ecoverdevaleting.co.uk stylesheet, scoped to .lv (page content only). Do not edit by hand. */\n" +

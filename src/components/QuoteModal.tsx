@@ -2,7 +2,10 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CloseIcon } from "./Icons";
-import QuoteForm from "./QuoteForm";
+import dynamic from "next/dynamic";
+
+// The form (validation, photo upload…) is only downloaded when the pop-up is first opened.
+const QuoteForm = dynamic(() => import("./QuoteForm"), { ssr: false });
 
 /**
  * Site-wide quote pop-up. Any same-origin link to "#quote" (Book Now, Get a Free Quote, service CTAs…)
@@ -63,7 +66,7 @@ export default function QuoteModal() {
       <button type="button" className="quote-modal__close icon-btn icon-btn--sm" onClick={close} aria-label="Close quote form">
         <CloseIcon width={16} height={16} />
       </button>
-      <QuoteForm preset={preset} nonce={nonce} onClose={close} />
+      {nonce > 0 && <QuoteForm preset={preset} nonce={nonce} onClose={close} />}
     </dialog>
   );
 }

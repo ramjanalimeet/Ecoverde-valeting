@@ -171,7 +171,7 @@ export default function Header() {
         Skip to content
       </a>
       <div className="header__inner" ref={navRef}>
-        <Link href="/" className="header__logo" aria-label="Ecoverde Valeting — home" onClick={close}>
+        <Link href="/" className="header__logo" onClick={close}>
           <Logo />
         </Link>
 

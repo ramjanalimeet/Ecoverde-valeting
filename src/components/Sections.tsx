@@ -52,11 +52,13 @@ function Leaves({ className }: { className: string }) {
 /* ------------------------------------------------------------------ Hero */
 const HERO = {
   src: "/images/hero-green-bmw-valeted-west-london-1440.webp",
-  srcSet: [560, 960, 1440].map((w) => `/images/hero-green-bmw-valeted-west-london-${w}.webp ${w}w`).join(", "),
+  // Phones: the glass card covers most of the photo, so a smaller file is plenty.
+  sizes: "(max-width: 760px) 70vw, 100vw",
+  srcSet: [560, 720, 960, 1440].map((w) => `/images/hero-green-bmw-valeted-west-london-${w}.webp ${w}w`).join(", "),
 };
 
 export function Hero() {
-  preload(HERO.src, { as: "image", imageSrcSet: HERO.srcSet, imageSizes: "100vw", fetchPriority: "high" });
+  preload(HERO.src, { as: "image", imageSrcSet: HERO.srcSet, imageSizes: HERO.sizes, fetchPriority: "high" });
   return (
     <section className="hero" aria-labelledby="hero-title">
       <div className="hero__photo">
@@ -64,12 +66,12 @@ export function Hero() {
         <img
           src={HERO.src}
           srcSet={HERO.srcSet}
-          sizes="100vw"
+          sizes={HERO.sizes}
           width={1440}
           height={785}
           alt="Freshly valeted dark green BMW parked on a tree-lined, white stucco street in West London"
           fetchPriority="high"
-          decoding="async"
+          decoding="sync"
         />
       </div>
       <div className="hero__shade" aria-hidden="true" />
