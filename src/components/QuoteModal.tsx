@@ -4,8 +4,11 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { CloseIcon } from "./Icons";
 import dynamic from "next/dynamic";
 
-// The form (validation, photo upload…) is only downloaded when the pop-up is first opened.
-const QuoteForm = dynamic(() => import("./QuoteForm"), { ssr: false });
+// The form (validation, photo upload…) is kept out of the first page load, then fetched in the
+// background once the page is idle — or as soon as a quote button is touched/hovered — so the
+// pop-up opens instantly.
+const loadQuoteForm = () => import("./QuoteForm");
+const QuoteForm = dynamic(loadQuoteForm, { ssr: false });
 
 /**
  * Site-wide quote pop-up. Any same-origin link to "#quote" (Book Now, Get a Free Quote, service CTAs…)
@@ -16,6 +19,9 @@ export default function QuoteModal() {
   const lastFocus = useRef<HTMLElement | null>(null);
   const [preset, setPreset] = useState<string | null>(null);
   const [nonce, setNonce] = useState(0);
+  // true once the form code has been preloaded: the form is then rendered (hidden) inside the closed
+  // dialog, so opening it is instant.
+  const [formReady, setFormReady] = useState(false);
 
   const open = useCallback((service?: string | null) => {
     const d = dialogRef.current;
@@ -42,11 +48,41 @@ export default function QuoteModal() {
       open(url.searchParams.get("service"));
     };
     window.addEventListener("click", onClick, true);
+
+    // Preload the form: when the browser is idle after load, or on first intent (touch / hover / focus
+    // on any quote button), whichever comes first.
+    let preloaded = false;
+    const preload = () => {
+      if (preloaded) return;
+      preloaded = true;
+      loadQuoteForm()
+        .then(() => setFormReady(true))
+        .catch(() => {
+          preloaded = false;
+        });
+    };
+    const onIntent = (e: Event) => {
+      const t = e.target as Element | null;
+      if (t?.closest?.('a[href*="#quote"], [data-book]')) preload();
+    };
+    for (const type of ["pointerdown", "touchstart", "mouseover", "focusin"]) {
+      window.addEventListener(type, onIntent, { passive: true, capture: true });
+    }
+    const idle = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 1500));
+    const scheduleIdle = () => idle(preload);
+    if (document.readyState === "complete") scheduleIdle();
+    else window.addEventListener("load", scheduleIdle, { once: true });
     if (location.hash === "#quote") {
       open(new URLSearchParams(location.search).get("service"));
       history.replaceState(null, "", location.pathname);
     }
-    return () => window.removeEventListener("click", onClick, true);
+    return () => {
+      window.removeEventListener("click", onClick, true);
+      window.removeEventListener("load", scheduleIdle);
+      for (const type of ["pointerdown", "touchstart", "mouseover", "focusin"]) {
+        window.removeEventListener(type, onIntent, { capture: true });
+      }
+    };
   }, [open]);
 
   return (
@@ -69,7 +105,7 @@ export default function QuoteModal() {
           <CloseIcon width={16} height={16} />
         </button>
       </div>
-      {nonce > 0 && <QuoteForm preset={preset} nonce={nonce} onClose={close} />}
+      {(formReady || nonce > 0) && <QuoteForm preset={preset} nonce={nonce} onClose={close} />}
     </dialog>
   );
 }

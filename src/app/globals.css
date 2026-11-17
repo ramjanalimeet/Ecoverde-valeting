@@ -1470,7 +1470,7 @@ textarea:where(:not(.lv *)) {
   box-shadow: rgba(0, 0, 0, 0.35) 0 40px 80px -30px;
 }
 .quote-modal[open] {
-  animation: modal-in 300ms var(--ease);
+  animation: modal-in 200ms var(--ease);
 }
 @keyframes modal-in {
   from {
@@ -1508,7 +1508,7 @@ textarea:where(:not(.lv *)) {
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
   .quote-modal[open] {
-    animation: sheet-in 320ms var(--ease);
+    animation: sheet-in 220ms var(--ease);
   }
   @keyframes sheet-in {
     from {
