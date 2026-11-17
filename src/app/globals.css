@@ -4453,3 +4453,102 @@ textarea:where(:not(.lv *)) {
     aspect-ratio: 4 / 3;
   }
 }
+
+/* ---------------------------------------------------------------------------------------------
+   Homepage hero — tablets & phones. The feature list on the left is a desktop-only element.
+   --------------------------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .hero__features,
+  .hero__waves {
+    display: none;
+  }
+  .hero__shade {
+    background: none;
+  }
+}
+@media (max-width: 760px) {
+  .hero:where(:not(.lv *)) {
+    padding: calc(88px + env(safe-area-inset-top, 0px)) 0 calc(28px + env(safe-area-inset-bottom, 0px));
+  }
+  .hero__photo img:where(:not(.lv *)) {
+    object-position: 34% 50%;
+  }
+  .hero__card {
+    padding: 20px 16px 16px;
+    border-radius: 20px;
+  }
+  .hero__card h1:where(:not(.lv *)) {
+    font-size: clamp(1.7rem, 1.05rem + 3.4vw, 2.05rem);
+    line-height: 1.08;
+    margin-bottom: 10px;
+  }
+  .hero__lead {
+    font-size: 0.84rem;
+    line-height: 1.55;
+    margin-bottom: 14px;
+  }
+  .hero__ctas {
+    margin-bottom: 12px;
+  }
+  .hero__ctas .btn:where(:not(.lv *)) {
+    min-height: 44px;
+  }
+  /* trust tiles: a tidy 2 × 2 instead of four stacked rows */
+  .hero__tiles li:nth-child(-n + 2):where(:not(.lv *)) {
+    grid-column: auto;
+  }
+  .hero__tiles li:where(:not(.lv *)) {
+    min-height: 48px;
+    padding: 7px 10px;
+  }
+  .hero__tiles li:first-child:where(:not(.lv *)) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+  }
+  .hero__tile-logo img:where(:not(.lv *)) {
+    height: 26px;
+    max-width: 100%;
+  }
+}
+@media (max-width: 360px) {
+  .hero__card .eyebrow:where(:not(.lv *)) {
+    letter-spacing: 0.06em;
+    font-size: 0.56rem;
+  }
+  .hero__tiles li:where(:not(.lv *)) {
+    padding: 6px 8px;
+  }
+}
+
+/* Sticky contact bar (phones & tablets): hidden at the top of the page, slides up once the visitor
+   scrolls down (html.mbar-on is set by src/components/MobileBarReveal.tsx). */
+@media (max-width: 960px) {
+  .mbar {
+    animation: none;
+    transform: translateY(calc(100% + 24px));
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      transform 350ms var(--ease),
+      opacity 250ms var(--ease),
+      visibility 0s linear 350ms;
+  }
+  html.mbar-on .mbar {
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition:
+      transform 350ms var(--ease),
+      opacity 250ms var(--ease),
+      visibility 0s;
+  }
+}
+@media (max-width: 960px) and (prefers-reduced-motion: reduce) {
+  .mbar,
+  html.mbar-on .mbar {
+    transition: none;
+  }
+}

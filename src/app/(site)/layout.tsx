@@ -6,6 +6,7 @@ import QuoteModal from "@/components/QuoteModal";
 import Tracker from "@/components/Tracker";
 import { PRIMARY_PHONE, quoteHref, whatsappLink } from "@/data/site";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import MobileBarReveal from "@/components/MobileBarReveal";
 import "../clone.css";
 
 // Structured data (Organization, Service, FAQPage, BreadcrumbList…) comes per page from the live site — see src/lib/clone.ts.
@@ -37,6 +38,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
         </Link>
       </nav>
       <GoogleAnalytics />
+      <MobileBarReveal />
     </>
   );
 }
