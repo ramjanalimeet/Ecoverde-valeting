@@ -171,7 +171,15 @@ export default function QuoteForm({ preset, nonce, onClose }: { preset?: string 
   }
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} noValidate className="qf" aria-labelledby={`${uid}-title`}>
+    <form
+      ref={formRef}
+      onSubmit={onSubmit}
+      noValidate
+      className="qf"
+      aria-labelledby={`${uid}-title`}
+      // WebMCP: lets AI agents recognise this form as a "request a quote" tool
+      {...{ toolname: "request_valeting_quote", tooldescription: "Request a free, no-obligation car valeting or detailing quote from Ecoverde Valeting (West London). John calls back to confirm the price." }}
+    >
       <p className="eyebrow">Free Quote · No Obligation</p>
       <h2 id={`${uid}-title`} className="qf__title">
         Request your free quote

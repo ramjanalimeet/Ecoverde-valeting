@@ -76,7 +76,7 @@ export default function Footer() {
         <div className="ft__grid">
           {/* Brand */}
           <div className="ft__brand">
-            <Link href="/" aria-label="Ecoverde Valeting — home">
+            <Link href="/">
               <Logo light />
             </Link>
             <p>
