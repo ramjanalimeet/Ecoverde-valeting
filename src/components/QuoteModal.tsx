@@ -22,6 +22,8 @@ export default function QuoteModal() {
   // true once the form code has been preloaded: the form is then rendered (hidden) inside the closed
   // dialog, so opening it is instant.
   const [formReady, setFormReady] = useState(false);
+  // cancels a closing animation that is still running (e.g. the button is clicked again quickly)
+  const cancelClosing = useRef<(() => void) | null>(null);
 
   const open = useCallback((service?: string | null) => {
     const d = dialogRef.current;
@@ -29,11 +31,37 @@ export default function QuoteModal() {
     setPreset(service ?? null);
     setNonce((n) => n + 1);
     lastFocus.current = document.activeElement as HTMLElement | null;
+    cancelClosing.current?.();
     if (!d.open) d.showModal();
     document.documentElement.classList.add("modal-open");
   }, []);
 
-  const close = useCallback(() => dialogRef.current?.close(), []);
+  // Close with the reverse animation, then actually close the dialog.
+  const close = useCallback(() => {
+    const d = dialogRef.current;
+    if (!d?.open || d.classList.contains("is-closing")) return;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      d.close();
+      return;
+    }
+    d.classList.add("is-closing");
+    const cleanup = () => {
+      d.removeEventListener("animationend", onEnd);
+      clearTimeout(fallback);
+      d.classList.remove("is-closing");
+      cancelClosing.current = null;
+    };
+    const done = () => {
+      cleanup();
+      d.close();
+    };
+    const onEnd = (e: AnimationEvent) => {
+      if (e.target === d) done();
+    };
+    d.addEventListener("animationend", onEnd);
+    const fallback = setTimeout(done, 400);
+    cancelClosing.current = cleanup;
+  }, []);
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
@@ -94,6 +122,11 @@ export default function QuoteModal() {
       onClose={() => {
         document.documentElement.classList.remove("modal-open");
         lastFocus.current?.focus?.();
+      }}
+      onCancel={(e) => {
+        // Escape key: play the closing animation instead of closing instantly
+        e.preventDefault();
+        close();
       }}
       onClick={(e) => {
         if (e.target === dialogRef.current) close();

@@ -1469,13 +1469,54 @@ textarea:where(:not(.lv *)) {
   overscroll-behavior: contain;
   box-shadow: rgba(0, 0, 0, 0.35) 0 40px 80px -30px;
 }
+/* Smooth open / close: card eases up and in, backdrop fades. Transform + opacity only (GPU-friendly).
+   Closing plays the reverse via .is-closing (see QuoteModal.tsx). */
 .quote-modal[open] {
-  animation: modal-in 200ms var(--ease);
+  animation: qm-in 340ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-@keyframes modal-in {
+.quote-modal[open]::backdrop {
+  animation: qm-fade-in 340ms ease-out both;
+}
+.quote-modal.is-closing {
+  animation: qm-out 220ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+.quote-modal.is-closing::backdrop {
+  animation: qm-fade-out 220ms ease-in both;
+}
+@keyframes qm-in {
   from {
     opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes qm-out {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
     transform: translateY(16px) scale(0.98);
+  }
+}
+@keyframes qm-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes qm-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 .quote-modal::backdrop {
@@ -1507,14 +1548,33 @@ textarea:where(:not(.lv *)) {
     border-radius: 22px 22px 0 0;
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
+  /* bottom sheet slides all the way up from the bottom edge and back down on close */
   .quote-modal[open] {
-    animation: sheet-in 220ms var(--ease);
+    animation: sheet-in 380ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .quote-modal.is-closing {
+    animation: sheet-out 240ms cubic-bezier(0.4, 0, 1, 1) both;
   }
   @keyframes sheet-in {
     from {
-      transform: translateY(40px);
-      opacity: 0;
+      transform: translateY(100%);
     }
+    to {
+      transform: none;
+    }
+  }
+  @keyframes sheet-out {
+    from {
+      transform: none;
+    }
+    to {
+      transform: translateY(100%);
+    }
+  }
+  /* a full-screen blur is expensive on phones and makes the slide stutter; a plain dim is smooth */
+  .quote-modal::backdrop {
+    backdrop-filter: none;
+    background: rgba(6, 26, 19, 0.55);
   }
   .quote-modal__bar {
     height: auto;
@@ -2929,5 +2989,14 @@ html.is-resizing *::after {
 @media (max-width: 300px) {
   .header__logo .logo__sub {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quote-modal[open],
+  .quote-modal[open]::backdrop,
+  .quote-modal.is-closing,
+  .quote-modal.is-closing::backdrop {
+    animation: none;
   }
 }
