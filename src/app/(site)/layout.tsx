@@ -8,6 +8,7 @@ import { PRIMARY_PHONE, quoteHref, whatsappLink } from "@/data/site";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import MobileBarReveal from "@/components/MobileBarReveal";
 import "../clone.css";
+import "../clone-mobile.css";
 
 // Structured data (Organization, Service, FAQPage, BreadcrumbList…) comes per page from the live site — see src/lib/clone.ts.
 

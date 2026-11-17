@@ -10,7 +10,7 @@ export default function ClonePage({ page, path, html = page.html }: { page: Page
   FONTS.forEach((href) => preload(href, { as: "font", type: "font/woff2", crossOrigin: "" }));
   return (
     <>
-      <div className="lv" id="lv-root" dangerouslySetInnerHTML={{ __html: html }} />
+      <div className={`lv ${path === "/" ? "lv-home" : "lv-inner"}`} id="lv-root" dangerouslySetInnerHTML={{ __html: html }} />
       <CloneEnhancer key={path} />
       {page.jsonLd.map((json, i) => (
         <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: json.replace(/</g, "\\u003c") }} />
