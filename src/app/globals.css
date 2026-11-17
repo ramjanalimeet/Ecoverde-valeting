@@ -2697,33 +2697,46 @@ textarea:where(:not(.lv *)) {
   .hero__photo img:where(:not(.lv *)) {
     object-position: 34% 50%;
   }
+  /* Spacing rhythm taken from the live site's mobile hero: roomier card, clear gaps between groups */
   .hero__card {
-    padding: 20px 16px 16px;
-    border-radius: 20px;
+    padding: 28px 20px 22px;
+    border-radius: 22px;
+  }
+  .hero__card .eyebrow:where(:not(.lv *)) {
+    margin-bottom: 16px;
   }
   .hero__card h1:where(:not(.lv *)) {
-    font-size: clamp(1.7rem, 1.05rem + 3.4vw, 2.05rem);
-    line-height: 1.08;
-    margin-bottom: 10px;
+    font-size: clamp(1.75rem, 1.1rem + 3.4vw, 2.1rem);
+    line-height: 1.1;
+    margin-bottom: 16px;
   }
   .hero__lead {
-    font-size: 0.84rem;
-    line-height: 1.55;
-    margin-bottom: 14px;
+    font-size: 0.92rem;
+    line-height: 1.65;
+    margin-bottom: 24px;
   }
   .hero__ctas {
-    margin-bottom: 12px;
+    gap: 10px;
+    margin-bottom: 24px;
   }
   .hero__ctas .btn:where(:not(.lv *)) {
-    min-height: 44px;
+    flex: 1 1 calc(50% - 5px);
+    min-height: 48px;
+  }
+  .hero__ctas .btn--primary {
+    flex-basis: 100%;
   }
   /* trust tiles: a tidy 2 × 2 instead of four stacked rows */
+  .hero__tiles {
+    gap: 10px;
+  }
   .hero__tiles li:nth-child(-n + 2):where(:not(.lv *)) {
     grid-column: auto;
   }
   .hero__tiles li:where(:not(.lv *)) {
-    min-height: 48px;
-    padding: 7px 10px;
+    min-height: 52px;
+    padding: 9px 12px;
+    border-radius: 10px;
   }
   .hero__tiles li:first-child:where(:not(.lv *)) {
     flex-direction: column;
