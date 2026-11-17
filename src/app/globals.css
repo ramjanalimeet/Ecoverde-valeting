@@ -2718,8 +2718,9 @@ textarea:where(:not(.lv *)) {
   }
 }
 @media (max-width: 760px) {
+  /* clear gap under the floating header (it ends ~70px from the top) */
   .hero:where(:not(.lv *)) {
-    padding: calc(88px + env(safe-area-inset-top, 0px)) 0 calc(28px + env(safe-area-inset-bottom, 0px));
+    padding: calc(104px + env(safe-area-inset-top, 0px)) 0 calc(40px + env(safe-area-inset-bottom, 0px));
   }
   .hero__photo img:where(:not(.lv *)) {
     object-position: 34% 50%;
@@ -2760,10 +2761,18 @@ textarea:where(:not(.lv *)) {
   .hero__tiles li:nth-child(-n + 2):where(:not(.lv *)) {
     grid-column: auto;
   }
+  /* trust tiles: taller, roomier cards */
   .hero__tiles li:where(:not(.lv *)) {
-    min-height: 52px;
-    padding: 9px 12px;
-    border-radius: 10px;
+    min-height: 68px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-size: 0.74rem;
+  }
+  .hero__tiles strong:where(:not(.lv *)) {
+    font-size: 0.8rem;
+  }
+  .hero__tiles small:where(:not(.lv *)) {
+    font-size: 0.7rem;
   }
   .hero__tiles li:first-child:where(:not(.lv *)) {
     flex-direction: column;
@@ -2771,7 +2780,7 @@ textarea:where(:not(.lv *)) {
     gap: 3px;
   }
   .hero__tile-logo img:where(:not(.lv *)) {
-    height: 26px;
+    height: 32px;
     max-width: 100%;
   }
 }
