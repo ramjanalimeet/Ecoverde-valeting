@@ -146,3 +146,8 @@
     padding: 10px 16px;
   }
 }
+
+/* Anchor links (/#reviews, /#how…) stop below the fixed header instead of under it. */
+.lv [id] {
+  scroll-margin-top: 96px;
+}

@@ -15,9 +15,9 @@ export const metadata: Metadata = cloneMetadata(page);
 
 export default function Home() {
   return (
-    <>
+    <div className="home-page">
       <Hero />
       <ClonePage page={page} path="/" html={body} />
-    </>
+    </div>
   );
 }

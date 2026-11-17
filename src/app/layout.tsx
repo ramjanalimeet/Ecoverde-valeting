@@ -35,7 +35,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-GB" className={`${hanken.variable} ${fraunces.variable}`}>
+    <html lang="en-GB" className={`${hanken.variable} ${fraunces.variable}`} data-scroll-behavior="smooth">
       <body>{children}</body>
     </html>
   );
