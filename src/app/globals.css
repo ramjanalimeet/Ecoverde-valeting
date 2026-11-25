@@ -2271,13 +2271,6 @@ textarea:where(:not(.lv *)) {
   }
 }
 
-/* small phones: Get In Touch gets the full width so the email address doesn't break mid-word */
-@media (max-width: 480px) {
-  .ft__col:last-child {
-    grid-column: 1 / -1;
-  }
-}
-
 /* Sticky action bar (phones & tablets) */
 .mbar {
   display: none;

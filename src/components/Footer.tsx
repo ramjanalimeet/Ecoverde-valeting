@@ -121,9 +121,12 @@ export default function Footer() {
                 </span>
                 <span>
                   <a href={`mailto:${SITE.email}`}>
+                    {/* break points after "@" and before the TLD, so a narrow column never splits a word */}
                     {SITE.email.split("@")[0]}@
                     <wbr />
-                    {SITE.email.split("@")[1]}
+                    {SITE.email.split("@")[1].replace(/\..*$/, "")}
+                    <wbr />
+                    {SITE.email.split("@")[1].replace(/^[^.]*/, "")}
                   </a>
                   <small>Quotes &amp; questions</small>
                 </span>
