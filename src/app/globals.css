@@ -505,7 +505,21 @@ textarea:where(:not(.lv *)) {
   border-radius: var(--r-md);
   box-shadow: var(--shadow-card), rgba(0, 0, 0, 0.06) 0 8px 24px;
   padding: 10px;
-  animation: drop 250ms var(--ease);
+  /* Closed state: kept in the DOM (inert) so it can fade/slide out as smoothly as it fades in */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px) scale(0.985);
+  transform-origin: top center;
+  pointer-events: none;
+  transition: opacity 200ms var(--ease), transform 240ms var(--ease), visibility 0s linear 240ms;
+}
+.dropdown.is-open,
+.mega.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  pointer-events: auto;
+  transition: opacity 260ms var(--ease), transform 320ms var(--ease), visibility 0s;
 }
 /* Invisible hover bridge between the nav item and its menu */
 .dropdown::before,
@@ -516,12 +530,6 @@ textarea:where(:not(.lv *)) {
   right: 0;
   top: -28px;
   height: 28px;
-}
-@keyframes drop {
-  from {
-    opacity: 0;
-    transform: translateY(-6px);
-  }
 }
 .dropdown {
   min-width: 220px;
