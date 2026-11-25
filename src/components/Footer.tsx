@@ -69,7 +69,7 @@ export default function Footer() {
               Get a Free Quote <ArrowRight width={16} height={16} />
             </Link>
             <WhatsAppLink className="btn btn--ghost">
-              <WhatsAppIcon width={16} height={16} /> WhatsApp
+              <WhatsAppIcon width={16} height={16} /> Continue on WhatsApp
             </WhatsAppLink>
           </div>
         </div>

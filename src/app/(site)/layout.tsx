@@ -23,8 +23,9 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <Footer />
       <QuoteModal />
       <Tracker />
-      <WhatsAppLink className="wa-fab" aria-label="Chat with us on WhatsApp">
-        <WhatsAppIcon width={28} height={28} />
+      <WhatsAppLink className="wa-fab">
+        <WhatsAppIcon width={26} height={26} />
+        <span>Continue on WhatsApp</span>
       </WhatsAppLink>
       {/* Sticky action bar — phones & tablets only */}
       <nav className="mbar" aria-label="Quick contact">
