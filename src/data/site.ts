@@ -52,7 +52,7 @@ export function whatsappLink(message = "Hi Ecoverde, I'd like a free quote for m
 }
 
 export const REVIEWS = {
-  total: "595+",
+  total: "600+",
   rating: "5.0",
   breakdown: [
     { source: "Google", count: 374 },
@@ -368,7 +368,7 @@ export const WHY = [
   {
     icon: "sparkle",
     title: "Meticulous, perfectionist finish",
-    text: "Attention to detail on every panel — the high standard that earns 595+ five-star reviews.",
+    text: "Attention to detail on every panel — the high standard that earns 600+ five-star reviews.",
   },
 ] as const;
 
@@ -396,7 +396,7 @@ export const STEPS = [
 ];
 
 export const STATS = [
-  { value: "595+", label: "Verified reviews" },
+  { value: "600+", label: "Verified reviews" },
   { value: "5.0★", label: "Average rating" },
   { value: "8+", label: "Years' experience" },
   { value: "100%", label: "Mobile & eco-friendly" },
@@ -459,7 +459,7 @@ export const FAQS = [
   },
   {
     q: "Where can I find a mobile car valeting service with great reviews nearby?",
-    a: "Ecoverde has earned 595+ five-star reviews across Google, Checkatrade, Bark, Facebook and Yell. We're Checkatrade verified and consistently praised for attention to detail, punctuality and professionalism.",
+    a: "Ecoverde has earned 600+ five-star reviews across Google, Checkatrade, Bark, Facebook and Yell. We're Checkatrade verified and consistently praised for attention to detail, punctuality and professionalism.",
   },
   {
     q: "Do you offer ceramic coating treatments?",
