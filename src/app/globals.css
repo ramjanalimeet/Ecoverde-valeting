@@ -2113,10 +2113,8 @@ textarea:where(:not(.lv *)) {
   color: rgba(255, 255, 255, 0.75);
 }
 .ft__contact .ft__area a:where(:not(.lv *)) {
-  font-weight: 600;
-  color: var(--green-light);
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  font-weight: 700;
+  text-decoration: none;
 }
 .ft__contact small:where(:not(.lv *)) {
   font-size: 0.72rem;
