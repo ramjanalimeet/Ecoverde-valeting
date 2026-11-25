@@ -205,6 +205,11 @@ export default function CloneEnhancer() {
         started = true;
         load(tiCert, "data-ti-cert");
         load(tiWidget, "data-ti-widget");
+        // the badge appears within a few seconds of the scripts loading; stop watching after that
+        floatStop = setTimeout(() => {
+          tagFloats();
+          floatMo.disconnect();
+        }, 30000);
         timer = setTimeout(
           () => {
             if (tiWidget.offsetHeight < 120 && !tiWidget.querySelector(".ti-placeholder")) {
@@ -219,6 +224,36 @@ export default function CloneEnhancer() {
           6000,
         );
       };
+      /* The certificate script adds a floating "Excellent Service" badge pinned to the bottom of the
+         viewport, which sits on top of the phone sticky contact bar. Tag whatever fixed element it
+         creates so CSS can lift it above the bar (see [data-ti-float] in globals.css). */
+      let tagQueued = false;
+      const tagFloats = () => {
+        tagQueued = false;
+        document
+          .querySelectorAll<HTMLElement>('[class*="ti-"], [id*="trustindex"], iframe[src*="trustindex"]')
+          .forEach((el) => {
+            for (let n: HTMLElement | null = el; n && n !== document.body; n = n.parentElement) {
+              if (n.hasAttribute("data-ti-float")) break;
+              if (getComputedStyle(n).position === "fixed") {
+                n.setAttribute("data-ti-float", "");
+                break;
+              }
+            }
+          });
+      };
+      const floatMo = new MutationObserver(() => {
+        if (!tagQueued) {
+          tagQueued = true;
+          requestAnimationFrame(tagFloats);
+        }
+      });
+      floatMo.observe(document.body, { childList: true, subtree: true });
+      let floatStop: ReturnType<typeof setTimeout> | undefined;
+      cleanups.push(() => {
+        floatMo.disconnect();
+        clearTimeout(floatStop);
+      });
       const tiIo = new IntersectionObserver(
         (entries) => {
           if (entries.some((x) => x.isIntersecting)) {

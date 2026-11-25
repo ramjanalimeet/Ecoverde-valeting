@@ -151,3 +151,30 @@
 .lv [id] {
   scroll-margin-top: 96px;
 }
+
+/* Homepage on phones: shorter service photos, tighter area chips, a gap-free gallery. */
+@media (max-width: 560px) {
+  /* ten service cards stack on phones; a wider photo crop keeps the list from feeling endless */
+  .lv .svc-media {
+    aspect-ratio: 16 / 9;
+  }
+  /* area chips: less card padding so two or three fit per row instead of one */
+  .lv .area-wrap {
+    padding: 30px 20px;
+    gap: 24px;
+  }
+  .lv .area-tags {
+    gap: 8px;
+  }
+  .lv .area-tags a,
+  .lv .area-tags span {
+    padding: 8px 12px;
+    font-size: 0.84rem;
+  }
+  /* before & after: pack the tall and wide tiles without leaving holes */
+  .lv .gallery-grid {
+    grid-auto-flow: dense;
+    grid-auto-rows: 150px;
+    gap: 10px;
+  }
+}
