@@ -57,7 +57,7 @@ A mini valet takes around 60–90 minutes; a deluxe full valet up to 2 hours.
 
 There are plenty of options listed on marketplaces and directories, so a few checks go a long way:
 
-- **Reviews in volume.** Look for a long track record across more than one platform. Ecoverde has 560+ verified reviews averaging 5.0 across Google, Checkatrade, Bark, Trustindex, Facebook and Yell.
+- **Reviews in volume.** Look for a long track record across more than one platform. Ecoverde has 600+ verified reviews averaging 5.0 across Google, Checkatrade, Bark, Trustindex, Facebook and Yell.
 - **Insurance.** Ask for public liability cover — we are fully insured.
 - **Method.** Ask how they wash. If the answer does not include a pre-wash and two buckets, expect swirl marks.
 - **Products.** Biodegradable, pH-balanced products are kinder to paint, trim and the drains on your street.

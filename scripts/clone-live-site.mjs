@@ -223,6 +223,8 @@ for (const slug of slugs) {
   // the review marquee is filled client-side from src/content/clone/reviews (as on the live site)
 
   let html = main.html().trim().replace(/\n\s*\n+/g, "\n");
+  // Review count: the app says 600+ everywhere, whatever figure the live page currently shows.
+  html = html.replace(/(?<!£)\b5[0-9]0(<em>)?\+(?=[^0-9£]{0,40}reviews?\b)/gi, "600$1+");
   if (/\bassets\//.test(html.replace(/\/assets\//g, ""))) console.warn(slug, "has unrewritten asset path");
   pages[slug] = { ...head, jsonLd, html };
 }
