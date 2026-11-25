@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { AREA_BASES, REVIEWS, SITE, SOCIAL, areaHref, quoteHref, slugify } from "@/data/site";
 import { ArrowRight, ClockIcon, Logo, MailIcon, SocialIcon, StarIcon, WhatsAppIcon } from "./Icons";
-import { CallLink, FooterPhones, WhatsAppLink } from "./LocalContact";
+import { CallLink, FooterBusinessName, FooterPhones, WhatsAppLink } from "./LocalContact";
 
 const SERVICES_LINKS = [
   { label: "Valeting Service", href: "/services/valeting-service" },
@@ -143,7 +143,7 @@ export default function Footer() {
 
         <div className="ft__bottom">
           <p>
-            © {new Date().getFullYear()} {SITE.legalName}. All rights reserved.
+            © {new Date().getFullYear()} <FooterBusinessName />. All rights reserved.
           </p>
           <ul className="ft__legal">
             <li>

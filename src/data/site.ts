@@ -13,8 +13,23 @@ export const SITE = {
   email: "info@ecoverdevaleting.co.uk",
   hours: "Mon–Sun 7am–8pm",
   phones: [
-    { display: "07495 400369", tel: "+447495400369", label: "Brentford · Call or WhatsApp" },
-    { display: "07871 553827", tel: "+447871553827", label: "Ladbroke Grove · Call or WhatsApp" },
+    // area / page / googleName must match each Google Business Profile exactly.
+    {
+      display: "07495 400369",
+      tel: "+447495400369",
+      label: "Brentford · Call or WhatsApp",
+      area: "Brentford (TW8)",
+      page: "/car-valeting-brentford",
+      googleName: "Ecoverde Valeting & Detailing Service",
+    },
+    {
+      display: "07871 553827",
+      tel: "+447871553827",
+      label: "Ladbroke Grove · Call or WhatsApp",
+      area: "Ladbroke Grove (W10)",
+      page: "/ladbroke-grove-w10",
+      googleName: "Ecoverde Valeting Service",
+    },
   ],
   whatsapp: "447495400369",
   founder: "John Muriel",
@@ -37,7 +52,7 @@ export function whatsappLink(message = "Hi Ecoverde, I'd like a free quote for m
 }
 
 export const REVIEWS = {
-  total: "560+",
+  total: "595+",
   rating: "5.0",
   breakdown: [
     { source: "Google", count: 374 },
@@ -353,7 +368,7 @@ export const WHY = [
   {
     icon: "sparkle",
     title: "Meticulous, perfectionist finish",
-    text: "Attention to detail on every panel — the high standard that earns 560+ five-star reviews.",
+    text: "Attention to detail on every panel — the high standard that earns 595+ five-star reviews.",
   },
 ] as const;
 
@@ -381,7 +396,7 @@ export const STEPS = [
 ];
 
 export const STATS = [
-  { value: "560+", label: "Verified reviews" },
+  { value: "595+", label: "Verified reviews" },
   { value: "5.0★", label: "Average rating" },
   { value: "8+", label: "Years' experience" },
   { value: "100%", label: "Mobile & eco-friendly" },
@@ -444,7 +459,7 @@ export const FAQS = [
   },
   {
     q: "Where can I find a mobile car valeting service with great reviews nearby?",
-    a: "Ecoverde has earned 560+ five-star reviews across Google, Checkatrade, Bark, Facebook and Yell. We're Checkatrade verified and consistently praised for attention to detail, punctuality and professionalism.",
+    a: "Ecoverde has earned 595+ five-star reviews across Google, Checkatrade, Bark, Facebook and Yell. We're Checkatrade verified and consistently praised for attention to detail, punctuality and professionalism.",
   },
   {
     q: "Do you offer ceramic coating treatments?",

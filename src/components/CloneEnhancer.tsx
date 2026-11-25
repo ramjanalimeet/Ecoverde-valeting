@@ -215,7 +215,7 @@ export default function CloneEnhancer() {
               tiWidget.insertAdjacentHTML(
                 "beforeend",
                 '<div class="ti-placeholder"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>' +
-                  "<p><b>5.0 from 560+ verified reviews</b> on Trustindex — live across Google, Checkatrade, Bark, Facebook &amp; Yell.<br>" +
+                  "<p><b>5.0 from 595+ verified reviews</b> on Trustindex — live across Google, Checkatrade, Bark, Facebook &amp; Yell.<br>" +
                   '<a href="https://www.trustindex.io/reviews/www.ecoverdevaleting.co.uk" target="_blank" rel="noopener" style="color:var(--emerald);font-weight:600">Read all our reviews →</a></p></div>',
               );
             }
