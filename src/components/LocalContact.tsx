@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import { PRIMARY_PHONE, SITE, locationPhone, whatsappLink, type Phone } from "@/data/site";
-import { PhoneIcon } from "./Icons";
+import { ArrowRight, PhoneIcon } from "./Icons";
 
 /** The location page's own number, or null off location pages. */
 export function useLocationPhone(): Phone | null {
@@ -66,7 +66,9 @@ export function FooterPhones() {
           </span>
           <span>
             <span className="ft__area">
-              <Link href={p.page}>{p.area}</Link>:{" "}
+              <Link href={p.page} className="ft__more">
+                {p.area} <ArrowRight width={13} height={13} />
+              </Link>
             </span>
             <a href={`tel:${p.tel}`}>{p.display}</a>
             <small>Call or WhatsApp</small>
