@@ -14,7 +14,7 @@ export const SITE = {
   hours: "Mon–Sun 7am–8pm",
   phones: [
     { display: "07495 400369", tel: "+447495400369", label: "Brentford · Call or WhatsApp" },
-    { display: "07871 553827", tel: "+447871553827", label: "Ladbroke Grove" },
+    { display: "07871 553827", tel: "+447871553827", label: "Ladbroke Grove · Call or WhatsApp" },
   ],
   whatsapp: "447495400369",
   founder: "John Muriel",
@@ -22,8 +22,18 @@ export const SITE = {
 
 export const PRIMARY_PHONE = SITE.phones[0];
 
-export function whatsappLink(message = "Hi Ecoverde, I'd like a free quote for my car.") {
-  return `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(message)}`;
+export type Phone = (typeof SITE.phones)[number];
+/** Each base answers its own areas: Brentford (TW8) on 07495 400369, Ladbroke Grove (W10) on 07871 553827. */
+export const BASE_PHONES: Record<string, Phone> = {
+  brentford: SITE.phones[0],
+  "ladbroke-grove": SITE.phones[1],
+};
+
+/** wa.me digits for a phone, e.g. "+447871553827" → "447871553827". */
+export const waNumber = (p: Phone) => p.tel.replace(/\D/g, "");
+
+export function whatsappLink(message = "Hi Ecoverde, I'd like a free quote for my car.", phone?: Phone) {
+  return `https://wa.me/${phone ? waNumber(phone) : SITE.whatsapp}?text=${encodeURIComponent(message)}`;
 }
 
 export const REVIEWS = {
@@ -154,6 +164,25 @@ export const ALL_AREAS: Area[] = AREA_BASES.flatMap((b) => [
   ...b.areas.map((n) => ({ name: n, slug: slugify(n), base: b, isBase: false })),
 ]);
 export const areaHref = (slug: string) => LIVE_AREA_URLS[slug] ?? `/areas/${slug}`;
+
+/** Location page path (e.g. "/chelsea", "/areas/chelsea") → the base that covers it. */
+const BASE_BY_PATH: Record<string, string> = Object.fromEntries(
+  ALL_AREAS.flatMap((a) => [
+    [areaHref(a.slug), a.base.slug],
+    [`/areas/${a.slug}`, a.base.slug],
+  ]),
+);
+
+/**
+ * The phone (calls + WhatsApp) for a page: on a location page, that location's base number only;
+ * everywhere else null, meaning the site-wide default (PRIMARY_PHONE, both numbers in the footer).
+ */
+export function locationPhone(pathname: string | null | undefined): Phone | null {
+  if (!pathname) return null;
+  const path = pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
+  const base = BASE_BY_PATH[path];
+  return base ? BASE_PHONES[base] : null;
+}
 
 /** Link that preselects a service in the quote form. */
 export const quoteHref = (slug?: string) => (slug ? `/?service=${slug}#quote` : "/#quote");

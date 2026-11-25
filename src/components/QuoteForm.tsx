@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useId, useRef, useState, type DragEvent, type FormEvent } from "react";
-import { PET_OPTIONS, PRIMARY_PHONE, whatsappLink } from "@/data/site";
+import { PET_OPTIONS, whatsappLink } from "@/data/site";
 import {
   ACCEPT_ATTR,
   MAX_FILES,
@@ -15,6 +15,7 @@ import {
   type QuoteFields,
 } from "@/lib/quote";
 import { CheckIcon, CloseIcon, UploadIcon, WhatsAppIcon } from "./Icons";
+import { useContactPhone } from "./LocalContact";
 
 const EMPTY: QuoteFields = {
   name: "",
@@ -35,6 +36,7 @@ type Status = "idle" | "sending" | "success" | "error";
  * `preset` preselects a service; `nonce` changes each time the pop-up opens.
  */
 export default function QuoteForm({ preset, nonce, onClose }: { preset?: string | null; nonce?: number; onClose?: () => void }) {
+  const phone = useContactPhone();
   const [fields, setFields] = useState<QuoteFields>(EMPTY);
   const [photos, setPhotos] = useState<File[]>([]);
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -149,7 +151,7 @@ export default function QuoteForm({ preset, nonce, onClose }: { preset?: string 
         <div className="qf__success-actions">
           <a
             className="btn btn--whatsapp"
-            href={whatsappLink(`Hi John, I've just sent a quote request on your website — my name is ${sentName}.`)}
+            href={whatsappLink(`Hi John, I've just sent a quote request on your website — my name is ${sentName}.`, phone)}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -331,8 +333,8 @@ export default function QuoteForm({ preset, nonce, onClose }: { preset?: string 
         <div className="form-alert" role="alert">
           <p>{serverError}</p>
           <div>
-            <a href={`tel:${PRIMARY_PHONE.tel}`}>Call {PRIMARY_PHONE.display}</a> ·{" "}
-            <a href={whatsappLink()} target="_blank" rel="noopener noreferrer">
+            <a href={`tel:${phone.tel}`}>Call {phone.display}</a> ·{" "}
+            <a href={whatsappLink(undefined, phone)} target="_blank" rel="noopener noreferrer">
               WhatsApp us
             </a>
           </div>

@@ -4,7 +4,8 @@ import Link from "next/link";
 import { ArrowRight, PhoneIcon, WhatsAppIcon } from "@/components/Icons";
 import QuoteModal from "@/components/QuoteModal";
 import Tracker from "@/components/Tracker";
-import { PRIMARY_PHONE, quoteHref, whatsappLink } from "@/data/site";
+import { quoteHref } from "@/data/site";
+import { CallLink, WhatsAppLink } from "@/components/LocalContact";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import MobileBarReveal from "@/components/MobileBarReveal";
 import ResizeCalm from "@/components/ResizeCalm";
@@ -22,19 +23,19 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <Footer />
       <QuoteModal />
       <Tracker />
-      <a className="wa-fab" href={whatsappLink()} target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
+      <WhatsAppLink className="wa-fab" aria-label="Chat with us on WhatsApp">
         <WhatsAppIcon width={28} height={28} />
-      </a>
+      </WhatsAppLink>
       {/* Sticky action bar — phones & tablets only */}
       <nav className="mbar" aria-label="Quick contact">
-        <a className="mbar__btn" href={`tel:${PRIMARY_PHONE.tel}`}>
+        <CallLink className="mbar__btn">
           <PhoneIcon width={18} height={18} />
           <span>Call</span>
-        </a>
-        <a className="mbar__btn mbar__btn--wa" href={whatsappLink()} target="_blank" rel="noopener noreferrer">
+        </CallLink>
+        <WhatsAppLink className="mbar__btn mbar__btn--wa">
           <WhatsAppIcon width={18} height={18} />
           <span>WhatsApp</span>
-        </a>
+        </WhatsAppLink>
         <Link className="mbar__cta" href={quoteHref()}>
           Get a Free Quote <ArrowRight width={16} height={16} />
         </Link>
