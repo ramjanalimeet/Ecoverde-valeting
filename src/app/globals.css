@@ -1088,6 +1088,43 @@ textarea:where(:not(.lv *)) {
   height: 32px;
   width: auto;
 }
+/* clickable trust tiles: the link's ::after stretches over the whole tile */
+.hero__tile--link {
+  position: relative;
+  transition:
+    transform 250ms var(--ease),
+    box-shadow 250ms var(--ease);
+}
+.hero__tile-link {
+  color: inherit;
+  text-decoration: none;
+}
+.hero__tile-logo .hero__tile-link {
+  display: block;
+  line-height: 0;
+}
+.hero__tile-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+.hero__tile-link:focus-visible {
+  outline: none;
+}
+.hero__tile--link:has(.hero__tile-link:focus-visible) {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+@media (hover: hover) {
+  .hero__tile--link:hover {
+    transform: translateY(-2px);
+    box-shadow: rgba(0, 0, 0, 0.18) 0 6px 18px;
+  }
+}
+.hero__tile--link:active {
+  transform: scale(0.98);
+}
 .hero__scroll {
   position: absolute;
   left: 50%;
@@ -2234,6 +2271,13 @@ textarea:where(:not(.lv *)) {
   }
 }
 
+/* small phones: Get In Touch gets the full width so the email address doesn't break mid-word */
+@media (max-width: 480px) {
+  .ft__col:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
 /* Sticky action bar (phones & tablets) */
 .mbar {
   display: none;
@@ -2321,6 +2365,21 @@ textarea:where(:not(.lv *)) {
 }
 @media print {
   .mbar {
+    display: none !important;
+  }
+}
+
+/* Trustindex's floating "Excellent Service" badge (tagged by CloneEnhancer.tsx): sit above the sticky
+   contact bar while it is showing, instead of covering it. */
+@media (max-width: 960px) {
+  [data-ti-float] {
+    z-index: 40 !important;
+    transition: bottom 400ms var(--ease) !important;
+  }
+  html.mbar-on [data-ti-float] {
+    bottom: calc(84px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  html.modal-open [data-ti-float] {
     display: none !important;
   }
 }

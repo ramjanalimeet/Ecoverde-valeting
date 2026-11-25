@@ -21,6 +21,12 @@ export function Eyebrow({ children, center = false, light = false }: { children:
 }
 
 /* ------------------------------------------------------------------ Hero */
+// Trust tiles link out to the same verification pages as the live site.
+const TRUST_LINKS = {
+  reviews: "https://www.trustindex.io/reviews/www.ecoverdevaleting.co.uk",
+  chambers: "https://www.westlondonchambers.org.uk/",
+  checkatrade: "https://www.checkatrade.com/trades/ecoverdevaletingservice",
+};
 const HERO = {
   src: "/images/hero-green-bmw-valeted-west-london-1440.webp",
   sizes: "100vw",
@@ -112,14 +118,21 @@ export function Hero() {
             </a>
           </div>
           <ul className="hero__tiles">
-            <li>
+            <li className="hero__tile--link">
               <Stars size={11} />
-              <span>
+              <a
+                className="hero__tile-link"
+                href={TRUST_LINKS.reviews}
+                target="_blank"
+                rel="noopener"
+                title="Read all our reviews on Trustindex"
+                aria-label={`${REVIEWS.rating} from ${REVIEWS.total} reviews. Read them all on Trustindex`}
+              >
                 <strong>
                   {REVIEWS.rating} from {REVIEWS.total} reviews
                 </strong>
                 <small>Google · Checkatrade · Bark</small>
-              </span>
+              </a>
             </li>
             <li>
               <span>
@@ -127,11 +140,21 @@ export function Hero() {
                 <small>Fully insured &amp; verified</small>
               </span>
             </li>
-            <li className="hero__tile-logo">
-              <Image src="/images/west-london-chambers-of-commerce-member.webp" alt="Member of West London Chambers of Commerce" width={152} height={36} loading="eager" />
+            <li className="hero__tile-logo hero__tile--link">
+              <a className="hero__tile-link" href={TRUST_LINKS.chambers} target="_blank" rel="noopener">
+                <Image src="/images/west-london-chambers-of-commerce-member.webp" alt="Member of West London Chambers of Commerce" width={152} height={36} loading="eager" />
+              </a>
             </li>
-            <li className="hero__tile-logo">
-              <Image src="/images/checkatrade-approved-member.webp" alt="Checkatrade approved member" width={120} height={36} loading="eager" />
+            <li className="hero__tile-logo hero__tile--link">
+              <a
+                className="hero__tile-link"
+                href={TRUST_LINKS.checkatrade}
+                target="_blank"
+                rel="noopener"
+                title="Click to verify our status on Checkatrade"
+              >
+                <Image src="/images/checkatrade-approved-member.webp" alt="Checkatrade approved member — verify our status" width={120} height={36} loading="eager" />
+              </a>
             </li>
           </ul>
         </div>
