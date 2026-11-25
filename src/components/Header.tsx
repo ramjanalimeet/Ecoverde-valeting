@@ -217,13 +217,13 @@ export default function Header() {
                     <ChevronDown width={14} height={14} />
                   </button>
                   {mega ? (
-                    <div id={id} className={`mega mega--${mega}`} hidden={!isOpen}>
+                    <div id={id} className={`mega mega--${mega}${isOpen ? " is-open" : ""}`} inert={!isOpen}>
                       <div className="mega__scroll">
                         {mega === "services" ? <ServicesMenu onNavigate={close} /> : <AreasMenu onNavigate={close} />}
                       </div>
                     </div>
                   ) : (
-                    <ul id={id} className="dropdown" hidden={!isOpen}>
+                    <ul id={id} className={`dropdown${isOpen ? " is-open" : ""}`} inert={!isOpen}>
                       {item.children?.map((c) => (
                         <li key={c.label}>
                           <Link href={c.href} onClick={close}>
