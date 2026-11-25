@@ -7,8 +7,6 @@ import data from "@/content/clone/reviews.json";
  * The live site's page interactions (assets/js/main.js), limited to the page body so the
  * app's own header, footer and quote pop-up are left alone. Re-runs on every client navigation.
  */
-const LIVE_HOST = /(^|\.)ecoverdevaleting\.co\.uk$/i;
-
 function reviewCard(r: { n: string; d: string; t: string }) {
   const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
   return (
@@ -186,11 +184,11 @@ export default function CloneEnhancer() {
       }),
     );
 
-    /* ---- Trustindex (domain-locked: real widget only on the live domain, fallback elsewhere) ---- */
+    /* ---- Trustindex: review carousel + "Excellent Service" certificate badge, on every host.
+       If Trustindex refuses to render (e.g. a domain not listed in its dashboard), a fallback card shows instead. ---- */
     const tiWidget = root.querySelector<HTMLElement>("#ti-widget");
     if (tiWidget) {
       const tiCert = root.querySelector<HTMLElement>("#ti-certificate");
-      const onRealDomain = LIVE_HOST.test(location.hostname);
       const load = (el: HTMLElement | null, attr: string) => {
         const url = el?.getAttribute(attr);
         if (!el || !url) return;
@@ -205,10 +203,8 @@ export default function CloneEnhancer() {
       const start = () => {
         if (started) return;
         started = true;
-        if (onRealDomain) {
-          load(tiCert, "data-ti-cert");
-          load(tiWidget, "data-ti-widget");
-        }
+        load(tiCert, "data-ti-cert");
+        load(tiWidget, "data-ti-widget");
         timer = setTimeout(
           () => {
             if (tiWidget.offsetHeight < 120 && !tiWidget.querySelector(".ti-placeholder")) {
@@ -220,7 +216,7 @@ export default function CloneEnhancer() {
               );
             }
           },
-          onRealDomain ? 5000 : 250,
+          6000,
         );
       };
       const tiIo = new IntersectionObserver(
