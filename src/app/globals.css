@@ -2108,6 +2108,16 @@ textarea:where(:not(.lv *)) {
 .ft__contact a:hover:where(:not(.lv *)) {
   color: var(--green-light);
 }
+.ft__contact .ft__area {
+  font-size: 0.76rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+.ft__contact .ft__area a:where(:not(.lv *)) {
+  font-weight: 600;
+  color: var(--green-light);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
 .ft__contact small:where(:not(.lv *)) {
   font-size: 0.72rem;
   color: rgba(255, 255, 255, 0.6);
