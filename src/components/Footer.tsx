@@ -6,11 +6,11 @@ import { CallLink, FooterPhones, WhatsAppLink } from "./LocalContact";
 const SERVICES_LINKS = [
   { label: "Valeting Service", href: "/services/valeting-service" },
   { label: "Car Detailing", href: "/services/car-detailing" },
-  { label: "Mobile Car Wash", href: "/services/mobile-car-wash" },
   { label: "Car Restoration", href: "/services/car-restoration" },
   { label: "Ceramic Coating", href: "/services/ceramic-coating" },
   { label: "Paint Correction", href: "/services/paint-correction" },
   { label: "Interior Deep Clean", href: "/services/interior-deep-clean" },
+  { label: "Exterior Hand Wash & Protection", href: "/services/mobile-car-wash" },
   { label: "Gift Vouchers", href: "/services/gift-vouchers" },
 ];
 

@@ -59,7 +59,7 @@ export const slugify = (s: string) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 
-/** The four main service categories (cards at the top of the Services menu). */
+/** The four service categories (cards at the top of the Services menu). */
 export const SERVICE_CATEGORIES = [
   {
     slug: "valeting-service",
@@ -74,16 +74,17 @@ export const SERVICE_CATEGORIES = [
     image: "/images/menu-car-detailing-machine-polish.webp",
   },
   {
-    slug: "mobile-car-wash",
-    label: "Mobile Car Wash",
-    blurb: "A quick, eco-friendly exterior wash & refresh — we come to you.",
-    image: "/images/menu-mobile-car-wash-pressure-rinse.webp",
-  },
-  {
     slug: "car-restoration",
     label: "Car Restoration",
     blurb: "Alloy refurb, dent & scuff repair and bodywork respray.",
     image: "/images/menu-alloy-wheel-restoration.webp",
+  },
+  {
+    // Listed after valeting & detailing on purpose: it's an add-on, not the headline service.
+    slug: "mobile-car-wash",
+    label: "Exterior Hand Wash & Protection",
+    blurb: "A careful snow-foam hand wash with a protective finish — we come to you.",
+    image: "/images/menu-mobile-car-wash-pressure-rinse.webp",
   },
 ];
 
@@ -267,11 +268,11 @@ export const SERVICES: ServiceCard[] = [
     page: "car-restoration",
   },
   {
-    title: "Lease Return & Post-Purchase Valet",
+    title: "Lease Return Valet",
     price: "From £289",
     category: "Valeting",
     description:
-      "Handing a lease back? We deep clean the areas inspectors check to help you avoid end-of-lease charges. Just bought used? A full reset removes the previous owner's dirt, stains & odours.",
+      "Handing a lease back? We deep clean the areas inspectors check to help you avoid end-of-lease charges, with a showroom-ready finish for the handback inspection.",
     image: "/images/snow-foam-valet-brentford.webp",
     alt: "Valeter spraying eco-friendly snow foam over a car before a lease return valet",
     formValue: "lease-return-valet",
