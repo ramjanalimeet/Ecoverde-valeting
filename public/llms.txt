@@ -8,6 +8,28 @@
 - Bases: Ladbroke Grove (W10) and Brentford (TW8)
 - To get a quote: use "Get a Free Quote" on any page, call, or message on WhatsApp
 
+## Prices (from)
+
+Every quote is tailored to the car's size and condition; these are starting prices.
+
+- Mini valet: from £109
+- Full (deluxe) valet: from £189
+- Interior deep clean (includes steam): from £189
+- Used car valet (second-hand cars): from £189
+- Machine polishing (single stage): from £189
+- Soft-top cleaning & proofing: from £189
+- Car detailing: from £289
+- Paint correction & protection (multi-stage): from £289
+- Supercar detailing: from £289
+- Classic car detailing: from £289
+- Lease return valet: from £289
+- Ultimate pre-sale valet: from £289
+- Ceramic coating (IGL, 1 to 5 years' protection): from £399
+- Leather & upholstery detailing (add-on): from £95
+- Exterior hand wash & protection: from £40
+- Mould removal, ozone, stain & odour, steam sanitisation: price on request, quoted from photos
+- Alloy wheels, dents, respray, scratch removal: price on request, quoted from photos; deeper work at our partner bodyshop
+
 ## Company
 
 - [Mobile Car Valeting & Detailing West London](https://ecoverdevaleting.co.uk/): Eco-friendly mobile car valeting & detailing across West London. Full valets, ceramic coating, paint protection & interior deep cleans at your door. Free quote.
@@ -19,17 +41,16 @@
 
 - [Mobile Car Valeting Service West London](https://ecoverdevaleting.co.uk/valeting-service): Eco-friendly mobile car valeting in West London. Mini, full & deluxe valets with interior deep clean and steam. From £109. We come to you.
 - [Car Detailing & Ceramic Coating West London](https://ecoverdevaleting.co.uk/car-detailing): Professional mobile car detailing in West London — paint correction, machine polishing & ceramic coating. From £289. We come to you. 5.0 from 560+ reviews.
-- [Mobile Car Wash West London](https://ecoverdevaleting.co.uk/mobile-car-wash): Eco-friendly mobile car wash in West London. Exterior & interior wash, premium wash & shine. From £40. We come to you — 5.0 from 560+ reviews.
-- [Car Restoration & Alloy Wheel Refurbishment West London](https://ecoverdevaleting.co.uk/car-restoration): Mobile car restoration in West London — alloy wheel refurbishment, dent & scuff repair, bodywork respray and paint restoration. Free, no-obligation quote.
+- [Car Restoration & Alloy Wheel Refurbishment West London](https://ecoverdevaleting.co.uk/car-restoration): Car restoration in West London — alloy wheel refurbishment, dent & scuff repair, bodywork respray and paint restoration. Light scratches are polished out or touched in at your home; deeper damage goes to our partner bodyshop (we collect and return the car). Price on request, quoted from photos.
 - [Car Ceramic Coating](https://ecoverdevaleting.co.uk/car-ceramic-coating): Car ceramic coating protects your paint from dirt, scratches, and weather. Enjoy a long-lasting shine and an easier way to keep your car looking clean.
 - [Paint Correction in London](https://ecoverdevaleting.co.uk/paint-correction-london): Swirl marks that seem impossible to ignore, you might wonder whether you need a full respray or if a paint correction London would do the job...
 - [Car Interior Deep Clean West London](https://ecoverdevaleting.co.uk/car-interior-deep-clean-west-london): Stains, bad odors, or grimy seats? Ecoverde's car interior deep clean in West London uses steam & eco products to restore your cabin. Book now.
 - [Car Mould & Odour Removal London](https://ecoverdevaleting.co.uk/car-interior-mould-removal): Mobile car mould & odour removal in West London — eco-friendly steam sanitisation, anti-fungal treatment and ozone to eliminate damp and stubborn smells.
 - [Car Lease Return Valet London](https://ecoverdevaleting.co.uk/car-lease-return-valet-in-london): Mobile lease return valet across West London. A deep clean focused on the areas leasing companies inspect, helping you avoid end-of-lease charges.
 - [Ultimate Pre-Sale Valet London](https://ecoverdevaleting.co.uk/ultimate-pre-sale-valet-in-london): Mobile pre-sale valet & detail in West London. Machine polish, ceramic-spray protection and a showroom finish to help your car sell faster. From £289.
-- [Used Car Valet & Steam Sanitisation](https://ecoverdevaleting.co.uk/used-car-valet-london): Just bought a used car? Our mobile deep clean valet includes steam sanitisation and odour removal. Eco-friendly, across West London. Get a free quote.
+- [Used Car Valet & Steam Sanitisation](https://ecoverdevaleting.co.uk/used-car-valet-london): Have you purchased a second-hand car? Second-hand car valeting from £189 — a mobile deep clean with steam sanitisation and odour removal. Eco-friendly, across West London.
 - [Monthly Car Valeting Plans London](https://ecoverdevaleting.co.uk/monthly-car-valeting-service): Keep your car spotless year-round with a monthly mobile valeting plan in West London. Scheduled visits, priority booking and a discounted per-visit rate.
-- [Supercar Detailing London](https://ecoverdevaleting.co.uk/supercar-detailing): Discreet mobile supercar & luxury car detailing across West London. Ferrari, McLaren, Lamborghini and more. Paint-safe, fully insured. From £349.
+- [Supercar Detailing London](https://ecoverdevaleting.co.uk/supercar-detailing): Discreet mobile supercar & luxury car detailing across West London. Ferrari, McLaren, Lamborghini and more. Paint-safe, fully insured. From £289.
 - [Classic Car Detailing London](https://ecoverdevaleting.co.uk/classic-car-detailing): Specialist mobile classic & vintage car detailing in West London. Period-correct, paint-safe products and gentle techniques for original finishes. From £289.
 - [Car Leather & Upholstery Detailing London](https://ecoverdevaleting.co.uk/car-leather-upholstery-detailing): Mobile car leather & upholstery detailing in West London — deep clean, stain & dye-transfer removal, condition and protect. Eco-friendly, pH-balanced. From £95.
 - [Soft-Top Cleaning & Proofing](https://ecoverdevaleting.co.uk/soft-top-cleaning-proofing-in-london): Professional soft-top cleaning and proofing services in West London. Eco-friendly, mobile solutions for your convertible. Soft-Top Cleaning & Proofing.
@@ -38,20 +59,21 @@
 - [Bumper Scuff & Car Scratch Repair London](https://ecoverdevaleting.co.uk/bumper-scuff-repair): Mobile bumper scuff & car scratch repair in West London — colour-matched and repaired in place, no bumper replacement. Fast, tidy, fully insured. Free quote.
 - [Car Bodywork Repair & Paint Respraying London](https://ecoverdevaleting.co.uk/bodywork-paint-respraying-london): Professional bodywork repair & paint respraying in West London — colour-matched panel resprays that restore damaged or faded paintwork to a factory-look finish.
 - [Fleet & Commercial Vehicle Valeting London Service](https://ecoverdevaleting.co.uk/fleet-and-commercial-vehicle-valeting): Fleet and commercial vehicle valeting is not just about keeping your vehicles spotless; it’s also a vital part of maintaining their condition...
+- [Exterior Hand Wash & Protection West London](https://ecoverdevaleting.co.uk/mobile-car-wash): Careful exterior hand wash with a snow-foam pre-wash and a protective finish, at your home or workplace in West London. From £40. An add-on to our valeting and detailing services.
 - [Car Valeting Gift Vouchers London](https://ecoverdevaleting.co.uk/gift-vouchers): Car valeting and detailing gift vouchers across West London. Open value cards from £25, ceramic coating experiences, wedding and corporate vouchers. Personalised and sent by email.
 
 ## Service areas
 
-- [Car Valeting, Detailing & Car Wash Ladbroke Grove W10](https://ecoverdevaleting.co.uk/ladbroke-grove-w10): Mobile car valeting, detailing and car wash in Ladbroke Grove (W10). Eco-friendly and fully mobile, we come to your door. From £109. Free quote.
-- [Mobile Car Valeting in Brentford, TW8 — We Come to You](https://ecoverdevaleting.co.uk/car-valeting-brentford): Professional mobile car valeting in Brentford, TW8 — eco-friendly valeting, detailing, mobile car wash & restoration. Checkatrade verified. We come to you.
-- [Mobile Car Valeting & Detailing in Chiswick W4](https://ecoverdevaleting.co.uk/chiswick): Ecoverde Valeting provides professional mobile car wash and cleaning services in Chiswick, bringing high-quality results directly to your doorstep. Book Now
+- [Mobile Car Valeting & Detailing Ladbroke Grove W10](https://ecoverdevaleting.co.uk/ladbroke-grove-w10): Mobile car valeting and detailing in Ladbroke Grove (W10). Eco-friendly and fully mobile, we come to your door. Valeting from £109. Free quote.
+- [Mobile Car Valeting in Brentford, TW8 — We Come to You](https://ecoverdevaleting.co.uk/car-valeting-brentford): Professional mobile car valeting and detailing in Brentford, TW8 — eco-friendly valets, detailing & restoration. Checkatrade verified. From £109. We come to you.
+- [Mobile Car Valeting & Detailing in Chiswick W4](https://ecoverdevaleting.co.uk/chiswick): Professional mobile car valeting and detailing in Chiswick W4, brought to your doorstep by Ecoverde Valeting. Valeting from £109. Book a free quote.
 - [Mobile Car Valeting & Detailing in Ealing. Book Now!](https://ecoverdevaleting.co.uk/ealing): Ecoverde provides a professional mobile car valeting and detailing service in Ealing, bringing high-quality results directly to your doorstep. Book Now!
 - [Mobile Car Valeting Kensington W8](https://ecoverdevaleting.co.uk/mobile-car-valeting-kensington): Premium mobile car valeting and detailing in Kensington W8, SW7 & W14. We come to your home or office — Mobile car valeting kensington.
 - [Mobile Car Valeting Notting Hill W11](https://ecoverdevaleting.co.uk/mobile-car-valeting-notting-hill): Premium mobile car valeting and detailing in Notting Hill W11, Portobello Road & Holland Park. Eco-friendly, 5-star rated. We come to you.
 - [Mobile Car Detailing Richmond TW9](https://ecoverdevaleting.co.uk/mobile-car-detailing-richmond): Mobile car detailing and valeting in Richmond, TW9 and TW10. Doorstep service near Richmond Park, the Green and Richmond Hill. Free quote.
 - [Mobile Car Valeting Hammersmith W6](https://ecoverdevaleting.co.uk/mobile-car-valeting-hammersmith): Eco-friendly mobile car valeting & detailing in Hammersmith W6. Full valets, ceramic coating & interior deep cleans at your door. Get a free quote.
-- [Mobile Car Valeting & Car Wash in Fulham SW6](https://ecoverdevaleting.co.uk/mobile-car-wash-fulham): Mobile car valeting, hand car wash and detailing in Fulham SW6, from Parsons Green to Sands End. We bring our own water and power. Get a free quote.
-- [Mobile Car Valeting & Car Wash in Chelsea SW3](https://ecoverdevaleting.co.uk/chelsea): Looking for a mobile car wash in Chelsea & the surrounding areas? At Ecoverde Valeting, we're offering the ultimate car wash, valeting, and detailing services.
+- [Mobile Car Valeting & Detailing in Fulham SW6](https://ecoverdevaleting.co.uk/mobile-car-wash-fulham): Mobile car valeting and detailing in Fulham SW6, from Parsons Green to Sands End. We bring our own water and power. Valeting from £109. Free quote.
+- [Mobile Car Valeting & Detailing in Chelsea SW3](https://ecoverdevaleting.co.uk/chelsea): Mobile car valeting and detailing in Chelsea SW3. Eco-friendly and fully mobile, we come to your home or office. Valeting from £109. Free quote.
 
 ## Guides
 

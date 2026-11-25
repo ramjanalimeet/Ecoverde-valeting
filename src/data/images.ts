@@ -10,7 +10,7 @@ export const PHOTOS = {
 
   menuInterior: p("menu-valeting-clean-car-interior.webp", 440, 308, "Spotless luxury car interior with leather seats and wood trim after a valet", "Clean luxury interior"),
   menuPolish: p("menu-car-detailing-machine-polish.webp", 440, 308, "Machine polisher bringing a deep gloss to dark blue paintwork", "Machine polish to a deep gloss"),
-  menuRinse: p("menu-mobile-car-wash-pressure-rinse.webp", 440, 308, "Pressure rinse lifting snow foam off a blue car during a mobile car wash", "Mobile wash rinse"),
+  menuRinse: p("menu-mobile-car-wash-pressure-rinse.webp", 440, 308, "Pressure rinse lifting snow foam off a blue car during an exterior hand wash", "Mobile wash rinse"),
   menuWheel: p("menu-alloy-wheel-restoration.webp", 440, 308, "Gloved hands cleaning a refurbished multi-spoke alloy wheel", "Alloy wheel restoration"),
 
   handWash: p("hand-wash-mini-full-valet.webp", 800, 534, "Ecoverde valeter hand-washing a black car with a sheepskin wash mitt during a mobile valet", "Hand wash during a full valet"),
