@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { AREA_BASES, PRIMARY_PHONE, REVIEWS, SITE, SOCIAL, areaHref, quoteHref, slugify, whatsappLink } from "@/data/site";
-import { ArrowRight, ClockIcon, Logo, MailIcon, PhoneIcon, SocialIcon, StarIcon, WhatsAppIcon } from "./Icons";
+import { AREA_BASES, REVIEWS, SITE, SOCIAL, areaHref, quoteHref, slugify } from "@/data/site";
+import { ArrowRight, ClockIcon, Logo, MailIcon, SocialIcon, StarIcon, WhatsAppIcon } from "./Icons";
+import { CallLink, FooterPhones, WhatsAppLink } from "./LocalContact";
 
 const SERVICES_LINKS = [
   { label: "Valeting Service", href: "/services/valeting-service" },
@@ -67,9 +68,9 @@ export default function Footer() {
             <Link className="btn btn--white" href={quoteHref()}>
               Get a Free Quote <ArrowRight width={16} height={16} />
             </Link>
-            <a className="btn btn--ghost" href={whatsappLink()} target="_blank" rel="noopener noreferrer">
+            <WhatsAppLink className="btn btn--ghost">
               <WhatsAppIcon width={16} height={16} /> WhatsApp
-            </a>
+            </WhatsAppLink>
           </div>
         </div>
 
@@ -113,17 +114,7 @@ export default function Footer() {
           <div className="ft__col">
             <h2 className="ft__title">Get In Touch</h2>
             <ul className="ft__contact">
-              {SITE.phones.map((p) => (
-                <li key={p.tel}>
-                  <span className="ft__icon">
-                    <PhoneIcon width={15} height={15} />
-                  </span>
-                  <span>
-                    <a href={`tel:${p.tel}`}>{p.display}</a>
-                    <small>{p.label}</small>
-                  </span>
-                </li>
-              ))}
+              <FooterPhones />
               <li>
                 <span className="ft__icon">
                   <MailIcon width={15} height={15} />
@@ -162,7 +153,7 @@ export default function Footer() {
               <Link href="/cancellation-refund-policy">Cancellation &amp; Refund Policy</Link>
             </li>
             <li>
-              <a href={`tel:${PRIMARY_PHONE.tel}`}>Call {PRIMARY_PHONE.display}</a>
+              <CallLink />
             </li>
           </ul>
         </div>

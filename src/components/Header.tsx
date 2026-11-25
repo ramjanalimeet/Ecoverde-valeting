@@ -7,7 +7,6 @@ import { useEffect, useRef, useState } from "react";
 import {
   AREA_BASES,
   NAV,
-  PRIMARY_PHONE,
   SERVICE_CATEGORIES,
   SERVICE_GROUPS,
   areaHref,
@@ -16,6 +15,7 @@ import {
   slugify,
 } from "@/data/site";
 import { ArrowRight, ChevronDown, CloseIcon, Logo, MenuIcon, PhoneIcon } from "./Icons";
+import { useContactPhone } from "./LocalContact";
 
 function ServicesMenu({ onNavigate }: { onNavigate: () => void }) {
   return (
@@ -101,6 +101,7 @@ export default function Header() {
   const menuBtnRef = useRef<HTMLButtonElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const phone = useContactPhone();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -240,14 +241,14 @@ export default function Header() {
         </nav>
 
         <div className="header__actions">
-          <a className="header__phone" href={`tel:${PRIMARY_PHONE.tel}`}>
+          <a className="header__phone" href={`tel:${phone.tel}`}>
             <PhoneIcon width={16} height={16} />
-            <span>{PRIMARY_PHONE.display}</span>
+            <span>{phone.display}</span>
           </a>
           <Link className="btn btn--sm header__book" href={quoteHref()} onClick={close}>
             Book Now
           </Link>
-          <a className="icon-btn header__call-mobile" href={`tel:${PRIMARY_PHONE.tel}`} aria-label={`Call ${PRIMARY_PHONE.display}`}>
+          <a className="icon-btn header__call-mobile" href={`tel:${phone.tel}`} aria-label={`Call ${phone.display}`}>
             <PhoneIcon />
           </a>
           <button
@@ -358,8 +359,8 @@ export default function Header() {
           <Link className="btn btn--primary btn--block" href={quoteHref()} onClick={close}>
             Get a Free Quote
           </Link>
-          <a className="btn btn--outline btn--block" href={`tel:${PRIMARY_PHONE.tel}`}>
-            <PhoneIcon width={18} height={18} /> Call {PRIMARY_PHONE.display}
+          <a className="btn btn--outline btn--block" href={`tel:${phone.tel}`}>
+            <PhoneIcon width={18} height={18} /> Call {phone.display}
           </a>
         </div>
       </div>
