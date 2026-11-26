@@ -1128,19 +1128,23 @@ textarea:where(:not(.lv *)) {
 /* 5th trust tile: "Fully Insured" — full-width row under the 2 × 2, opens the certificate pop-up */
 .hero__tiles li.hero__tile-insured {
   grid-column: 1 / -1;
-  gap: 10px;
-  padding-block: 7px;
-  background: linear-gradient(100deg, #fff 0%, #fff 55%, #f2faf5 100%);
-  box-shadow: inset 0 0 0 1px rgba(23, 123, 83, 0.14);
+  gap: 12px;
+  padding: 8px 10px 8px 12px;
+  /* thin gold → green → navy frame, like the "Fully Insured" badge */
+  border: 1px solid transparent;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(100deg, #e0a823 0%, #3e9b5c 50%, #17345a 100%) border-box;
 }
 .insured__shield {
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #fff8e6 0%, #e8f6ee 100%);
+  line-height: 0;
+}
+.insured__shield svg {
+  width: 34px;
+  height: auto;
 }
 .insured__btn {
   flex: 1;
@@ -1157,10 +1161,23 @@ textarea:where(:not(.lv *)) {
   cursor: pointer;
 }
 .insured__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
   min-width: 0;
 }
-.insured__narrow {
-  display: none;
+.hero__tiles .insured__title {
+  font-size: 0.86rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: #17345a;
+}
+.hero__tiles .insured__sub {
+  font-size: 0.66rem;
+  font-weight: 600;
+  color: #3d5670;
 }
 /* phone-only compact versions of the first two trust tiles */
 .hero__narrow {
@@ -1202,21 +1219,23 @@ textarea:where(:not(.lv *)) {
 .insured__cta {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  gap: 6px;
   flex-shrink: 0;
-  padding: 6px 11px;
+  padding: 7px 13px;
   border-radius: var(--r-pill);
-  background: linear-gradient(100deg, #c99a1c 0%, #26a06a 55%, #147b72 100%);
+  background: linear-gradient(100deg, #dba322 0%, #3a9a55 52%, #17345a 100%);
   color: #fff;
   font-size: 0.64rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-weight: 800;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   white-space: nowrap;
+  box-shadow: rgba(23, 52, 90, 0.25) 0 4px 10px -4px;
   transition: filter 250ms var(--ease);
 }
 .hero__tile-insured:hover .insured__cta {
-  filter: brightness(1.06) saturate(1.1);
+  filter: brightness(1.08) saturate(1.1);
 }
 
 /* certificate pop-up (shares the quote pop-up's dialog animations) */
@@ -3163,24 +3182,30 @@ textarea:where(:not(.lv *)) {
     max-width: 100%;
     object-fit: contain;
   }
+  /* insurance badge: shield on the left, title / line / full-width "View Certificate" pill stacked */
   .hero__tiles li.hero__tile-insured {
-    min-height: 56px;
-    padding: 8px 10px 8px 12px;
-    gap: 12px;
+    min-height: 0;
+    padding: 12px 14px;
+    gap: 14px;
   }
-  .insured__shield {
-    width: 34px;
-    height: 34px;
+  .insured__shield svg {
+    width: 46px;
   }
-  .insured__wide {
-    display: none;
+  .insured__btn {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
   }
-  .insured__narrow {
-    display: inline;
+  .hero__tiles .insured__title {
+    font-size: 1.02rem;
+  }
+  .hero__tiles .insured__sub {
+    font-size: 0.72rem;
+    white-space: nowrap;
   }
   .insured__cta {
-    font-size: 0.66rem;
-    padding: 7px 12px;
+    padding: 8px 14px;
+    font-size: 0.7rem;
   }
 }
 @media (max-width: 360px) {

@@ -43,16 +43,19 @@ export default function InsuranceCertificate() {
   return (
     <li className="hero__tile--link hero__tile-insured">
       <span className="insured__shield" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <svg viewBox="0 0 48 56" width="40" height="46" fill="none" strokeLinecap="round" strokeLinejoin="round">
           <defs>
-            <linearGradient id="insured-grad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stopColor="#d9a520" />
-              <stop offset="0.55" stopColor="#2ca56f" />
-              <stop offset="1" stopColor="#147c71" />
+            <linearGradient id="insured-grad" x1="0" y1="0" x2="0.35" y2="1">
+              <stop offset="0" stopColor="#e0a823" />
+              <stop offset="0.55" stopColor="#5d9440" />
+              <stop offset="1" stopColor="#14695f" />
             </linearGradient>
           </defs>
-          <path stroke="url(#insured-grad)" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-          <path stroke="url(#insured-grad)" d="m8.5 12 2.5 2.5 4.5-5" />
+          {/* outer + inner shield outline, sparkle and tick (after the "Fully Insured" badge) */}
+          <path stroke="url(#insured-grad)" strokeWidth="2.6" d="M24 2.5 44.5 8.5v18c0 13.5-9 22.5-20.5 27C12.5 49 3.5 40 3.5 26.5v-18z" />
+          <path stroke="url(#insured-grad)" strokeWidth="1.8" d="M24 8 39.5 12.5v14c0 10.5-6.8 17.6-15.5 21.3C15.3 44.1 8.5 37 8.5 26.5v-14z" />
+          <path fill="url(#insured-grad)" d="m21 15.5 1.2 3.3 3.3 1.2-3.3 1.2L21 24.5l-1.2-3.3-3.3-1.2 3.3-1.2z" />
+          <path stroke="url(#insured-grad)" strokeWidth="3.2" d="m16.5 30 5.5 6 11-14" />
         </svg>
       </span>
       <button
@@ -63,17 +66,12 @@ export default function InsuranceCertificate() {
         title="View our public liability insurance certificate"
       >
         <span className="insured__text">
-          <strong>
-            Fully Insured<span className="insured__wide"> · £1m Public Liability</span>
-          </strong>
-          <small>
-            <span className="insured__wide">Underwritten by U K Insurance Ltd (Direct Line)</span>
-            <span className="insured__narrow">£1m public liability cover</span>
-          </small>
+          <strong className="insured__title">Fully Insured</strong>
+          <small className="insured__sub">£1m Public Liability Protected</small>
         </span>
         <span className="insured__cta">
-          View<span className="insured__wide"> certificate</span>
-          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          View Certificate
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M7 17 17 7M8 7h9v9" />
           </svg>
         </span>
