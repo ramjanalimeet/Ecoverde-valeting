@@ -1130,17 +1130,42 @@ textarea:where(:not(.lv *)) {
   grid-column: 1 / -1;
   gap: 10px;
   padding-block: 7px;
-  background: linear-gradient(100deg, #fff 0%, #fff 55%, #f2faf5 100%);
-  box-shadow: inset 0 0 0 1px rgba(23, 123, 83, 0.14);
+  overflow: hidden;
+  /* hairline gold → green → teal frame over a white-to-mint fill */
+  border: 1px solid transparent;
+  background:
+    linear-gradient(105deg, #fff 0%, #fff 48%, #eaf7f0 100%) padding-box,
+    linear-gradient(100deg, rgba(219, 163, 34, 0.6) 0%, rgba(38, 160, 106, 0.45) 50%, rgba(20, 123, 114, 0.6) 100%) border-box;
+  box-shadow: rgba(8, 46, 33, 0.35) 0 8px 18px -12px;
+}
+/* soft light sweep across the tile on hover */
+.hero__tile-insured::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.75) 50%, transparent 65%);
+  transform: translateX(-110%);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .hero__tile-insured:hover::before {
+    transform: translateX(110%);
+    transition: transform 900ms var(--ease);
+  }
 }
 .insured__shield {
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #fff8e6 0%, #e8f6ee 100%);
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  /* gradient ring around a soft cream-to-mint inside */
+  border: 1.5px solid transparent;
+  background:
+    linear-gradient(135deg, #fffaf0 0%, #ecf8f1 100%) padding-box,
+    linear-gradient(135deg, #e0a823 0%, #26a06a 55%, #147b72 100%) border-box;
+  box-shadow: rgba(23, 123, 83, 0.45) 0 4px 10px -5px;
   line-height: 0;
 }
 .insured__shield svg {
@@ -1168,8 +1193,15 @@ textarea:where(:not(.lv *)) {
   min-width: 0;
 }
 .hero__tiles .insured__title {
-  font-size: 0.76rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.78rem;
   color: var(--heading);
+}
+.insured__tick {
+  flex-shrink: 0;
+  color: var(--green-bright);
 }
 .hero__tiles .insured__sub {
   font-size: 0.64rem;
@@ -1239,19 +1271,35 @@ textarea:where(:not(.lv *)) {
   justify-content: center;
   gap: 5px;
   flex-shrink: 0;
-  padding: 6px 11px;
+  padding: 5px 5px 5px 12px;
   border-radius: var(--r-pill);
   background: linear-gradient(100deg, #c99a1c 0%, #26a06a 55%, #147b72 100%);
   color: #fff;
-  font-size: 0.64rem;
+  font-size: 0.62rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   white-space: nowrap;
+  text-shadow: rgba(0, 0, 0, 0.12) 0 1px 1px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    rgba(20, 123, 114, 0.55) 0 5px 12px -6px;
   transition: filter 250ms var(--ease);
+}
+.insured__arrow {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.24);
+  transition: transform 250ms var(--ease);
 }
 .hero__tile-insured:hover .insured__cta {
   filter: brightness(1.08) saturate(1.1);
+}
+.hero__tile-insured:hover .insured__arrow {
+  transform: translate(1px, -1px);
 }
 
 /* certificate pop-up (shares the quote pop-up's dialog animations) */
@@ -3229,7 +3277,7 @@ textarea:where(:not(.lv *)) {
   }
   .insured__cta {
     grid-area: cta;
-    padding: 5px 10px;
+    padding: 4px 4px 4px 10px;
     font-size: 0.6rem;
   }
 }
@@ -3252,9 +3300,13 @@ textarea:where(:not(.lv *)) {
   }
   .insured__cta {
     gap: 4px;
-    padding: 5px 8px;
+    padding: 4px 4px 4px 8px;
     font-size: 0.56rem;
     letter-spacing: 0.02em;
+  }
+  .insured__arrow {
+    width: 16px;
+    height: 16px;
   }
 }
 

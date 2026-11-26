@@ -66,14 +66,22 @@ export default function InsuranceCertificate() {
         title="View our public liability insurance certificate"
       >
         <span className="insured__text">
-          <strong className="insured__title">Fully Insured</strong>
+          <strong className="insured__title">
+            Fully Insured
+            <svg className="insured__tick" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true">
+              <path fill="currentColor" d="M12 1.5l2.6 1.9 3.2-.1 1 3 2.6 1.9-1 3 1 3-2.6 1.9-1 3-3.2-.1L12 22.5l-2.6-1.9-3.2.1-1-3L2.6 15.8l1-3-1-3L5.2 7.9l1-3 3.2.1z" />
+              <path fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" d="m8 12.2 2.8 2.8L16 9.6" />
+            </svg>
+          </strong>
           <small className="insured__sub">Public Liability &amp; Treatment Risk Protected</small>
         </span>
         <span className="insured__cta">
           View Certificate
-          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d="M7 17 17 7M8 7h9v9" />
-          </svg>
+          <span className="insured__arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M7 17 17 7M8 7h9v9" />
+            </svg>
+          </span>
         </span>
       </button>
 
