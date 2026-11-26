@@ -67,7 +67,7 @@ export default function InsuranceCertificate() {
       >
         <span className="insured__text">
           <strong className="insured__title">Fully Insured</strong>
-          <small className="insured__sub">£1m Public Liability Protected</small>
+          <small className="insured__sub">Public Liability &amp; Treatment Risk Protected</small>
         </span>
         <span className="insured__cta">
           View Certificate

@@ -3201,7 +3201,8 @@ textarea:where(:not(.lv *)) {
   }
   .hero__tiles .insured__sub {
     font-size: 0.72rem;
-    white-space: nowrap;
+    line-height: 1.3;
+    white-space: normal;
   }
   .insured__cta {
     padding: 8px 14px;
