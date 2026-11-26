@@ -146,6 +146,9 @@ export function Hero() {
               </a>
             </li>
             <li>
+              <span className="hero__wide tile-icon" aria-hidden="true">
+                <FeatureIcon name="award" width={18} height={18} />
+              </span>
               <span className="hero__wide">
                 <strong>8+ years&apos; experience</strong>
                 <small>Fully insured &amp; verified</small>
@@ -153,7 +156,10 @@ export function Hero() {
               <span className="hero__narrow tile-stat">
                 <b className="tile-stat__num">8+</b>
                 <span className="tile-stat__label">
-                  <em>Years</em>
+                  <em>
+                    <FeatureIcon name="award" width={12} height={12} className="tile-stat__icon" />
+                    Years
+                  </em>
                   <small>experience</small>
                 </span>
               </span>

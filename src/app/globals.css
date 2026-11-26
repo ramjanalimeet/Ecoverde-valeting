@@ -1211,6 +1211,27 @@ textarea:where(:not(.lv *)) {
   line-height: 1.1;
   color: var(--heading);
 }
+/* round award badge in front of the "8+ years' experience" tile */
+.tile-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  padding: 7px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fff6dc 0%, #e3f4ea 100%);
+  color: var(--brand);
+  line-height: 0;
+}
+.tile-stat__label em {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.tile-stat__icon {
+  flex-shrink: 0;
+  color: #d9a520;
+  stroke-width: 2.2;
+}
 .tile-stat__stars {
   display: flex;
   gap: 1px;
