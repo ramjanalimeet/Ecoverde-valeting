@@ -63,11 +63,16 @@ export default function InsuranceCertificate() {
         title="View our public liability insurance certificate"
       >
         <span className="insured__text">
-          <strong>Fully Insured · £1m Public Liability</strong>
-          <small>Underwritten by U K Insurance Ltd (Direct Line)</small>
+          <strong>
+            Fully Insured<span className="insured__wide"> · £1m Public Liability</span>
+          </strong>
+          <small>
+            <span className="insured__wide">Underwritten by U K Insurance Ltd (Direct Line)</span>
+            <span className="insured__narrow">£1m public liability cover</span>
+          </small>
         </span>
         <span className="insured__cta">
-          View certificate
+          View<span className="insured__wide"> certificate</span>
           <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M7 17 17 7M8 7h9v9" />
           </svg>
