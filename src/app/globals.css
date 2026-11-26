@@ -1147,6 +1147,20 @@ textarea:where(:not(.lv *)) {
   background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.75) 50%, transparent 65%);
   transform: translateX(-110%);
 }
+/* faint oversized shield watermark for depth */
+.hero__tile-insured::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 30%;
+  width: 104px;
+  height: 120px;
+  translate: 0 -38%;
+  rotate: -14deg;
+  pointer-events: none;
+  opacity: 0.05;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 56' fill='none' stroke='%23177b53' stroke-width='2.6' stroke-linejoin='round' stroke-linecap='round'%3E%3Cpath d='M24 2.5 44.5 8.5v18c0 13.5-9 22.5-20.5 27C12.5 49 3.5 40 3.5 26.5v-18z'/%3E%3Cpath d='m16.5 30 5.5 6 11-14'/%3E%3C/svg%3E") center / contain no-repeat;
+}
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .hero__tile-insured:hover::before {
     transform: translateX(110%);
@@ -1165,7 +1179,9 @@ textarea:where(:not(.lv *)) {
   background:
     linear-gradient(135deg, #fffaf0 0%, #ecf8f1 100%) padding-box,
     linear-gradient(135deg, #e0a823 0%, #26a06a 55%, #147b72 100%) border-box;
-  box-shadow: rgba(23, 123, 83, 0.45) 0 4px 10px -5px;
+  box-shadow:
+    rgba(23, 123, 83, 0.45) 0 4px 10px -5px,
+    0 0 0 4px rgba(44, 165, 111, 0.08);
   line-height: 0;
 }
 .insured__shield svg {
@@ -1285,6 +1301,33 @@ textarea:where(:not(.lv *)) {
     inset 0 1px 0 rgba(255, 255, 255, 0.35),
     rgba(20, 123, 114, 0.55) 0 5px 12px -6px;
   transition: filter 250ms var(--ease);
+}
+/* a gentle light glint runs over the button every few seconds */
+.insured__cta {
+  position: relative;
+  overflow: hidden;
+}
+.insured__cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%);
+  transform: translateX(-120%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .insured__cta::before {
+    animation: insured-glint 5s ease-in-out 1.5s infinite;
+  }
+}
+@keyframes insured-glint {
+  0%,
+  70% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
 }
 .insured__arrow {
   display: grid;
@@ -3265,6 +3308,17 @@ textarea:where(:not(.lv *)) {
   .insured__text {
     display: contents;
   }
+  .insured__shield {
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+  }
+  .insured__shield svg {
+    width: 24px;
+  }
+  .hero__tile-insured::after {
+    right: 22%;
+  }
   .hero__tiles .insured__title {
     grid-area: title;
     font-size: 0.86rem;
@@ -3293,7 +3347,15 @@ textarea:where(:not(.lv *)) {
     gap: 9px;
   }
   .hero__tiles .insured__title {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
+    gap: 3px;
+  }
+  .insured__tick {
+    width: 11px;
+    height: 11px;
+  }
+  .insured__btn {
+    column-gap: 6px;
   }
   .hero__tiles .insured__sub {
     font-size: 0.64rem;
@@ -3307,6 +3369,14 @@ textarea:where(:not(.lv *)) {
   .insured__arrow {
     width: 16px;
     height: 16px;
+  }
+  .insured__shield {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+  .insured__shield svg {
+    width: 21px;
   }
 }
 
