@@ -1159,6 +1159,46 @@ textarea:where(:not(.lv *)) {
 .insured__text {
   min-width: 0;
 }
+.insured__narrow {
+  display: none;
+}
+/* phone-only compact versions of the first two trust tiles */
+.hero__narrow {
+  display: none;
+}
+.hero__wide {
+  display: block;
+}
+.tile-stat {
+  align-items: center;
+  gap: 9px;
+}
+.tile-stat__num {
+  font-family: var(--serif);
+  font-size: 1.55rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--brand);
+}
+.tile-stat__label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.tile-stat__label em {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.78rem;
+  line-height: 1.1;
+  color: var(--heading);
+}
+.tile-stat__stars {
+  display: flex;
+  gap: 1px;
+  line-height: 0;
+}
 .insured__cta {
   display: inline-flex;
   align-items: center;
@@ -3045,9 +3085,9 @@ textarea:where(:not(.lv *)) {
   }
 }
 @media (max-width: 760px) {
-  /* clear gap under the floating header (it ends ~70px from the top) */
+  /* small, even gap under the floating header (it ends ~71px from the top) */
   .hero:where(:not(.lv *)) {
-    padding: calc(104px + env(safe-area-inset-top, 0px)) 0 calc(40px + env(safe-area-inset-bottom, 0px));
+    padding: calc(86px + env(safe-area-inset-top, 0px)) 0 calc(40px + env(safe-area-inset-bottom, 0px));
   }
   .hero__photo img:where(:not(.lv *)) {
     object-position: 34% 50%;
@@ -3081,53 +3121,66 @@ textarea:where(:not(.lv *)) {
   .hero__ctas .btn--primary {
     flex-basis: 100%;
   }
-  /* trust tiles: a tidy 2 × 2 instead of four stacked rows */
+  /* trust tiles: reviews + experience as compact stat tiles side by side, the two logos below,
+     then the insurance row — every line fits without wrapping */
   .hero__tiles {
-    gap: 10px;
+    gap: 8px;
   }
   .hero__tiles li:nth-child(-n + 2):where(:not(.lv *)) {
     grid-column: auto;
   }
-  /* trust tiles: taller, roomier cards */
   .hero__tiles li:where(:not(.lv *)) {
-    min-height: 68px;
-    padding: 12px 14px;
+    min-height: 54px;
+    padding: 8px 12px;
     border-radius: 12px;
-    font-size: 0.74rem;
+    font-size: 0.72rem;
   }
   .hero__tiles strong:where(:not(.lv *)) {
     font-size: 0.8rem;
+    line-height: 1.25;
+    white-space: nowrap;
   }
   .hero__tiles small:where(:not(.lv *)) {
     font-size: 0.7rem;
+    line-height: 1.1;
+    white-space: nowrap;
   }
-  .hero__tiles li:first-child:where(:not(.lv *)) {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 3px;
+  .hero__tiles > li:first-child > .stars {
+    display: none;
+  }
+  .hero__wide {
+    display: none;
+  }
+  .hero__narrow.tile-stat {
+    display: flex;
+  }
+  .hero__tile-logo {
+    min-height: 54px;
   }
   .hero__tile-logo img:where(:not(.lv *)) {
-    height: 32px;
+    height: 30px;
     width: auto;
     max-width: 100%;
     object-fit: contain;
   }
   .hero__tiles li.hero__tile-insured {
-    min-height: 60px;
-    padding: 10px 12px;
-    grid-column: 1 / -1;
+    min-height: 56px;
+    padding: 8px 10px 8px 12px;
+    gap: 12px;
   }
   .insured__shield {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
   }
-  .insured__btn {
-    flex-wrap: wrap;
-    row-gap: 6px;
+  .insured__wide {
+    display: none;
+  }
+  .insured__narrow {
+    display: inline;
   }
   .insured__cta {
     font-size: 0.66rem;
-    padding: 6px 12px;
+    padding: 7px 12px;
   }
 }
 @media (max-width: 360px) {
@@ -3136,7 +3189,7 @@ textarea:where(:not(.lv *)) {
     font-size: 0.56rem;
   }
   .hero__tiles li:where(:not(.lv *)) {
-    padding: 6px 8px;
+    padding: 8px 10px;
   }
 }
 
