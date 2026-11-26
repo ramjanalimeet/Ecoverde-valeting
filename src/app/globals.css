@@ -1125,6 +1125,144 @@ textarea:where(:not(.lv *)) {
 .hero__tile--link:active {
   transform: scale(0.98);
 }
+/* 5th trust tile: "Fully Insured" — full-width row under the 2 × 2, opens the certificate pop-up */
+.hero__tiles li.hero__tile-insured {
+  grid-column: 1 / -1;
+  gap: 10px;
+  padding-block: 7px;
+  background: linear-gradient(100deg, #fff 0%, #fff 55%, #f2faf5 100%);
+  box-shadow: inset 0 0 0 1px rgba(23, 123, 83, 0.14);
+}
+.insured__shield {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #fff8e6 0%, #e8f6ee 100%);
+}
+.insured__btn {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.insured__text {
+  min-width: 0;
+}
+.insured__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+  padding: 6px 11px;
+  border-radius: var(--r-pill);
+  background: linear-gradient(100deg, #c99a1c 0%, #26a06a 55%, #147b72 100%);
+  color: #fff;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: filter 250ms var(--ease);
+}
+.hero__tile-insured:hover .insured__cta {
+  filter: brightness(1.06) saturate(1.1);
+}
+
+/* certificate pop-up (shares the quote pop-up's dialog animations) */
+.quote-modal.cert-modal {
+  width: min(620px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--surface);
+}
+.quote-modal.cert-modal[open] {
+  display: flex;
+}
+.cert-modal__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 14px 12px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--mint);
+}
+.cert-modal__head > div {
+  flex: 1;
+  min-width: 0;
+}
+.cert-modal__title {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  line-height: 1.25;
+  color: var(--heading);
+}
+.cert-modal__sub {
+  margin: 2px 0 0;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+.cert-modal__pdf {
+  flex-shrink: 0;
+  padding: 7px 14px;
+  border-radius: var(--r-pill);
+  background: var(--brand);
+  color: #fff;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.cert-modal__pdf:hover {
+  background: var(--brand-hover);
+}
+.cert-modal__close {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r-pill);
+}
+.cert-modal__body {
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 16px;
+  background: #e9efec;
+}
+.cert-modal__body img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: rgba(8, 46, 33, 0.18) 0 10px 30px -12px;
+}
+@media (max-width: 640px) {
+  .quote-modal.cert-modal {
+    width: 100%;
+    max-height: calc(100dvh - 12px);
+  }
+  .cert-modal__head {
+    padding: 12px 12px 10px 16px;
+  }
+  .cert-modal__title {
+    font-size: 0.95rem;
+  }
+  .cert-modal__body {
+    padding: 10px;
+  }
+}
 .hero__scroll {
   position: absolute;
   left: 50%;
@@ -2973,6 +3111,23 @@ textarea:where(:not(.lv *)) {
     width: auto;
     max-width: 100%;
     object-fit: contain;
+  }
+  .hero__tiles li.hero__tile-insured {
+    min-height: 60px;
+    padding: 10px 12px;
+    grid-column: 1 / -1;
+  }
+  .insured__shield {
+    width: 36px;
+    height: 36px;
+  }
+  .insured__btn {
+    flex-wrap: wrap;
+    row-gap: 6px;
+  }
+  .insured__cta {
+    font-size: 0.66rem;
+    padding: 6px 12px;
   }
 }
 @media (max-width: 360px) {

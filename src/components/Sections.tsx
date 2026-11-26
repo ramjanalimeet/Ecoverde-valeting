@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { PRIMARY_PHONE, REVIEWS, quoteHref, whatsappLink } from "@/data/site";
 import { ArrowRight, FeatureIcon, PhoneIcon, StarIcon, WhatsAppIcon } from "./Icons";
+import InsuranceCertificate from "./InsuranceCertificate";
 
 export function Stars({ size = 14, className = "stars" }: { size?: number; className?: string }) {
   return (
@@ -156,6 +157,7 @@ export function Hero() {
                 <Image src="/images/checkatrade-approved-member.webp" alt="Checkatrade approved member — verify our status" width={120} height={36} loading="eager" />
               </a>
             </li>
+            <InsuranceCertificate />
           </ul>
         </div>
       </div>
