@@ -129,16 +129,33 @@ export function Hero() {
                 title="Read all our reviews on Trustindex"
                 aria-label={`${REVIEWS.rating} from ${REVIEWS.total} reviews. Read them all on Trustindex`}
               >
-                <strong>
-                  {REVIEWS.rating} from {REVIEWS.total} reviews
-                </strong>
-                <small>Google · Checkatrade · Bark</small>
+                <span className="hero__wide">
+                  <strong>
+                    {REVIEWS.rating} from {REVIEWS.total} reviews
+                  </strong>
+                  <small>Google · Checkatrade · Bark</small>
+                </span>
+                {/* phones: compact stat tile */}
+                <span className="hero__narrow tile-stat" aria-hidden="true">
+                  <b className="tile-stat__num">{REVIEWS.rating}</b>
+                  <span className="tile-stat__label">
+                    <Stars size={10} className="stars tile-stat__stars" />
+                    <small>{REVIEWS.total} reviews</small>
+                  </span>
+                </span>
               </a>
             </li>
             <li>
-              <span>
+              <span className="hero__wide">
                 <strong>8+ years&apos; experience</strong>
                 <small>Fully insured &amp; verified</small>
+              </span>
+              <span className="hero__narrow tile-stat">
+                <b className="tile-stat__num">8+</b>
+                <span className="tile-stat__label">
+                  <em>Years</em>
+                  <small>experience</small>
+                </span>
               </span>
             </li>
             <li className="hero__tile-logo hero__tile--link">
