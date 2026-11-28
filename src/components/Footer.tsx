@@ -156,6 +156,9 @@ export default function Footer() {
               <Link href="/cancellation-refund-policy">Cancellation &amp; Refund Policy</Link>
             </li>
             <li>
+              <Link href="/quality-checklist">Quality Checklist</Link>
+            </li>
+            <li>
               <CallLink />
             </li>
           </ul>
