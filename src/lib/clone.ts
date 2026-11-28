@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import pages from "@/content/clone/pages.json";
+import { QUALITY_CHECKLIST_PAGE } from "@/content/quality-checklist";
 
 /**
  * Pages cloned from the live ecoverdevaleting.co.uk site: same URL, same <head> SEO
@@ -37,8 +38,13 @@ function fixHeadingOrder(html: string): string {
   });
 }
 
+/** Pages written for this site (not cloned), served at the same root-level URLs. */
+const OWN_PAGES: Record<string, ClonePage> = {
+  "quality-checklist": QUALITY_CHECKLIST_PAGE,
+};
+
 const PAGES = Object.fromEntries(
-  Object.entries(pages as Record<string, ClonePage>).map(([slug, p]) => [slug, { ...p, html: fixHeadingOrder(p.html) }]),
+  Object.entries({ ...(pages as Record<string, ClonePage>), ...OWN_PAGES }).map(([slug, p]) => [slug, { ...p, html: fixHeadingOrder(p.html) }]),
 );
 
 /** Slug without leading slash; "" is the homepage. */

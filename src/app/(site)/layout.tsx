@@ -11,6 +11,7 @@ import MobileBarReveal from "@/components/MobileBarReveal";
 import ResizeCalm from "@/components/ResizeCalm";
 import "../clone.css";
 import "../clone-mobile.css";
+import "../quality-checklist.css";
 
 // Structured data (Organization, Service, FAQPage, BreadcrumbList…) comes per page from the live site — see src/lib/clone.ts.
 
