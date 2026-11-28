@@ -57,3 +57,8 @@
 .lv .cta-band-img .qc-link:hover{color:#86E6B0}
 .lv a.qc-inline{color:var(--emerald);font-weight:600;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
 .lv a.qc-inline:hover{color:var(--pine)}
+
+/* same link under the top "Get a Free Quote" button on service pages (dark hero) */
+.lv .page-hero p.qc-hero-link{margin-top:16px;font-size:.95rem}
+.lv .page-hero .qc-link{color:#fff}
+.lv .page-hero .qc-link:hover{color:#86E6B0}
